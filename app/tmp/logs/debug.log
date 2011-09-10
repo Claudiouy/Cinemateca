@@ -1,0 +1,8 @@
+2011-09-10 09:57:26 Notice: Notice (8): Undefined property: ClientesController::$Persona in [/var/www/cake_primero/app/controllers/clientes_controller.php, line 13]
+2011-09-10 09:57:40 Notice: Notice (8): Trying to get property of non-object in [/var/www/cake_primero/app/views/clientes/index.ctp, line 10]
+2011-09-10 09:58:28 Notice: Notice (8): Undefined index:  nombre in [/var/www/cake_primero/app/views/clientes/index.ctp, line 10]
+2011-09-10 09:58:54 Notice: Notice (8): Use of undefined constant nombre - assumed 'nombre' in [/var/www/cake_primero/app/views/clientes/index.ctp, line 10]
+2011-09-10 09:58:54 Notice: Notice (8): Undefined index:  nombre in [/var/www/cake_primero/app/views/clientes/index.ctp, line 10]
+2011-09-10 10:03:15 Notice: Notice (8): Undefined index:  nombre in [/var/www/cake_primero/app/views/clientes/index.ctp, line 10]
+2011-09-10 10:09:41 Notice: Notice (8): Undefined index:  nombre in [/var/www/cake_primero/app/views/clientes/index.ctp, line 11]
+2011-09-10 10:10:22 Notice: Notice (8): Trying to get property of non-object in [/var/www/cake_primero/app/views/clientes/index.ctp, line 11]
