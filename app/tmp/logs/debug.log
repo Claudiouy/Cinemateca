@@ -65,3 +65,16 @@
 2011-10-06 23:00:01 Notice: Notice (8): Undefined variable: mi_peli in [/var/www/cake_primero/app/views/peliculas/detalle.ctp, line 8]
 2011-10-06 23:00:19 Notice: Notice (8): Undefined variable: titulo in [/var/www/cake_primero/app/views/peliculas/detalle.ctp, line 8]
 2011-10-08 16:23:06 Notice: Notice (8): Undefined index:  0 in [/var/www/cake_primero/app/controllers/peliculas_controller.php, line 28]
+2011-10-08 21:34:01 Notice: Notice (8): Array to string conversion in [/var/www/cake_primero/cake/libs/model/datasources/dbo_source.php, line 2204]
+2011-10-08 21:36:21 Notice: Notice (8): Undefined variable: mis_pelis in [/var/www/cake_primero/app/controllers/peliculas_controller.php, line 43]
+2011-10-08 21:38:32 Notice: Notice (8): Undefined variable: mis_pelis in [/var/www/cake_primero/app/controllers/peliculas_controller.php, line 43]
+2011-10-08 21:39:04 Notice: Notice (8): Undefined variable: mis_pelis in [/var/www/cake_primero/app/controllers/peliculas_controller.php, line 43]
+2011-10-08 21:39:45 Notice: Notice (8): Undefined variable: mis_pelis in [/var/www/cake_primero/app/controllers/peliculas_controller.php, line 43]
+2011-10-08 21:39:59 Notice: Notice (8): Undefined variable: mis_pelis in [/var/www/cake_primero/app/controllers/peliculas_controller.php, line 43]
+2011-10-08 21:40:07 Notice: Notice (8): Undefined variable: mis_pelis in [/var/www/cake_primero/app/controllers/peliculas_controller.php, line 43]
+2011-10-08 21:40:31 Notice: Notice (8): Undefined variable: mis_pelis in [/var/www/cake_primero/app/controllers/peliculas_controller.php, line 43]
+2011-10-08 21:52:01 Debug: Mensajito: Array
+2011-10-08 21:53:22 Notice: Notice (8): Undefined index:  0 in [/var/www/cake_primero/app/controllers/peliculas_controller.php, line 45]
+2011-10-08 21:53:22 Debug: Mensajito: 
+2011-10-08 21:53:54 Notice: Notice (8): Undefined offset:  0 in [/var/www/cake_primero/app/controllers/peliculas_controller.php, line 45]
+2011-10-08 21:53:54 Debug: Mensajito: 

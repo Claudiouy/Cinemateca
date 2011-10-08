@@ -37,13 +37,16 @@ class PeliculasController extends AppController{
     }
     
    function activar_peliculas(){
-        $mis_pelis = $this->Pelicula->find('all');
-        $this->Pelicula->updateAll(array('Pelicula.activa' => 0));
-        #return $mi_peli;
-        #$this->render('seleccionar_peliculas');
-        $this->redirect('/peliculas/seleccionar_peliculas');
+        
+        $ids = $this->data;
+        $array_ids = explode(",", $ids);  
+        $condiciones = array('Peliculas.id in' =>  $array_ids);
+        $this->Pelicula->updateAll(array('Pelicula.activa' => 1), $condiciones);
+        #$this->log('Mensajito: '.$condiciones[0] , LOG_DEBUG);
+        $this->render('seleccionar_peliculas');
+        #$this->render('/peliculas/seleccionar_peliculas');
            
-       
+       //seguir con renderizar un elemento con ajax ajaxreturn en marcadores
    }
     
 }
