@@ -1,0 +1,39 @@
+/* 
+    Document   : miCss
+    Created on : 17/09/2011, 03:17:41 PM
+    Author     : claudio
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+.fadeOut{
+    color:#A33;
+}
+
+.links{
+    text-decoration: none;
+}
+
+.liAlineados {
+    text-decoration: none;
+    list-style: none;
+}
+
+.liAlineados div{
+    width:33%;
+    float:left;
+}
+
+.liTitulo div{
+    width:10%;
+    float:left;
+}
