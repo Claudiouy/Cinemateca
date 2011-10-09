@@ -58,17 +58,7 @@ class PeliculasController extends AppController{
    }
    
    function consultar_peliculas(){
-       if($_POST){
-           var_dump($_POST);
-           #$nombrePeli = 
-           $mis_pelis = $this->Pelicula->find('all');
-           #$this->render('/elements/listado_peliculas'); 
-       }
-       else{
-           echo 'ssa';
-           $mis_pelis = $this->Pelicula->find('all');
-           #$this->render('/elements/listado_peliculas');           
-       }
+       
    }
    
    function otra_consulta(){
