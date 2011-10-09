@@ -38,15 +38,48 @@ class PeliculasController extends AppController{
     
    function activar_peliculas(){
         
-        $ids = $this->data;
-        $array_ids = explode(",", $ids);  
-        $condiciones = array('Peliculas.id in' =>  $array_ids);
-        $this->Pelicula->updateAll(array('Pelicula.activa' => 1), $condiciones);
-        #$this->log('Mensajito: '.$condiciones[0] , LOG_DEBUG);
-        $this->render('seleccionar_peliculas');
-        #$this->render('/peliculas/seleccionar_peliculas');
+       if(!empty($_POST['idSel'])){
+            echo 'entra';
+            $ids = $this->data['Pelicula']['id'];
+            echo $ids;
+            $array_ids = explode(",", $ids);  
+            $condiciones = array('Peliculas.id IN' =>  $array_ids);
+            $this->Pelicula->updateAll(array('Pelicula.activa' => 1), $condiciones);  //no funca, consultar
+            #$this->log('Mensajito: '.$ids , LOG_DEBUG);"entra"
+            $this->render('seleccionar_peliculas');
+            #$this->render('/peliculas/seleccionar_peliculas');   
+       }
+       else{
+           echo 'no entra';
+           $this->render('seleccionar_peliculas');
+       }
            
        //seguir con renderizar un elemento con ajax ajaxreturn en marcadores
+   }
+   
+   function consultar_peliculas(){
+       if($_POST){
+           var_dump($_POST);
+           #$nombrePeli = 
+           $mis_pelis = $this->Pelicula->find('all');
+           #$this->render('/elements/listado_peliculas'); 
+       }
+       else{
+           echo 'ssa';
+           $mis_pelis = $this->Pelicula->find('all');
+           #$this->render('/elements/listado_peliculas');           
+       }
+   }
+   
+   function otra_consulta(){
+       if(!empty($_POST['miNombre'])){
+           $nombreParcial = $_POST['miNombre'];
+           $filtros =  array("Pelicula.titulo LIKE" => "%".$nombreParcial."%");
+           $listaPorPelicula = $this->Pelicula->find('all', array('conditions' => $filtros));
+           #var_dump($listadoFiltrado);
+           $this->set('listadoFiltrado', $listaPorPelicula);
+       }
+       $this->render('/elements/listado_peliculas'); 
    }
     
 }

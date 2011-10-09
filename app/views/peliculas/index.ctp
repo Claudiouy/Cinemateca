@@ -16,7 +16,7 @@
                       
                       '<li class="liAlineados" ><div id="contenedorPelicula" ><div id="contenedorNombrePelicula" >'.$peli["Pelicula"]["titulo"]
                           .'</div><div id="contenedorDuracionPelicula" > '.$peli["Pelicula"]["duracion"].' </div> <div id="contenedorVerDetallePelicula" >   <a href="/cake_primero/peliculas/detalle/'.$peli["Pelicula"]["id"]
-                             .'" class="links" >Ver detalle</a></div> ';
+                             .'" class="links" >Ver detalle</a></div> </li> <br />';
                   }
               }
               

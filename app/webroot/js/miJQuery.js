@@ -21,28 +21,32 @@ $(document).ready(function(){
         });
     });*/
     
+    $("#consultarPeliculas").click(function(){
+       var nombrePeli = $("#filtroNombre").val();
+       $.ajax({
+            data: "miNombre=" + nombrePeli,
+            type: "POST",
+            url:  "/cake_primero/peliculas/otra_consulta",
+            success: function(data){
+                $("#listadoFiltradoPeliculas").html(data);
+                //console.info(data);
+            }
+       });
+    });
+    
     $("#activarPeliculasSeleccionadas").click(function(){
         
-         var idsArray = new Array();
-         
-         $(".peliculaSeleccionada").each(function(){
-             
-             if(($(this).attr("checked")) == "checked"){
-                 idsArray.push($(this).attr("id"));
-                 //console.info($(this).attr("id"));
-             }
-         });
-         idsJoins = idsArray.join(',');
+         idsJoins = getPeliculasMarcadas();
          
          $.ajax({
             data: "idSel=" + idsJoins,
-            type: "POST",
+            type: "POST ",
             url:  "/cake_primero/peliculas/activar_peliculas",
             success: function(data){
                 //console.info(data);
                 limpiarCheckboxes();
             }
-        });
+         });
          
     });
     
@@ -50,7 +54,21 @@ $(document).ready(function(){
     function limpiarCheckboxes(){
         $("input:checkbox").each(function(){
             $(this).attr("checked", false);
-        });
+        }); 
+    }
+    
+    function getPeliculasMarcadas(){
+        
+        var idsArray = new Array();
+         
+         $(".peliculaSeleccionada").each(function(){
+             
+             if(($(this).attr("checked")) == "checked"){
+                 idsArray.push($(this).attr("id"));
+             }
+         });
+         idsJoins = idsArray.join(',');
+         return idsJoins;
     }
 });
 
