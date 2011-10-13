@@ -22,6 +22,19 @@ class PeliculasController extends AppController{
         }
     }
     
+    function nueva_pelicula(){
+        if(!empty($this->data['Pelicula'])){
+             //var_dump($this->data['Pelicula']);
+            if($this->Pelicula->save($this->data['Pelicula'])){
+                $this->Session->setFlash('La película se salvó correctamente', 'default');   
+                $this->redirect('/peliculas/index');
+            }
+            else{
+                $this->Session->setFlash('Error al guardar la película', 'flash_error');
+            }
+        }
+    }
+    
     function seleccionar_peliculas(){
         if(!empty($this->data['Pelicula']['nombre'])){
             $nombre_peli = $this->data['Pelicula']['nombre'];
@@ -37,22 +50,18 @@ class PeliculasController extends AppController{
     }
     
    function activar_peliculas(){
-        
-       if(!empty($_POST['idSel'])){
-            echo 'entra';
-            $ids = $this->data['Pelicula']['id'];
-            echo $ids;
-            $array_ids = explode(",", $ids);  
-            $condiciones = array('Peliculas.id IN' =>  $array_ids);
+       if(!empty($_POST['idSelec'])){
+            $ids = $_POST['idSelec'];
+            $array_ids = explode(",", $ids);
+            var_dump($array_ids);
+            #echo $array_ids;
+            $condiciones = array('Peliculas.id IN' =>  $ids);
             $this->Pelicula->updateAll(array('Pelicula.activa' => 1), $condiciones);  //no funca, consultar
             #$this->log('Mensajito: '.$ids , LOG_DEBUG);"entra"
-            $this->render('seleccionar_peliculas');
+            #$this->render('seleccionar_peliculas');
             #$this->render('/peliculas/seleccionar_peliculas');   
        }
-       else{
-           echo 'no entra';
-           $this->render('seleccionar_peliculas');
-       }
+           return false;
            
        //seguir con renderizar un elemento con ajax ajaxreturn en marcadores
    }

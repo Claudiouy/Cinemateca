@@ -36,15 +36,18 @@ $(document).ready(function(){
     
     $("#activarPeliculasSeleccionadas").click(function(){
         
-         idsJoins = getPeliculasMarcadas();
-         
+         var idsJoins = getPeliculasMarcadas();
+         //console.info(idsJoins);
          $.ajax({
-            data: "idSel=" + idsJoins,
-            type: "POST ",
+            data: "idSelec=" + idsJoins,
+            type: "POST",
             url:  "/cake_primero/peliculas/activar_peliculas",
             success: function(data){
-                //console.info(data);
+                console.info(data);
                 limpiarCheckboxes();
+            },
+            error: function(miError){
+               //console.info(miError.statusText);
             }
          });
          
