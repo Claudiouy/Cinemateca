@@ -10,16 +10,7 @@ class ClientesController extends AppController{
     var $name = 'Clientes';
     
     function index(){
-        
-        #var_dump($this->Cookie->nombre);
-        #var_dump($this->components);
-        #if(!empty($this->Cookie->read('usuarioLogueado'))){
-         #   $this->Cookie->write('nombre','nuevo', false);
-        #}
-        #else{
-         #   $this->Cookie->write('nombre','ya hay cookie', false);
-        #}
-        
+
         $my_clientes = $this->Cliente->find('all');
         $this->set('clientela', $my_clientes);
     }

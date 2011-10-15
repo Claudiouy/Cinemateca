@@ -5,7 +5,7 @@
 
 $(document).ready(function(){
     
-    $('.fadeOut').hide(4000);
+    $('.fadeOut').hide(6000);
     
     
     /*$("#buscarPeliculaSP").click(function(){

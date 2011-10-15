@@ -141,3 +141,7 @@
 2011-10-10 21:04:01 Notice: Notice (8): Undefined property: PeliculasController::$1 in [/var/www/cake_primero/app/controllers/peliculas_controller.php, line 41]
 2011-10-10 21:04:23 Notice: Notice (8): Undefined property: PeliculasController::$1 in [/var/www/cake_primero/app/controllers/peliculas_controller.php, line 42]
 2011-10-10 21:10:09 Notice: Notice (8): Array to string conversion in [/var/www/cake_primero/cake/libs/model/datasources/dbo_source.php, line 2204]
+2011-10-15 11:48:31 Notice: Notice (8): Undefined variable: mi_cliente in [/var/www/cake_primero/app/views/clientes/editar.ctp, line 11]
+2011-10-15 11:48:31 Notice: Notice (8): Undefined variable: mi_cliente in [/var/www/cake_primero/app/views/clientes/editar.ctp, line 12]
+2011-10-15 11:48:31 Notice: Notice (8): Undefined variable: mi_cliente in [/var/www/cake_primero/app/views/clientes/editar.ctp, line 13]
+2011-10-15 11:48:31 Notice: Notice (8): Undefined variable: mi_cliente in [/var/www/cake_primero/app/views/clientes/editar.ctp, line 14]

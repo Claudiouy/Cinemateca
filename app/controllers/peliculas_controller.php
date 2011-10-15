@@ -29,8 +29,44 @@ class PeliculasController extends AppController{
                 $this->Session->setFlash('La película se salvó correctamente', 'default');   
                 $this->redirect('/peliculas/index');
             }
-            else{
+            else {
                 $this->Session->setFlash('Error al guardar la película', 'flash_error');
+            }
+        }
+    }
+    
+    function editar_pelicula(){
+        
+        #Si lo recibe por post viene del listado, por get es el envio del formulario
+        if(!empty($this->data['Pelicula'])){           
+            $nueva_pelicula = $this->data['Pelicula'];
+            $this->Pelicula->set($nueva_pelicula);   
+            
+            if($this->Pelicula->validates()){ //necesario, ya que validates() valida el metodo save(), no el update()               
+                $this->Pelicula->updateAll(
+                    array('Pelicula.titulo' => '"'.$nueva_pelicula['titulo'].'"',
+                          'Pelicula.duracion' => $nueva_pelicula['duracion'],
+                          'Pelicula.anio' => $nueva_pelicula['anio'],
+                          'Pelicula.activa' => $nueva_pelicula['activa']),
+                    array('Pelicula.id' => $nueva_pelicula['id'])
+                    );
+           
+                 $this->redirect("/peliculas");
+            }
+            #$this->render('/peliculas/editar_pelicula/'.$nueva_pelicula['id']);
+            $this->Session->setFlash('Error al guardar la película', 'flash_error');
+            $this->redirect('/peliculas/editar_pelicula/'.$nueva_pelicula['id']);
+        }
+        else { 
+            
+            if(!empty($this->params['pass']['0'])){               
+                $id_pelicula = $this->params['pass']['0'];
+                $mi_pelicula = $this->Pelicula->findById($id_pelicula);
+                
+                if(!empty($mi_pelicula)){
+                   $this->set('mi_pelicula', $mi_pelicula);     
+                }
+                
             }
         }
     }
@@ -56,10 +92,7 @@ class PeliculasController extends AppController{
             var_dump($array_ids);
             #echo $array_ids;
             $condiciones = array('Peliculas.id IN' =>  $ids);
-            $this->Pelicula->updateAll(array('Pelicula.activa' => 1), $condiciones);  //no funca, consultar
-            #$this->log('Mensajito: '.$ids , LOG_DEBUG);"entra"
-            #$this->render('seleccionar_peliculas');
-            #$this->render('/peliculas/seleccionar_peliculas');   
+            $this->Pelicula->updateAll(array('Pelicula.activa' => 1), $condiciones);  //no funca, consultar   
        }
            return false;
            
@@ -79,6 +112,10 @@ class PeliculasController extends AppController{
            $this->set('listadoFiltrado', $listaPorPelicula);
        }
        $this->render('/elements/listado_peliculas'); 
+   }
+   
+   function graficar_peliculas(){   
+       
    }
     
 }
