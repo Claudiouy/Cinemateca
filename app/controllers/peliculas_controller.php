@@ -117,6 +117,17 @@ class PeliculasController extends AppController{
    function graficar_peliculas(){   
        
    }
+   
+   function eliminar_pelicula(){
+       
+       if(!empty($this->params['pass']['0'])){
+           $id_a_eliminar = $this->params['pass']['0'];
+           if(!$this->Pelicula->delete($id_a_eliminar)){
+               $this->Session->setFlash('Error al eliminar la película');
+           }           
+       }
+       $this->redirect('/peliculas/index');
+   }
     
 }
 

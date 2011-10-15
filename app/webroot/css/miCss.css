@@ -26,13 +26,22 @@ root {
     text-decoration: none;
 }
 
-.liAlineados {
+.liAlineados, liPelicula{
     text-decoration: none;
     list-style: none;
 }
 
-.liAlineados div{
+.liAlineados div, .liPelicula div{
     width:33%;
+    float:left;
+}   
+.liPelicula div{
+    width:25%;
+    float:left;
+}
+
+.contenedorPelicula{
+     width:100%;
     float:left;
 }
 
@@ -40,6 +49,7 @@ root {
     width:10%;
     float:left;
 }
+
 
 #navbar {
 text-align: Center;
