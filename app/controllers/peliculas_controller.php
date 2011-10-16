@@ -37,7 +37,7 @@ class PeliculasController extends AppController{
     
     function editar_pelicula(){
         
-        #Si lo recibe por post viene del listado, por get es el envio del formulario
+        #Si lo recibe por get viene del listado, por post es el envio del formulario
         if(!empty($this->data['Pelicula'])){           
             $nueva_pelicula = $this->data['Pelicula'];
             $this->Pelicula->set($nueva_pelicula);   
@@ -126,7 +126,7 @@ class PeliculasController extends AppController{
                $this->Session->setFlash('Error al eliminar la película');
            }           
        }
-       $this->redirect('/peliculas/index');
+       $this->redirect('/peliculas');
    }
     
 }

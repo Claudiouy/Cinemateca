@@ -29,6 +29,7 @@ root {
 .liAlineados, liPelicula{
     text-decoration: none;
     list-style: none;
+    height:30px;
 }
 
 .liAlineados div, .liPelicula div{

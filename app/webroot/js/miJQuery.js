@@ -21,6 +21,7 @@ $(document).ready(function(){
         });
     });*/
     
+    
     $("#consultarPeliculas").click(function(){
        var nombrePeli = $("#filtroNombre").val();
        $.ajax({
