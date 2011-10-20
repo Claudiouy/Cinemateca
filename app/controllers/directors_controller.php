@@ -4,17 +4,40 @@ class DirectorsController extends AppController {
 	
 var $name =  'Directors';
 var $helpers = array('Html', 'Form');
+<<<<<<< HEAD
+=======
+//var $uses = array('state','director' );
+>>>>>>> e765efc30b9fcd8d5c114976ec1c8231118952f2
 
 public function index(){
 
 $this->set('directors', $this->Director->find('all'));
+<<<<<<< HEAD
+=======
+//$states=$this->Director->State->find('list');
+//var_dump($states);
+>>>>>>> e765efc30b9fcd8d5c114976ec1c8231118952f2
 
 }
 
 function add(){
+<<<<<<< HEAD
 $this->loadModel('State'); 
 $listado = $this->State->find('list', array('order' => 'State.name ASC'));
 $this->set('listado', $listado);
+=======
+	$this->loadModel('State'); 
+	
+	#$listado = ClassRegistry::init("State")->find("all");
+	#App::import('State', 'State');
+	#$listado = $this->State->find('all');
+		#var_dump($listado);
+		
+$listado = $this->State->find('list', array('order' => 'State.name ASC'));
+		
+		//$listado = $this->State->find('all');
+		$this->set('listado', $listado);
+>>>>>>> e765efc30b9fcd8d5c114976ec1c8231118952f2
 		//var_dump($listado);
 	if (!empty($this->data)) {
 		
@@ -52,5 +75,20 @@ Inténtalo de nuevo.');
 }
 
 
+<<<<<<< HEAD
+=======
+function delete($id = null) {
+if (!$id) {
+$this->Session->setFlash('id Invalida para Director');
+$this->redirect(array('action'=>'index'), null, true);
+}
+if ($this->Director->delete($id)) {
+	
+$this->Session->setFlash('Director #'.$id.' borrado');
+$this->redirect(array('action'=>'index'), null, true);
+}
+}
+
+>>>>>>> e765efc30b9fcd8d5c114976ec1c8231118952f2
 }
 ?>

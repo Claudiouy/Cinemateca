@@ -157,6 +157,7 @@
 2011-10-16 11:49:52 Notice: Notice (8): Undefined index:  lastname in [/var/www/cake_primero/app/models/actor.php, line 44]
 2011-10-16 11:49:52 Notice: Notice (8): Undefined index:  birthdate in [/var/www/cake_primero/app/models/actor.php, line 45]
 2011-10-16 11:49:52 Notice: Notice (8): Undefined index:  id in [/var/www/cake_primero/app/models/actor.php, line 46]
+<<<<<<< HEAD
 2011-10-19 16:21:29 Debug: Notice (8): Undefined property:  View::$Paginator in [C:\AppServ\www\cake_primero\app\views\socios\index.ctp, line 5]
 2011-10-19 16:23:29 Debug: Notice (8): Undefined property:  View::$Paginator in [C:\AppServ\www\cake_primero\app\views\socios\index.ctp, line 5]
 2011-10-19 16:23:32 Debug: Notice (8): Undefined property:  View::$Paginator in [C:\AppServ\www\cake_primero\app\views\socios\index.ctp, line 5]
@@ -211,3 +212,5 @@
 2011-10-19 23:52:11 Debug: Notice (8): Undefined variable: socios in [C:\AppServ\www\cake_primero\app\views\socios\index.ctp, line 13]
 2011-10-19 23:52:33 Debug: Notice (8): Undefined variable: socios in [C:\AppServ\www\cake_primero\app\views\socios\index.ctp, line 13]
 2011-10-20 00:04:48 Debug: Notice (8): Undefined variable: onlyActive in [C:\AppServ\www\cake_primero\app\views\socios\index.ctp, line 15]
+=======
+>>>>>>> e765efc30b9fcd8d5c114976ec1c8231118952f2

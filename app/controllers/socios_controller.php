@@ -1,6 +1,7 @@
 <?php
 class SociosController extends AppController {
 var $name =  'Socios';
+<<<<<<< HEAD
 var $helpers = array('Html', 'Form');
 
 public function index(){
@@ -105,5 +106,9 @@ $this->set('list_street', $list_street);*/
 }
         
         
+=======
+var $scaffold;
+
+>>>>>>> e765efc30b9fcd8d5c114976ec1c8231118952f2
 }
 ?>

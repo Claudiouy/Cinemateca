@@ -172,6 +172,7 @@
 2011-10-16 11:49:14 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /var/www/cake_primero/cake/libs/debugger.php:683) in [/var/www/cake_primero/cake/libs/controller/controller.php, line 742]
 2011-10-16 11:49:52 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /var/www/cake_primero/app/models/actor.php:39) in [/var/www/cake_primero/cake/libs/controller/controller.php, line 742]
 2011-10-16 11:58:22 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /var/www/cake_primero/app/models/actor.php:42) in [/var/www/cake_primero/cake/libs/controller/controller.php, line 742]
+<<<<<<< HEAD
 2011-10-19 16:26:55 Warning: Warning (2): Invalid argument supplied for foreach() in [C:\AppServ\www\cake_primero\app\views\socios\index.ctp, line 12]
 2011-10-19 21:18:47 Warning: Warning (512): Method FormHelper::upload does not exist in [C:\AppServ\www\cake_primero\cake\libs\view\helper.php, line 154]
 2011-10-19 21:32:45 Warning: Warning (512): Method FormHelper::upload does not exist in [C:\AppServ\www\cake_primero\cake\libs\view\helper.php, line 154]
@@ -191,3 +192,5 @@
 2011-10-20 00:04:48 Warning: Warning (2): Invalid argument supplied for foreach() in [C:\AppServ\www\cake_primero\app\views\socios\index.ctp, line 15]
 2011-10-20 00:06:55 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1062: Duplicate entry '9478583' for key 2</span> in [C:\AppServ\www\cake_primero\cake\libs\model\datasources\dbo_source.php, line 684]
 2011-10-20 00:15:54 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1062: Duplicate entry '77777777' for key 2</span> in [C:\AppServ\www\cake_primero\cake\libs\model\datasources\dbo_source.php, line 684]
+=======
+>>>>>>> e765efc30b9fcd8d5c114976ec1c8231118952f2
