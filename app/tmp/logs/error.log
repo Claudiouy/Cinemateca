@@ -190,3 +190,4 @@
 2011-10-19 23:52:33 Warning: Warning (2): Invalid argument supplied for foreach() in [C:\AppServ\www\cake_primero\app\views\socios\index.ctp, line 13]
 2011-10-20 00:04:48 Warning: Warning (2): Invalid argument supplied for foreach() in [C:\AppServ\www\cake_primero\app\views\socios\index.ctp, line 15]
 2011-10-20 00:06:55 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1062: Duplicate entry '9478583' for key 2</span> in [C:\AppServ\www\cake_primero\cake\libs\model\datasources\dbo_source.php, line 684]
+2011-10-20 00:15:54 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1062: Duplicate entry '77777777' for key 2</span> in [C:\AppServ\www\cake_primero\cake\libs\model\datasources\dbo_source.php, line 684]
