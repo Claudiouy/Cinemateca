@@ -1,0 +1,76 @@
+/* 
+    Document   : miCss
+    Created on : 17/09/2011, 03:17:41 PM
+    Author     : claudio
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400);
+
+
+root { 
+    display: block;
+}
+
+.fadeOut{
+    color:#A33;
+}
+
+.links{
+    text-decoration: none;
+}
+
+.liAlineados, liPelicula{
+    text-decoration: none;
+    list-style: none;
+    height:30px;
+}
+
+.liAlineados div, .liPelicula div{
+    width:33%;
+    float:left;
+}   
+.liPelicula div{
+    width:25%;
+    float:left;
+}
+
+.contenedorPelicula{
+     width:100%;
+    float:left;
+}
+
+.liTitulo div{
+    width:10%;
+    float:left;
+}
+
+
+#navbar {
+text-align: Center;
+width: 100%;
+font-family: 'Yanone Kaffeesatz', Arial, Helvetica, sans-serif;
+font-weight: 300;
+font-size: 24px;
+height: 35px;
+margin-top: 10px;
+margin-bottom:10px;
+text-transform: uppercase;
+display:block;
+}
+
+#navbar a { 
+    padding:5px; 
+    color:#8c8c8c; 
+    text-decoration:none;
+}
+#navbar a:hover {
+    color:#ae8b01; 
+    
+}
