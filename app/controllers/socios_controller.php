@@ -1,14 +1,13 @@
 <?php
 class SociosController extends AppController {
 var $name =  'Socios';
-<<<<<<< HEAD
 var $helpers = array('Html', 'Form');
 
 public function index(){
    
 $active = $this->Socio->find('all');   
 $this->set('onlyActive', $this->paginate('Socio', array ('Socio.estado'=>'True')));
-
+var_dump($active);
 }
 
 
@@ -106,9 +105,5 @@ $this->set('list_street', $list_street);*/
 }
         
         
-=======
-var $scaffold;
-
->>>>>>> e765efc30b9fcd8d5c114976ec1c8231118952f2
 }
 ?>
