@@ -6,8 +6,17 @@
 			<th><?php echo $this->Paginator->sort('nombre');?></th>
 			<th class="actions"><?php __('Acciones');?></th>
 	</tr>
+<<<<<<< HEAD
+ 
+
+	<?php
+
+        
+        $i = 0;
+=======
 	<?php
 	$i = 0;
+>>>>>>> e765efc30b9fcd8d5c114976ec1c8231118952f2
 	foreach ($users as $user):
 		$class = null;
 		if ($i++ % 2 == 0) {

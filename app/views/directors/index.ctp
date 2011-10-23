@@ -1,41 +1,42 @@
-<?php if(empty($directors)): ?>
-No hay directores en esta lista
-<br>
-<br>
-<?php else: ?>
-<table>
-<tr>
-<th>Apellido</th>
-<th>Nombre</th>
-<th>Nacionalidad</th>
-<th>Acciones</th>
-</tr>
-<?php foreach ($directors as $dirs): ?>
-<tr>
-<td>
-<?php echo $dirs['Director']['apellido'] ?>
-</td>
-<td>
-<?php echo $dirs['Director']['nombre'] ?>
-</td>
-<td>
-	
-<?php echo $dirs['State']['name'] ?>
-
-</td>
-<td class="actions">
-<?php echo $html->link(__('Editar', true), array('action'=>'edit',$dirs['Director']['id']));?>&nbsp
-
-<?php echo $html->link('Borrar', array('action'=>'delete',
- $dirs['Director']['id']), null, '¿Estás Seguro?'); ?>
-</td>
-</tr>
-<?php endforeach; ?>
-</table>
-<?php endif; ?>
-<div>
+<div class="directors index">
+    
+	<h2><?php __('Directores');?></h2>
+        
 <table cellpadding="0" cellspacing="0">
-<td class="actions">
-<?php echo $html->link(__('Agregar Director', true), array('action'=>'add')); ?>&nbsp
-</td>
-</table></div>
+	<tr>
+			<th><?php echo $this->Paginator->sort('Apellido, Nombre');?></th>
+                        <th><?php echo $this->Paginator->sort('Nacionalidad');?></th>
+			<th class="actions"><?php __('Acciones');?></th>
+	</tr>
+	<?php
+	$i = 0;
+	foreach ($directors as $director):
+		$class = null;
+		if ($i++ % 2 == 0) {
+			$class = ' class="altrow"';
+		}
+	?>
+	<tr<?php echo $class;?>>
+		<td><?php echo $director['Director']['surname'].', ';?>
+                 <?php echo $director['Director']['name'];?>
+                </td>
+		<td><?php echo $director['State']['name']; ?>&nbsp;</td>
+        
+		<td class="actions">
+                        <?php echo $this->Html->link(__('Ver', true), array('action' => 'view', $director['Director']['id'])); ?>
+			<?php echo $this->Html->link(__('Editar', true), array('action' => 'edit', $director['Director']['id'])); ?>
+			<?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $director['Director']['id']), null, sprintf(__('Esta Seguro de eliminar el director N° %s?', true), $director['Director']['id'])); ?>
+		</td>
+	</tr>
+<?php endforeach; ?>
+	</table>
+	
+
+	
+</div>
+<div class="actions">
+	<h3><?php __('Acciones'); ?></h3>
+	<ul>
+		<li><?php echo $this->Html->link(__('Nuevo Director', true), array('action' => 'add')); ?></li>
+	</ul>
+</div>

@@ -4,28 +4,20 @@ class DirectorsController extends AppController {
 	
 var $name =  'Directors';
 var $helpers = array('Html', 'Form');
-//var $uses = array('state','director' );
 
 public function index(){
 
-$this->set('directors', $this->Director->find('all'));
-//$states=$this->Director->State->find('list');
-//var_dump($states);
+//$this->set('directors', $this->Director->find('all'));
+
+$directors = $this->Director->find('list');   
+$this->set('directors', $this->paginate('Director'));
 
 }
 
 function add(){
-	$this->loadModel('State'); 
-	
-	#$listado = ClassRegistry::init("State")->find("all");
-	#App::import('State', 'State');
-	#$listado = $this->State->find('all');
-		#var_dump($listado);
-		
+$this->loadModel('State'); 
 $listado = $this->State->find('list', array('order' => 'State.name ASC'));
-		
-		//$listado = $this->State->find('all');
-		$this->set('listado', $listado);
+$this->set('listado', $listado);
 		//var_dump($listado);
 	if (!empty($this->data)) {
 		
@@ -40,6 +32,12 @@ $listado = $this->State->find('list', array('order' => 'State.name ASC'));
 
 }
 
+function view ($id = null){
+   
+        $this->Director->id = $id;
+        $this->set('director', $this->Director->read());
+       
+}
 function edit($id = null) {
 $this->loadModel('State'); 
 $listado = $this->State->find('list', array('order' => 'State.id ASC'));
@@ -61,7 +59,6 @@ Inténtalo de nuevo.');
 }
 }
 }
-
 
 function delete($id = null) {
 if (!$id) {
