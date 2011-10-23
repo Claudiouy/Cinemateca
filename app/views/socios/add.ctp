@@ -5,8 +5,8 @@
 <?php
 
 echo $form->hidden('Socio.id');
-
-echo $form->input('Socio.foto', array('label'=>'Foto:','type'=>'file'));
+echo $form->label('Socio.image_url', 'Imagen');  
+echo $form->file('Socio.image_url');  
 echo $form->input('Socio.name', array('label'=>'Nombre:'));
 echo $form->input('Socio.surname', array('label'=>'Apellido:'));
 echo $form->input('documento_identidad', array('label'=>'Documento de Identidad:'));

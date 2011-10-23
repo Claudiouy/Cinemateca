@@ -24,7 +24,7 @@ echo $this->Form->hidden('Socio.estado', array('label'=>'Socio activo:','type'=>
 
 ?>
 	</fieldset>
-<?php echo $this->Form->end(__('Guardar', true));?>
+<?php echo $this->Form->end(__('Actualizar', true));?>
 </div>
 <div class="actions">
 	<h3><?php __('Acciones'); ?></h3>
@@ -34,7 +34,7 @@ echo $this->Form->hidden('Socio.estado', array('label'=>'Socio activo:','type'=>
 		<li><?php echo $this->Html->link(__('Listar Socios', true), array('action' => 'index'));?></li>
 	</ul>
 
-
+</div>
 
 
 

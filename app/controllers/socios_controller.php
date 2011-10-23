@@ -7,18 +7,14 @@ public function index(){
    
 $active = $this->Socio->find('all');   
 $this->set('onlyActive', $this->paginate('Socio', array ('Socio.estado'=>'True')));
-var_dump($active);
 }
 
 
 function view($id = null) {
     
 
-		if (!$id) {
-			$this->Session->setFlash(__('Socio No Valido', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->set('socio', $this->Socio->read(null, $id));
+        $this->Socio->id = $id;
+        $this->set('socio', $this->Socio->read());
 	}
 
 
@@ -73,6 +69,8 @@ $this->set('list_pay_method', $list_pay_method);
 
 function add(){
 
+    
+    
 $this->loadModel('State'); 
 $list_state = $this->State->find('list', array('order' => 'State.id ASC'));
 $this->set('list_state', $list_state);

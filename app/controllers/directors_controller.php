@@ -4,40 +4,20 @@ class DirectorsController extends AppController {
 	
 var $name =  'Directors';
 var $helpers = array('Html', 'Form');
-<<<<<<< HEAD
-=======
-//var $uses = array('state','director' );
->>>>>>> e765efc30b9fcd8d5c114976ec1c8231118952f2
 
 public function index(){
 
-$this->set('directors', $this->Director->find('all'));
-<<<<<<< HEAD
-=======
-//$states=$this->Director->State->find('list');
-//var_dump($states);
->>>>>>> e765efc30b9fcd8d5c114976ec1c8231118952f2
+//$this->set('directors', $this->Director->find('all'));
+
+$directors = $this->Director->find('list');   
+$this->set('directors', $this->paginate('Director'));
 
 }
 
 function add(){
-<<<<<<< HEAD
 $this->loadModel('State'); 
 $listado = $this->State->find('list', array('order' => 'State.name ASC'));
 $this->set('listado', $listado);
-=======
-	$this->loadModel('State'); 
-	
-	#$listado = ClassRegistry::init("State")->find("all");
-	#App::import('State', 'State');
-	#$listado = $this->State->find('all');
-		#var_dump($listado);
-		
-$listado = $this->State->find('list', array('order' => 'State.name ASC'));
-		
-		//$listado = $this->State->find('all');
-		$this->set('listado', $listado);
->>>>>>> e765efc30b9fcd8d5c114976ec1c8231118952f2
 		//var_dump($listado);
 	if (!empty($this->data)) {
 		
@@ -52,6 +32,12 @@ $listado = $this->State->find('list', array('order' => 'State.name ASC'));
 
 }
 
+function view ($id = null){
+   
+        $this->Director->id = $id;
+        $this->set('director', $this->Director->read());
+       
+}
 function edit($id = null) {
 $this->loadModel('State'); 
 $listado = $this->State->find('list', array('order' => 'State.id ASC'));
@@ -74,9 +60,6 @@ Inténtalo de nuevo.');
 }
 }
 
-
-<<<<<<< HEAD
-=======
 function delete($id = null) {
 if (!$id) {
 $this->Session->setFlash('id Invalida para Director');
@@ -89,6 +72,5 @@ $this->redirect(array('action'=>'index'), null, true);
 }
 }
 
->>>>>>> e765efc30b9fcd8d5c114976ec1c8231118952f2
 }
 ?>

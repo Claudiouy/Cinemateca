@@ -7,7 +7,9 @@
 			<th><?php echo $this->Paginator->sort('N° Socio');?></th>
 			<th><?php echo $this->Paginator->sort('Apellido, Nombre');?></th>
                         <th><?php echo $this->Paginator->sort('Doc. Identidad');?></th>
-                        <th><?php echo $this->Paginator->sort('Activo');?></th>
+                        <th><?php echo $this->Paginator->sort('Suscripcion');?></th>
+                        <th><?php echo $this->Paginator->sort('Forma de Pago');?></th>
+
 			<th class="actions"><?php __('Acciones');?></th>
 	</tr>
 	<?php
@@ -24,12 +26,13 @@
                  <?php echo $socio['Socio']['name'];?>
                 </td>
 	<td><?php echo $socio['Socio']['documento_identidad']; ?>&nbsp;</td>
-        	<td><?php echo $socio['Socio']['estado']; ?>&nbsp;</td>
-
+        	<td><?php echo $socio['Subscription']['name']; ?>&nbsp;</td>
+<td><?php echo $socio['PaymentMethod']['name']; ?>&nbsp;</td>
         
 		<td class="actions">
-			<?php echo $this->Html->link(__('Editar', true), array('action' => 'edit', $socio['Socio']['id'])); ?>
-			<?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $socio['Socio']['id']), null, sprintf(__('Esta Seguro de eliminar el usuario N° %s?', true), $socio['Socio']['id'])); ?>
+		        <?php echo $this->Html->link(__('Ver', true), array('action' => 'view', $socio['Socio']['id'])); ?>	
+                        <?php echo $this->Html->link(__('Editar', true), array('action' => 'edit', $socio['Socio']['id'])); ?>
+			<?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $socio['Socio']['id']), null, sprintf(__('Esta Seguro de eliminar el Socio N° %s?', true), $socio['Socio']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
