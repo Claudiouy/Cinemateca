@@ -1,5 +1,6 @@
 <?php
 class SociosController extends AppController {
+
 var $name =  'Socios';
 var $helpers = array('Html', 'Form');
 
@@ -101,7 +102,6 @@ $this->set('list_street', $list_street);*/
 	}
 
 }
-        
         
 }
 ?>

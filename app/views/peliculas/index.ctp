@@ -1,32 +1,39 @@
-<html>
-    <head>        
-        <style>
-            
-        </style>
-        <title> </title>
-    </head>
-    <body>
-        <ul>
-            <li>Listado de películas</li>
-            <?php
-              if(!empty($pelis)){
-                  
-                   echo '<div id="contenedorPeliculas">';
-                   foreach ($pelis as $peli) {
-                      
-                     echo '<li class="liPelicula" ><div id="contenedorPelicula" ><div id="contenedorNombrePelicula" ><a href="/cake_primero/peliculas/editar_pelicula/'.$peli["Pelicula"]["id"].'" >'.$peli["Pelicula"]["titulo"]
-                          .'</a></div><div id="contenedorDuracionPelicula" > '.$peli["Pelicula"]["duracion"].' </div> <div id="contenedorVerDetallePelicula" >   <a href="/cake_primero/peliculas/detalle/'.$peli["Pelicula"]["id"]
-                             .'" class="links" >Ver detalle</a></div><div id="contenedorEliminarPelicula" ><a href="/cake_primero/peliculas/eliminar_pelicula/'.$peli["Pelicula"]["id"].'" > Eliminar </a></div></div> </li> <br />';                  
-                     }
-                  echo '</div>'; 
-              }
-              echo $this->Session->flash(); 
-            ?>            
-        </ul>
-       <!-- <a href="/cake_primero/clientes/nuevo" class="links" >Ingresar cliente</a> -->
-        <br />
-        <br />
-        
-    </body>
-       
-</html>
+<div class="index">
+	<h2><?php __('Peliculas');?></h2>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+			<th><?php echo $this->Paginator->sort('id');?></th>
+			<th><?php echo $this->Paginator->sort('título');?></th>
+                        <th><?php echo $this->Paginator->sort('duración');?></th>
+			<th class="actions"><?php __('Acciones');?></th>
+	</tr>
+	<?php
+	$i = 0;
+	foreach ($peliculas as $peli):
+		$class = null;
+		if ($i++ % 2 == 0) {
+			$class = ' class="altrow"';
+		}
+	?>
+	<tr<?php echo $class;?>>
+		<td><?php echo $peli['Pelicula']['id']; ?>&nbsp;</td>
+		<td><?php echo $peli['Pelicula']['titulo']; ?>&nbsp;</td>
+                <td><?php echo $peli['Pelicula']['duracion']; ?> min &nbsp;</td>
+	
+		<td class="actions">
+			<?php echo $this->Html->link(__('Editar', true), array('action' => 'editar_pelicula', $peli['Pelicula']['id'])); ?>
+			<?php echo $this->Html->link(__('Borrar', true), array('action' => 'eliminar_pelicula', $peli['Pelicula']['id']), null, sprintf(__('Esta Seguro de eliminar la película N° %s?', true), $peli['Pelicula']['id'])); ?>
+		</td>
+	</tr>
+            <?php endforeach; ?>
+	</table>
+	
+
+	
+</div>
+<div class="actions">
+	<h3><?php __('Acciones'); ?></h3>
+	<ul>
+		<li><?php echo $this->Html->link(__('Nueva película', true), array('action' => 'nueva_pelicula')); ?></li>
+	</ul>
+</div>

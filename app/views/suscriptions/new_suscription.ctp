@@ -4,13 +4,13 @@
     </head>
     
     <body>
-        Agregar actor
+        Agregar pelicula
         
         <?php 
-            echo $form->create('Actor', array('action' => 'new_actor'));
+            echo $form->create('Suscription', array('action' => 'new_suscription'));
             echo $this->Form->input('name', array('label' => 'Nombre'));
-            echo $this->Form->input('lastname', array('label' => 'Apellido'));
-            echo $this->Form->input('birthdate', array('type' => 'date', 'label' => 'Fecha de nacimento'));
+            echo $this->Form->input('description', array('label' => 'descripcion'));
+            echo $this->Form->input('repeats_by_year', array('label' => 'Repeticiones por año'));
             echo $this->Form->end('Guardar');
         
         ?>

@@ -9,14 +9,15 @@ class PeliculasController extends AppController{
     var $name = 'Peliculas';
     
     function index(){
-        $mis_pelis = $this->Pelicula->find('all'); 
-        $this->set('pelis', $mis_pelis);
+        $this->Pelicula->recursive = 0;
+        $conditions = array('Pelicula.deleted = ' => 0);
+        $this->set('peliculas', $this->paginate('Pelicula', $conditions));
     }
     
     function detalle(){
         if(!empty($this->params['pass']['0'])){
             $pelicula_id = $this->params['pass']['0'];
-            $mi_peli = $this->Pelicula->findById($pelicula_id);
+            $mi_peli = $this->Pelicula->find('id =', $pelicula_id);
             $this->set('la_peli', $mi_peli['Pelicula']);
             
         }

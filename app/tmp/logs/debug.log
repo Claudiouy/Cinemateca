@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2011-09-10 09:57:26 Notice: Notice (8): Undefined property: ClientesController::$Persona in [/var/www/cake_primero/app/controllers/clientes_controller.php, line 13]
 2011-09-10 09:57:40 Notice: Notice (8): Trying to get property of non-object in [/var/www/cake_primero/app/views/clientes/index.ctp, line 10]
 2011-09-10 09:58:28 Notice: Notice (8): Undefined index:  nombre in [/var/www/cake_primero/app/views/clientes/index.ctp, line 10]
@@ -364,3 +365,5 @@
 2011-10-24 23:26:59 Debug: Notice (8): Undefined variable: logged_in in [C:\AppServ\www\cake_primero\app\views\layouts\default.ctp, line 55]
 2011-10-24 23:41:03 Debug: Notice (8): Undefined property:  UsersController::$request in [C:\AppServ\www\cake_primero\app\controllers\users_controller.php, line 88]
 2011-10-24 23:43:47 Debug: Notice (8): Undefined property:  UsersController::$Director in [C:\AppServ\www\cake_primero\app\controllers\users_controller.php, line 92]
+=======
+>>>>>>> b5f7756d49e49559f629e12390efab8690c83e8f

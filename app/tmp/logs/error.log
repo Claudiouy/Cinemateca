@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2011-09-11 12:39:39 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /var/www/cake_primero/cake/libs/debugger.php:683) in [/var/www/cake_primero/cake/libs/controller/controller.php, line 742]
 2011-09-11 12:40:06 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /var/www/cake_primero/cake/libs/debugger.php:683) in [/var/www/cake_primero/cake/libs/controller/controller.php, line 742]
 2011-09-11 12:41:16 Warning: Warning (2): Invalid argument supplied for foreach() in [/var/www/cake_primero/app/views/clientes/index.ctp, line 9]
@@ -225,3 +226,5 @@
 2011-10-27 18:00:28 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1062: Duplicate entry '0' for key 2</span> in [C:\AppServ\www\cake_primero\cake\libs\model\datasources\dbo_source.php, line 684]
 2011-10-27 18:00:35 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1062: Duplicate entry '0' for key 2</span> in [C:\AppServ\www\cake_primero\cake\libs\model\datasources\dbo_source.php, line 684]
 2011-10-27 18:01:36 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1062: Duplicate entry '2147483647' for key 2</span> in [C:\AppServ\www\cake_primero\cake\libs\model\datasources\dbo_source.php, line 684]
+=======
+>>>>>>> b5f7756d49e49559f629e12390efab8690c83e8f

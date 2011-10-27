@@ -25,7 +25,7 @@ class Actor extends AppModel{
     
     
     public function getAllActors(){
-        $actors = $this->find('all');
+        $actors = $this->find('all', array('conditions' => array('Actor.deleted' => 0)));
         return $actors;
     }
     
@@ -34,19 +34,27 @@ class Actor extends AppModel{
         return $myActor;
     }
     
-    public function cUpdateActor($actorId){
-        $myActor = $this->findById($actorId);
-        $this->set($myActor);
+    public function cUpdateActor($actorId, $actorName, $actorLastname, $actorBirthdate){
         $updatedOk = false;
-        if($this->validates()){
-            $fields = array('Actor.name' => '"'.$myActor['Actor']['name'].'"',
-                            'Actor.lastname' => '"'.$myActor['Actor']['lastname'].'"',
-                            'Actor.birthdate' => $myActor['Actor']['birthdate']);
-            $conditions = array('Actor.id' => $myActor['Actor']['id']);
-            
-            if($this->updateAll($fields, $conditions) == true) $updatedOk = true;
-        }
+        $fields = array('Actor.name' => '"'.$actorName.'"',
+                        'Actor.lastname' => '"'.$actorLastname.'"' ,
+                        'Actor.birthdate' => '"'.$actorBirthdate.'"');
+        $conditions = array('Actor.id' => $actorId);
+        
+        if($this->updateAll($fields, $conditions) == true) $updatedOk = true;
+        
         return $updatedOk;
+    }
+    
+    public function safeDelete($actorId){
+        
+        $safeDeleteOk = false;
+        $fields = array('Actor.deleted' => 1);
+        $conditions = array('Actor.id' => $actorId);
+
+        if($this->updateAll($fields, $conditions) == true) $safeDeleteOk = true;
+        
+        return $safeDeleteOk;
     }
 }
 ?>
