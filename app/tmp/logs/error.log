@@ -1,0 +1,6 @@
+2011-10-23 19:52:10 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Socio.state_id' in 'on clause'</span> in [/var/www/cake_primero/cake/libs/model/datasources/dbo_source.php, line 684]
+2011-10-23 19:53:11 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Socio.state_id' in 'on clause'</span> in [/var/www/cake_primero/cake/libs/model/datasources/dbo_source.php, line 684]
+2011-10-23 19:53:11 Warning: Warning (2): Invalid argument supplied for foreach() in [/var/www/cake_primero/app/views/socios/index.ctp, line 17]
+2011-10-23 19:55:21 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Socio.state_id' in 'on clause'</span> in [/var/www/cake_primero/cake/libs/model/datasources/dbo_source.php, line 684]
+2011-10-23 19:55:21 Warning: Warning (2): Invalid argument supplied for foreach() in [/var/www/cake_primero/app/views/socios/index.ctp, line 17]
+2011-10-25 19:29:37 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Socio.state_id' in 'on clause'</span> in [/var/www/cake_primero/cake/libs/model/datasources/dbo_source.php, line 684]

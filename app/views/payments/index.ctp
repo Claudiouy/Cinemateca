@@ -37,6 +37,6 @@
 <div class="actions">
 	<h3><?php __('Acciones'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Nuevo actor', true), array('action' => 'new_actor')); ?></li>
+		<li><?php echo $this->Html->link(__('Ingresar pago', true), array('action' => 'new_actor')); ?></li>
 	</ul>
 </div>
