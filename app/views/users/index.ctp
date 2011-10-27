@@ -1,22 +1,16 @@
-<div class="usuarios index">
-	<h2><?php __('Users');?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<tr>
-			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('nombre');?></th>
-			<th class="actions"><?php __('Acciones');?></th>
-	</tr>
-<<<<<<< HEAD
- 
-
-	<?php
-
+<div class="users index">
+    
+	<h2><?php __('Usuarios');?></h2>
         
-        $i = 0;
-=======
+<table cellpadding="0" cellspacing="0">
+	<tr>
+	<th><?php echo $this->Paginator->sort('Id');?></th>
+        <th><?php echo $this->Paginator->sort('Nombre de Usuario');?></th>
+	<th><?php echo $this->Paginator->sort('Rol');?></th>
+	<th class="actions"><?php __('Acciones');?></th>
+	</tr>
 	<?php
 	$i = 0;
->>>>>>> e765efc30b9fcd8d5c114976ec1c8231118952f2
 	foreach ($users as $user):
 		$class = null;
 		if ($i++ % 2 == 0) {
@@ -24,12 +18,14 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $user['User']['id']; ?>&nbsp;</td>
-		<td><?php echo $user['User']['nombre']; ?>&nbsp;</td>
-	
+        <td><?php echo $user['User']['id'];?></td>
+        <td><?php echo $user['User']['username'];?></td>
+	<td><?php echo $user['User']['roles'];?></td>
+        
 		<td class="actions">
+            <?php echo $this->Html->link(__('Ver', true), array('action' => 'view', $user['User']['id'])); ?>
 			<?php echo $this->Html->link(__('Editar', true), array('action' => 'edit', $user['User']['id'])); ?>
-			<?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $user['User']['id']), null, sprintf(__('Esta Seguro de eliminar el usuario N° %s?', true), $user['User']['id'])); ?>
+			<?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $user['User']['id']), null, sprintf(__('Esta Seguro de eliminar el usuario %s?', true), $user['User']['username'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
