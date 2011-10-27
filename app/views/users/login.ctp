@@ -1,14 +1,8 @@
-<html>
-    <head>
-        <title> </title>
-    </head>
-    <body>
-        <a href="/cake_primero/users/index" class="links" >Modulo de Usuarios</a> <br/>
-        <a href="/cake_primero/clientes/index" class="links" >Modulo de Clientes</a> <br/>
-        <a href="/cake_primero/socios/index" class="links" >Modulo de Socios</a> <br/>
-        <a href="/cake_primero/peliculas/index" class="links" >Modulo de Peliculas</a> <br/>
-        <a href="/cake_primero/directors/index" class="links" >Modulo de Directores</a> <br/>
-        <?php echo $this->Session->flash(); ?>
-    </body>
+<h3>Login</h3>
     
-</html>
+<?php echo $session->flash('auth');?>
+<?php echo $form->create('User', array ('action'=>'login'));?>
+<?php echo $form->input('username', array ('label'=>'Nombre de Usuario','action'=>'login'));?>
+<?php echo $form->input('password', array ('label'=>'Clave','type'=>'password','action'=>'login'));?>
+<?php echo $form->end('Login', array ('action'=>'login'));?>
+

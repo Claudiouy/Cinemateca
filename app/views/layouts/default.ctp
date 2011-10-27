@@ -26,7 +26,7 @@
             echo $this->Html->css('miCss'); 
         ?>
 	<title>
-		<?php __('CakePHP: the rapid development php framework:'); ?>
+		<?php __('Sistema de Gestion de Socios y Puntos de Venta ~ CINEMATECA URUGUAYA'); ?>
 		<?php echo $title_for_layout;?>
 	</title>
 
@@ -34,29 +34,39 @@
 	<link rel="shortcut icon" href="<?php echo $this->webroot;?>favicon.ico" type="image/x-icon" />
 	<?php echo $this->Html->css('cake.generic');?>
 	<?php echo $scripts_for_layout;?>
+        <style>
+            #user-nav{
+                width: 100%;
+                text-align: right;
+                    
+            }
+        </style>
+            
+        
 </head>
 <body>
 	<div id="container">
 		<div id="header">
-<<<<<<< HEAD
 			<div id="navbar"> <a href="index.htm" target="_parent">Ingreso a sala</a> · <a href="/cake_primero/socios" target="_parent">Modulo socios</a> · <a href="/cake_primero/peliculas" target="_parent">Modulo peliculas</a> · <a href="cinemateca18.html" target="_parent">Modulo de pagos</a> · <a href="festivales.html" target="_parent">Reportes de caja</a> ·  <a href="http://www.cinemateca.org.uy/plus.html" target="_parent">Otros Modulos</a> </div>    
-=======
-			<div id="navbar"> <a href="index.htm" target="_parent">Ingreso a sala</a> · <a href="calendario.html" target="_parent">Modulo socios</a> · <a href="/cake_primero/peliculas" target="_parent">Modulo peliculas</a> · <a href="cinemateca18.html" target="_parent">Modulo de pagos</a> · <a href="festivales.html" target="_parent">Reportes de caja</a> ·  <a href="http://www.cinemateca.org.uy/plus.html" target="_parent">Otros Modulos</a> </div>    
->>>>>>> e765efc30b9fcd8d5c114976ec1c8231118952f2
 		</div>
 		<div id="content">
                         
-			<?php $this->Session->flash();?>
+                    <div id="user-nav">
+<?php if ($logged_in):?>
+                        Bienvenido <?php echo $users_username;?>&nbsp-<?php echo $users_userRol;?>-&nbsp;<?php echo $html->link('Cerrar Sesión', array('controller'=>'users','action'=>'logout'));?>
+                        <?php else: ?>
+    <?php echo $html->link('Registro', array('controller'=>'users','action'=>'add'));?> o 
+                        <?php echo $html->link('Login', array('controller'=>'users','action'=>'login'));?>
+    <?php endif;?>
+                    </div>
+
+	<?php $this->Session->flash();?>
 
 			<?php echo $content_for_layout;?>
 
 		</div>
 		<div id="footer">
-<<<<<<< HEAD
 			<div id="navbar"> <a href="index.htm" target="_parent">Ingreso a sala</a> · <a href="/cake_primero/socios" target="_parent">Modulo socios</a> · <a href="institucional.html" target="_parent">Modulo peliculas</a> · <a href="cinemateca18.html" target="_parent">Modulo de pagos</a> · <a href="festivales.html" target="_parent">Reportes de caja</a> ·  <a href="http://www.cinemateca.org.uy/plus.html" target="_parent">Otros Modulos</a> </div>    
-=======
-			<div id="navbar"> <a href="index.htm" target="_parent">Ingreso a sala</a> · <a href="calendario.html" target="_parent">Modulo socios</a> · <a href="institucional.html" target="_parent">Modulo peliculas</a> · <a href="cinemateca18.html" target="_parent">Modulo de pagos</a> · <a href="festivales.html" target="_parent">Reportes de caja</a> ·  <a href="http://www.cinemateca.org.uy/plus.html" target="_parent">Otros Modulos</a> </div>    
->>>>>>> e765efc30b9fcd8d5c114976ec1c8231118952f2
 		</div>
 	</div>
 </body>

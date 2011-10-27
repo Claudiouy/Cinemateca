@@ -6,7 +6,7 @@ var $helpers = array('Html', 'Form');
 public function index(){
    
 $active = $this->Socio->find('all');   
-$this->set('onlyActive', $this->paginate('Socio', array ('Socio.estado'=>'True')));
+$this->set('onlyActive', $this->paginate('Socio', array ('Socio.estado'=>1)));
 }
 
 

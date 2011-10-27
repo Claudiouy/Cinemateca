@@ -2,6 +2,8 @@
 <?php echo $this->Form->create('Director');?>
 	<fieldset>
  		<legend><?php __('Editar Director'); ?></legend>
+<?php echo $session->flash('auth');?>
+
 <?php
 echo $form->hidden('Director.id');
 echo $form->input('Director.name');
