@@ -44,7 +44,6 @@ $(document).ready(function(){
             type: "POST",
             url:  "/cake_primero/peliculas/activar_peliculas",
             success: function(data){
-                console.info(data);
                 limpiarCheckboxes();
             },
             error: function(miError){
@@ -74,6 +73,66 @@ $(document).ready(function(){
          idsJoins = idsArray.join(',');
          return idsJoins;
     }
+    
+    
+    //------------new_payment------------
+    
+        $("#openSearchSocio").click(function(){
+            $("#searchSocioContainer").toggle();
+        });
+    
+        $("#retrieveSocios").click(function(){
+           var nombreSocio = $("#socioNameSearch").val();
+           $.ajax({
+                data: "nameSocio=" + nombreSocio,
+                type: "POST",
+                url:  "/cake_primero/payments/retrieveSociosByName",
+                success: function(data){
+                    $("#socioData").html(data);
+                }
+           });
+        });
+        /*
+        $(".selectSocio").live('click', function(){  
+           var idSocio = $(this).attr('id');
+           console.info(idSocio);
+           $.ajax({
+                data: "idSocio=" + idSocio,
+                type: "POST",
+                datatype: 'json',
+                url:  "/cake_primero/payments/retrieveSocioById",
+                success: function(data){
+                    $("#socioData").html(data);
+                }
+           });
+        });*/
+    
+    
+    //------------/ new_payment---------
+    
+    //------------- tickets------------------
+    
+    
+         $("#findSocioByDoc").click(function(){
+           var socioDocument = $("#socioDocument").val();
+           $.ajax({
+                data: "socioDoc=" + socioDocument,
+                type: "POST",
+                url:  "/cake_primero/tickets/retrieve_socio_by_document",
+                success: function(data){
+                    var sociosName = data.split('--||--')[0];
+                    var sociosId = data.split('--||--')[1];
+                    
+                    $('#inputReadOnlySocio').val(sociosName);
+                    $('#TicketId').val(sociosId);
+                }
+           });
+        });
+    
+    
+    
+    
+    //----------------- /tickets---------------
 });
 
 

@@ -9,6 +9,8 @@
 class PaymentsController extends AppController{
     var $name = 'Payments';
     
+    var $components = array('RequestHandler');  // para no mostrar header y footer cuando cargo un element
+    
     function index(){
         $this->Payment->recursive = 0;
         $conditions = array('Payment.deleted = ' => 0);
@@ -79,7 +81,53 @@ class PaymentsController extends AppController{
                 $allPayments = $this->find('all');
             }
         }
-        $this->redirect('/payment');
+        $this->redirect('/payments');
     }
+    
+    
+    function retrieveSociosByName(){
+        
+        if(!empty($_POST["nameSocio"])){
+            $socioName = $_POST["nameSocio"];
+            $this->loadModel('Socio');
+            $this->Payment->recursive = 1;
+            $conditions = array('OR' => array('Socio.nombre LIKE' => '%'.$socioName.'%',
+                                                'Socio.apellido LIKE' => '%'.$socioName.'%'));
+            //$conditions = array('Socio.id' => 1);
+            //$conditions = 'Socio.apellido LIKE %'.$socioName.'%';
+                                                
+            $socioList = $this->Socio->find('all', array('conditions' => $conditions));
+            //var_dump($socioList);
+            $this->set('socioList', $socioList);
+            
+        }
+        $this->render('/elements/socios_list');
+        //$this->layout = 'layout_list_socios';
+    }
+    
+    function retrieveSocioById(){
+        if(!empty($this->params['pass']['0'])){
+            $idSocio = $this->params['pass']['0'];
+            $this->loadModel('Socio');
+            $this->Payment->recursive = 1;
+            $selSocio = $this->Socio->findById($idSocio);
+            $this->set('selSocio', $selSocio);
+            //var_dump($selSocio);
+            //echo $selSocio["Socio"]["apellido"];
+        }
+        $this->render('/payments/new_payment');
+        //$this->render($selSocio['Socio']['apellido']);
+    }
+    
+    function set_payment(){
+        if(!empty($this->data['Payment'])){
+            $rawPayment = $this->data['Payment'];
+            if($this->Payment->cCreateNewPayment($rawPayment['idSocio'], $rawPayment['amountSocio'])){
+                $this->redirect('/payments');
+            }
+        }
+        $this->redirect('/payments/new_payment');
+    }
+    
 }
 ?>

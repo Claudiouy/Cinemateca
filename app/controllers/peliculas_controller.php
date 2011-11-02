@@ -6,7 +6,8 @@
  */
 
 class PeliculasController extends AppController{
-    var $name = 'Peliculas';
+    var $name = 'Peliculas'; 
+    var $components = array('RequestHandler');
     
     function index(){
         $this->Pelicula->recursive = 0;

@@ -51,6 +51,15 @@ var $validate = array(
      'message' => 'Favor ingresar un email valido')
     
 );
+    
+    function getSocioByDocument($docSocio){
+        
+        if(!empty($docSocio)){
+            $mySocio = $this->find('first', array('conditions' => array('Socio.documento_identidad' => $docSocio)));
+        }
+        return $mySocio;
+    }
+
 
 }
 ?>

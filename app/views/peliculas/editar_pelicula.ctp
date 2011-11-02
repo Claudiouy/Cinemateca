@@ -6,6 +6,7 @@
     <body>
         
         <h3>Editar película</h3>
+        <div style="width:50%">
         <?php
             if(!empty($mi_pelicula)){
                 echo $form->create('Pelicula', array('action' => 'editar_pelicula'));
@@ -18,6 +19,7 @@
             }
         ?>
         <?php echo $this->Session->flash(); ?>
+        </div>    
     </body>
     
     

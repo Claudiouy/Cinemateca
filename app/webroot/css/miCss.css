@@ -78,3 +78,27 @@ display:block;
 .longData{
     word-break: break-all;
 }
+
+#searchSocioContainer{
+    display: none;
+    left: 20%;
+    position: absolute;
+    top: 20%;
+    width: 50%;
+    background: #505050;
+    filter: alpha(opacity=80);
+    opacity: 0.9;
+    padding:20px;
+    
+    
+}
+
+#searchSocioTicketContainer{
+    width:40%;
+    margin-right:3%;
+}
+
+#dataSocioTicketContainer{
+    
+}
+
