@@ -26,7 +26,7 @@
                  <?php echo $socio['Socio']['name'];?>
                 </td>
 	<td><?php echo $socio['Socio']['documento_identidad']; ?>&nbsp;</td>
-        	<td><?php echo $socio['Subscription']['name']; ?>&nbsp;</td>
+        	<td><?php echo $socio['Suscription']['name']; ?>&nbsp;</td>
 <td><?php echo $socio['PaymentMethod']['name']; ?>&nbsp;</td>
         
 		<td class="actions">

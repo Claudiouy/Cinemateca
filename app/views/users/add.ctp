@@ -29,7 +29,3 @@
  <?php endif; ?>
         </ul>
 </div>
-
-
-
-

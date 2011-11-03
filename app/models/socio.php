@@ -4,7 +4,7 @@ var $name = 'Socio';
 var $hasMany = array('Payment');
 
 
-var $belongsTo = array('Street','State','Subscription','PaymentMethod');
+var $belongsTo = array('Street','State','Suscription','PaymentMethod');
 
 var $validate = array(
      'name' => array(
