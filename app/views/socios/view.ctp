@@ -1,6 +1,6 @@
 <div class="socios index">
     
-	<h2><?php __('Socios');?></h2>
+	<h2 id="h2"><?php __('Socios');?></h2>
         
 <table cellpadding="0" cellspacing="0">
 	<tr>
@@ -10,7 +10,7 @@
             <th><?php echo('Suscripcion');?></th>
             <th><?php echo('Forma de Pago');?></th>
             <th><?php echo('Socio Desde');?></th>
-            <th><?php echo('Ultima Modificacion');?></th>
+            <th><?php echo('Fecha de Nac.');?></th>
             <th><?php echo('Foto');?></th>
             
             <th class="actions"><?php __('Acciones');?></th>
@@ -24,7 +24,7 @@
 <td><?php echo $socio['Suscription']['name']; ?>&nbsp;</td>
 <td><?php echo $socio['PaymentMethod']['name']; ?>&nbsp;</td>  
 <td><?php echo $socio['Socio']['created']; ?>&nbsp;</td>  
-<td><?php echo $socio['Socio']['modified']; ?>&nbsp;</td>	
+<td><?php echo $socio['Socio']['fec_nac']; ?>&nbsp;</td>	
 <td><?php
     if(!empty($socio['Socio']['image_url'])) {  
     $url = $socio['Socio']['image_url'];  
@@ -44,6 +44,7 @@
 <td class="actions">
         <?php echo $this->Html->link(__('Editar', true), array('action' => 'edit', $socio['Socio']['id'])); ?>
 	<?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $socio['Socio']['id']), null, sprintf(__('Esta Seguro de eliminar al socio N° %s?', true), $socio['Socio']['id'])); ?>
+             
           
         </td>
 	</tr>
@@ -57,5 +58,14 @@
 	<ul>
         <li><?php echo $this->Html->link(__('Nuevo Socio', true), array('action' => 'add')); ?></li>
         <li><?php echo $this->Html->link(__('Listar Socios', true), array('action' => 'index'));?></li>
-	</ul>
+	        <li><?php echo $this->Html->link(__('Imprimir', true), array('action' => 'pdf'));?></li>
+
+        <li>
+                <?php
+                echo $form->create('', array('action'=>'search'));
+                echo $form->input('Buscar', array('type'=>'text'));
+                echo $form->end('Buscar');             
+                ?>
+                </li>
+        </ul>
 </div>

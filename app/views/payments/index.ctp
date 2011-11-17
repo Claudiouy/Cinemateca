@@ -1,5 +1,5 @@
 <div class="index">
-	<h2><?php __('Pagos');?></h2>
+	<h2 id="h2"><?php __('Pagos');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
@@ -24,8 +24,7 @@
                     <td><?php  ?>&nbsp;</td>
 
                     <td class="actions">
-                            <?php echo $this->Html->link(__('Editar', true), array('action' => 'edit_payment', $pay['Payment']['id'])); ?>
-                            <?php echo $this->Html->link(__('Borrar', true), array('action' => 'remove_payment', $pay['Payment']['id']), null, sprintf(__('Esta Seguro de eliminar el pago N° %s?', true), $pay['Payment']['id'])); ?>
+                            
                     </td>
             </tr>
                 <?php endforeach;}?>
@@ -37,6 +36,6 @@
 <div class="actions">
 	<h3><?php __('Acciones'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Nuevo actor', true), array('action' => 'new_actor')); ?></li>
+		<li><?php echo $this->Html->link(__('Ingresar pago', true), array('action' => 'new_payment')); ?></li>
 	</ul>
 </div>

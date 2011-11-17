@@ -1,14 +1,18 @@
 <?php
 
 class AppController extends Controller {
-    var $components = array ('Auth', 'Session');
+
+var $components = array ('Auth', 'Session', 'RequestHandler');  
+
+
 
     function beforeFilter() {
 $this->Auth->allow('login');    
 $this->Auth->authError='Debe estar logueado en el sistema para tener acceso';    
 $this->Auth->loginError='Usuario/Clave combinacion inválida .';    
-$this->Auth->loginRedirect=array('controller'=>'users','action'=>'inicio');    
+$this->Auth->loginRedirect=array('controller'=>'pages','action'=>'home');    
 $this->Auth->logoutRedirect=array('controller'=>'users','action'=>'login');    
+
 
 $this->set('admin', $this->_isAdmin());
 $this->set('logged_in',$this->_LoggedIn());
@@ -133,6 +137,26 @@ function uploadFiles($folder, $formdata, $itemId = null) {
     }  
 return $result;  
 }
+
+function search(){
+$this->autoRender = false;
+$search = $this->data[$this->modelClass]['Buscar'];
+$cond ="";
+$i=0;
+foreach($this->{$this->modelClass}->_schema as $field => $value){
+//debug($field);
+if($i>0){
+$cond = $cond. " OR ";
+}
+$cond = $cond. " ".$this->modelClass.".".$field." LIKE '%".$search."%' ";
+$i++;
+}
+$conditions = array('limit'=>10,'conditions'=> $cond);
+$this->paginate = $conditions;
+$this->set(strtolower($this->name), $this->paginate());
+$this->render('search');
+}
+
 }
 
   

@@ -1,7 +1,7 @@
 <div class="users form">
 <?php echo $this->Form->create('User');?>
 	<fieldset>
- 		<legend><?php __('Editar Usuario'); ?></legend>
+ 		<legend id="legend"><?php __('Editar Usuario'); ?></legend>
         <?php echo $session->flash('auth');?>
 
 	<?php

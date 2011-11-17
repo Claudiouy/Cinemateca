@@ -20,11 +20,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<?php echo $this->Html->charset();
-            echo $this->Html->script('jQuery');
-            echo $this->Html->script('miJQuery');
-            echo $this->Html->css('miCss'); 
-        ?>
+	<?php 
+           echo $this->Html->css('miCss');
+           echo $this->Html->css('cake.generic');
+           echo $this->Html->css('miCss.css');
+           echo $this->Html->css('autocompleteui');
+           echo $this->Html->css('autoComplete.css');
+           echo $this->Html->css('datePicker.css');
+           echo $this->Html->css('jquery-ui-1.8.16.custom.css');
+           echo $this->Html->charset();
+           echo $this->Html->script('jQuery');
+           echo $this->Html->script('miJQuery');
+           echo $this->Html->script('jquery-1.6.2.min.js');
+           echo $this->Html->script('jquery-ui-1.8.16.custom.min.js');
+           echo $this->Html->script('date.js');
+           echo $this->Html->script('application.js');
+           echo $this->Html->script('jquery.datePicker.js');
+           echo $this->Html->script('cake.datePicker.js');
+        
+           ?>   
+    
 	<title>
 		<?php __('Sistema de Gestion de Socios y Puntos de Venta ~ CINEMATECA URUGUAYA'); ?>
 		<?php echo $title_for_layout;?>
@@ -32,7 +47,6 @@
 
 	<link rel="icon" href="<?php echo $this->webroot;?>favicon.ico" type="image/x-icon" />
 	<link rel="shortcut icon" href="<?php echo $this->webroot;?>favicon.ico" type="image/x-icon" />
-	<?php echo $this->Html->css('cake.generic');?>
 	<?php echo $scripts_for_layout;?>
         <style>
             #user-nav{

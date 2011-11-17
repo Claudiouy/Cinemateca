@@ -1,7 +1,7 @@
 <div class="directors form">
 <?php echo $this->Form->create('Director');?>
 	<fieldset>
- 		<legend><?php __('Editar Director'); ?></legend>
+ 		<legend id="legend"><?php __('Editar Director'); ?></legend>
 <?php echo $session->flash('auth');?>
 
 <?php

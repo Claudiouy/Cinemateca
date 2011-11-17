@@ -19,13 +19,26 @@ class Payment extends AppModel{
     public function safeDelete($paymentId){
         
         $safeDeleteOk = false;
-        $fields = array('Payment.canceled' => 1);
+        $fields = array('Payment.deleted' => 1);
         $conditions = array('Payment.id' => $paymentId);
 
         if($this->updateAll($fields, $conditions) == true) $safeDeleteOk = true;
         
         return $safeDeleteOk;
     }
+    
+    public function cCreateNewPayment($socioId, $totalAmount){
+        
+        $savedOk = false;
+        $data = array('Payment' => array('socio_id' => $socioId, 'amount' => $totalAmount));
+        if($this->save($data)){
+            $savedOk = true;
+        }
+        return $savedOk;
+    }
+    
+    
+   
     
 }
 ?>

@@ -1,5 +1,5 @@
 <div class="index">
-	<h2><?php __('Suscripciones');?></h2>
+	<h2 id="h2"><?php __('Suscripciones');?></h2>
         <table cellpadding="0" cellspacing="0" style="width:80%">
             <tr>
                             <th><?php echo $this->Paginator->sort('id');?></th>

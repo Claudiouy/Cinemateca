@@ -3,7 +3,7 @@
         <title> </title>
     </head>
     <body>
-        <h2>Ingreso de usuario</h2>
+        <h2 id="h2">Ingreso de usuario</h2>
         <br />
         <?php 
             echo $form->create('Cliente', array('action' => 'nuevo'));

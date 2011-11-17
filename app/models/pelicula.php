@@ -7,9 +7,10 @@
 
 class Pelicula extends AppModel{
     var $name = 'Pelicula';
+    var $hasMany = array ('Performance');
     
      var $validate = array(
-         'titulo' => array(
+         'name' => array(
              'rule' => 'notEmpty',
              'message' => 'Debe Indicar un título'
              ),

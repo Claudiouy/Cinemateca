@@ -1,6 +1,6 @@
 <div class="streets index">
     
-	<h2><?php __('Calles');?></h2>
+	<h2 id="h2"><?php __('Calles');?></h2>
         
 <table cellpadding="0" cellspacing="0">
 	<tr>

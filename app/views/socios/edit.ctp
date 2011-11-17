@@ -1,35 +1,25 @@
 <div class="socios form">
 <?php echo $this->Form->create('Socio',array('type'=>'file'));?>
 	<fieldset>
- 		<legend><?php __('Editar Socio'); ?></legend>
+ 		<legend id="legend"><?php __('Editar Socio'); ?></legend>
 	
         
 <?php echo $form->hidden('Socio.id');?>
 
-<td><?php
-    
-  
-    $url = $socio['Socio']['image_url'];  
-var_dump($url);
-    echo '<div class="uploaded_image">';  
-    ?>
-<?php
-    echo $this->Html->image('/'.'app/webroot/'.$url, array('width'=>100 ,'height'=>100, 'border'=>1));
-    ?>
-</td>
-    <?php
-    
-    
-    echo '</div>';  
-  
-?>
+<label for="FileImage">Foto</label>  
+<input type="file" name="data[File][image]" id="FileImage" />  
 <?php
 
 echo $form->input('Socio.name', array('label'=>'Nombre:'));
 echo $form->input('Socio.surname', array('label'=>'Apellido:'));
+echo $datePicker->picker('fec_nac' ,array('maxYear'=> date('Y'),'minYear'=>date('Y') - 100)); 
+$options=array('M'=>'Hombre','F'=>'Mujer');
+$attributes=array('legend'=>'Sexo');
+echo $this->Form->radio('gender',$options,$attributes);
+
 echo $this->Form->input('documento_identidad', array('label'=>'Documento de Identidad:'));
 echo $form->input('Socio.state_id', array('type' => 'select', 'label'=>'Nacionalidad:', 'options'=>$list_state, 'empty'=>FALSE));
-//echo $form->input('Socio.street_id', array('type' => 'select', 'label'=>'Calle:', 'options'=>$list_street, 'empty'=>FALSE));         
+echo $this->Form->input('calle_princ',array('type'=>'text','id'=>'calle_princ','label'=>'Direccion'));
 echo $this->Form->input('Socio.ocupacion', array('label'=>'Ocupacion:'));
 echo $this->Form->input('Socio.tel_fijo', array('label'=>'Tel.:'));
 echo $this->Form->input('Socio.celular', array('label'=>'Cel.:'));
