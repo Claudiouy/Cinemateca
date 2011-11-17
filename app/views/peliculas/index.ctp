@@ -1,4 +1,5 @@
 <div class="index">
+    
 	<h2><?php __('Peliculas');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
@@ -35,5 +36,6 @@
 	<h3><?php __('Acciones'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Nueva película', true), array('action' => 'nueva_pelicula')); ?></li>
-	</ul>
+                <li><?php echo $this->Html->link(__('Activar películas', true), array('action' => 'seleccionar_peliculas')); ?></li>
+        </ul>
 </div>

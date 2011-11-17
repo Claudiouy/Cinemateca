@@ -59,6 +59,15 @@ var $validate = array(
         }
         return $mySocio;
     }
+    
+    function getSociosByName($socioName){
+        
+        $conditions = array('OR' => array('Socio.name LIKE' => '%'.$socioName.'%',
+                                                'Socio.surname LIKE' => '%'.$socioName.'%'));
+        
+        $socioList = $this->find('all', array('conditions' => $conditions));
+        return $socioList;
+    }
 
 
 }

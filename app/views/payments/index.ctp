@@ -5,6 +5,8 @@
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('Detalle');?></th>
                         <th><?php echo $this->Paginator->sort('');?></th>
+                        <th><?php echo $this->Paginator->sort('Monto');?></th>
+                        <th><?php echo $this->Paginator->sort('Fecha');?></th>
 			<th class="actions"><?php __('Acciones');?></th>
 	</tr>
 	<?php
@@ -22,9 +24,21 @@
                     <td><?php echo $this->Html->link(__('Ver detalle', true), array('action' => 'detail', $pay['Payment']['id'])); ?></td>
                     </td>
                     <td><?php  ?>&nbsp;</td>
-
+                    <td><?php echo '$'.$pay['Payment']['amount'];?></td>
+                    <td><?php echo 'fecha'; ?></td>
                     <td class="actions">
-                            
+                        <?php if(empty($pay['Payment']['id_canceled']) && $pay['Payment']['canceled'] == 0 ){ 
+                            echo $this->Html->link(__('Anular', true), array('action' => 'cancel_payment', $pay['Payment']['id'])); 
+                        
+                        } else {
+                            if(!empty($pay['Payment']['id_canceled'])){
+                                echo 'Anula pago nº: '.$pay['Payment']['id_canceled'] ;
+                            }
+                            else{
+                                echo 'Anulado.';
+                            }
+                        }
+?>
                     </td>
             </tr>
                 <?php endforeach;}?>
@@ -37,5 +51,6 @@
 	<h3><?php __('Acciones'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Ingresar pago', true), array('action' => 'new_payment')); ?></li>
-	</ul>
+                <li><?php echo $this->Html->link(__('Consultar pagos', true), array('action' => 'payment_filters')); ?></li>
+        </ul>
 </div>

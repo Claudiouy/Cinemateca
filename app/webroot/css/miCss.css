@@ -102,3 +102,21 @@ display:block;
     
 }
 
+#closeButton{
+    float:right;
+    margin-right: 8px;
+    border: solid 1px white;
+    height:12px;
+    width:12px;
+}
+
+#selectedSocio{
+    width: 50%;
+    float:left;
+}
+
+#paymentsOfSocio{
+    width:37%;
+    float:left;
+}
+

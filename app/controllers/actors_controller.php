@@ -7,6 +7,7 @@
 
 class ActorsController extends AppController{
     var $name = 'Actors';
+    var $hasMany = array('Peliculas');
     
     
     function index(){

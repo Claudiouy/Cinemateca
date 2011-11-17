@@ -1,2 +1,2 @@
-1320277027
-a:14:{i:0;s:6:"actors";i:1;s:8:"clientes";i:2;s:9:"directors";i:3;s:15:"payment_methods";i:4;s:8:"payments";i:5;s:9:"peliculas";i:6;s:6:"socios";i:7;s:6:"states";i:8;s:7:"streets";i:9;s:13:"subscriptions";i:10;s:12:"suscriptions";i:11;s:7:"tickets";i:12;s:5:"users";i:13;s:8:"usuarios";}
+1321229467
+a:16:{i:0;s:15:"actor_peliculas";i:1;s:6:"actors";i:2;s:8:"clientes";i:3;s:18:"director_peliculas";i:4;s:9:"directors";i:5;s:15:"payment_methods";i:6;s:8:"payments";i:7;s:9:"peliculas";i:8;s:6:"socios";i:9;s:6:"states";i:10;s:7:"streets";i:11;s:13:"subscriptions";i:12;s:12:"suscriptions";i:13;s:7:"tickets";i:14;s:5:"users";i:15;s:8:"usuarios";}

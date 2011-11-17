@@ -38,13 +38,14 @@ $(document).ready(function(){
     $("#activarPeliculasSeleccionadas").click(function(){
         
          var idsJoins = getPeliculasMarcadas();
-         //console.info(idsJoins);
+         var idsJoinsNoMarcadas = getPeliculasNoMarcadas();
+         
          $.ajax({
-            data: "idSelec=" + idsJoins,
+            data: "idSelec=" + idsJoins + "&idNoSelec=" + idsJoinsNoMarcadas,
             type: "POST",
             url:  "/cake_primero/peliculas/activar_peliculas",
             success: function(data){
-                limpiarCheckboxes();
+                //console.info(data);
             },
             error: function(miError){
                //console.info(miError.statusText);
@@ -66,13 +67,50 @@ $(document).ready(function(){
          
          $(".peliculaSeleccionada").each(function(){
              
-             if(($(this).attr("checked")) == "checked"){
+             if(this.checked){
                  idsArray.push($(this).attr("id"));
              }
          });
          idsJoins = idsArray.join(',');
          return idsJoins;
     }
+    
+    function getPeliculasNoMarcadas(){
+        
+        var idsArray = new Array();
+         
+         $(".peliculaSeleccionada").each(function(){
+             
+             if(!this.checked){
+                 idsArray.push($(this).attr("id"));
+             }
+         });
+         idsJoins = idsArray.join(',');
+         return idsJoins;
+    }
+    
+    //------------------filtered_payments------------------------
+        
+        $("#confirmSearchPayment").click(function(){
+            
+            if($("#nameSocioOfPayment").val() != null)  nameSocio = $("#nameSocioOfPayment").val();
+            if($("#lastNameSocioOfPayment").val() != null ) lastNameSocio = $("#lastNameSocioOfPayment").val();
+            if($("#ciSocioOfPayment").val() != null)  ciSocio = $("#ciSocioOfPayment").val();
+            if($("#amountOfPayment").val() != null)  amountPayment = $("#amountOfPayment").val();
+            
+            $.ajax({
+                type: "POST",
+                data: "nameSocio=" + nameSocio + "&lastNameSocio=" + lastNameSocio + "&ciSocio=" + ciSocio + "&amountPayment=" + amountPayment,
+                url:  "/cake_primero/payments/payment_filters",
+                success: function(data){
+                    console.info(data);
+                    $("#paymentsContainer").html(data);
+                }
+           });
+           
+        });
+    
+    //------------------- /filtered_payments----------------
     
     
     //------------new_payment------------
@@ -106,6 +144,11 @@ $(document).ready(function(){
                 }
            });
         });*/
+        
+        $("#closeButton").click(function(){
+            var divContenedor = $("#searchSocioContainer");
+            divContenedor.hide();
+        });
     
     
     //------------/ new_payment---------
@@ -133,6 +176,16 @@ $(document).ready(function(){
     
     
     //----------------- /tickets---------------
+    
+    
+    function getMoviesData(){
+        var movie_container = document.createElement('div');
+        $(movie_container).addClass('movieContainer');
+        
+        var movie_image = document.createElement('img');
+        $(addComment).addClass('movieImg');
+        $(post_container).append(addComment);
+    }
 });
 
 

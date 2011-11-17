@@ -22,6 +22,6 @@
     </tr>  
 </table>
 
-<div style="margin-left:40%"> <?php echo $this->Form->end('Aplicar pago'); ?> </div>
+<div style="margin-left:40%"> <?php echo $this->Form->end('Generar entrada'); ?> </div>
 
     

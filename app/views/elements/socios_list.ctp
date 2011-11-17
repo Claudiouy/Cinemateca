@@ -9,7 +9,7 @@
             ?>
                     <li>
                       
-                       <?php echo $this->Html->link(__($socio['Socio']['nombre'].' '.$socio['Socio']['apellido']  , true), array('action' => 'retrieveSocioById', $socio['Socio']['id'])); ?>
+                       <?php echo $this->Html->link(__($socio['Socio']['name'].' '.$socio['Socio']['surname']  , true), array('action' => 'retrieveSocioById', $socio['Socio']['id'])); ?>
                     </li>        
         
         <?php 
