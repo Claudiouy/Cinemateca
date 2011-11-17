@@ -6,6 +6,7 @@
     <body>
         
         <h3>Editar actor</h3>
+        <div style="width:50%">
         <?php
             if(!empty($my_actor)){
                 echo $form->create('Actor', array('action' => 'edit_actor_proccess'));
@@ -16,7 +17,7 @@
                 echo $this->Form->end('Actualizar');
             }   
         ?>
-        
+        </div>
     </body>
     
     

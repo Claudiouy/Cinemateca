@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 2011-09-11 12:39:39 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /var/www/cake_primero/cake/libs/debugger.php:683) in [/var/www/cake_primero/cake/libs/controller/controller.php, line 742]
 2011-09-11 12:40:06 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /var/www/cake_primero/cake/libs/debugger.php:683) in [/var/www/cake_primero/cake/libs/controller/controller.php, line 742]
 2011-09-11 12:41:16 Warning: Warning (2): Invalid argument supplied for foreach() in [/var/www/cake_primero/app/views/clientes/index.ctp, line 9]
@@ -447,3 +448,5 @@
 2011-11-17 10:19:33 Warning: Warning (2): Invalid argument supplied for foreach() in [C:\AppServ\www\cake_primero\app\views\socios\index.ctp, line 22]
 2011-11-17 10:19:34 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dsc  LIMIT 10' at line 1</span> in [C:\AppServ\www\cake_primero\cake\libs\model\datasources\dbo_source.php, line 684]
 2011-11-17 10:19:34 Warning: Warning (2): Invalid argument supplied for foreach() in [C:\AppServ\www\cake_primero\app\views\socios\index.ctp, line 22]
+=======
+>>>>>>> 536d3e85739a2ce271238b5b112a609159f356b2

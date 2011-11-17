@@ -9,7 +9,7 @@
 class PaymentsController extends AppController{
     var $name = 'Payments';
     
-  //  var $components = array('RequestHandler');  // para no mostrar header y footer cuando cargo un element
+    var $components = array('RequestHandler');  // para no mostrar header y footer cuando cargo un element
     
     function index(){
         $this->Payment->recursive = 0;
@@ -21,10 +21,8 @@ class PaymentsController extends AppController{
         if(!empty($this->params['pass']['0'])){
             $this->loadModel('Socio');
             $this->Payment->recursive = 1;
-            $socioIdList = $this->Payment->find('list', array('conditions' => array('Payment.socio_id' => $this->params['pass']['0'])));
-            $socioId = $socioIdList[$this->params['pass']['0']];            
-            $my_socio = $this->Socio->find('first', array('conditions' => array('Socio.id' => $socioId)));
-            $this->set('detailedSocio', $my_socio);
+            $payment = $this->Payment->find('first', array('conditions' => array('Payment.id ' => $this->params['pass']['0'])));
+            $this->set('detailedPayment', $payment);
         }
         else{
             $this->redirect('/payments');
@@ -84,6 +82,20 @@ class PaymentsController extends AppController{
         $this->redirect('/payments');
     }
     
+    function cancel_payment(){
+        
+        if(!empty($this->params['pass']['0'])){
+            $payment_id_to_cancel = $this->params['pass']['0'];
+            if($this->Payment->cCancelPayment($payment_id_to_cancel)){
+                $this->Session->setFlash('El pago se anuló correctamente');
+            }
+            else{
+                $this->Session->setFlash('El pago no se pudo anular');
+            }
+        }
+        $this->redirect('/payments');
+    }
+    
     
     function retrieveSociosByName(){
         
@@ -106,17 +118,17 @@ class PaymentsController extends AppController{
     }
     
     function retrieveSocioById(){
-        if(!empty($this->params['pass']['0'])){
+        if(!empty($this->params['pass']['0'])){        
             $idSocio = $this->params['pass']['0'];
             $this->loadModel('Socio');
             $this->Payment->recursive = 1;
             $selSocio = $this->Socio->findById($idSocio);
+            $socioPayments = $selSocio["Payment"];
+            if( sizeOf($socioPayments) > 0 )  $this->set('paymentsSocio', $socioPayments);
+            #var_dump($socioPayments);
             $this->set('selSocio', $selSocio);
-            //var_dump($selSocio);
-            //echo $selSocio["Socio"]["apellido"];
         }
         $this->render('/payments/new_payment');
-        //$this->render($selSocio['Socio']['apellido']);
     }
     
     function set_payment(){
@@ -127,6 +139,46 @@ class PaymentsController extends AppController{
             }
         }
         $this->redirect('/payments/new_payment');
+    }
+    
+    function payment_filters(){
+        if(!empty($_POST["nameSocio"]) || !empty($_POST["lastNameSocio"]) || !empty($_POST["ciSocio"]) || !empty($_POST["amountPayment"])){
+            
+            $this->loadModel('Socio');
+            $this->Payment->recursive = 1;
+            $sociosIds = array();
+            $paymentsByFilters = array();
+            
+            if(!empty($_POST["nameSocio"])){
+                $sociosByName = $this->Socio->getSociosByName($_POST["nameSocio"]);
+                $paymentsByName = $this->Payment->cGetPaymentsBySocio($sociosByName);
+                if(!empty($paymentsByName)) $paymentsByFilters = array_merge($paymentsByFilters, $paymentsByName);            
+            }
+            
+            if(!empty($_POST["lastNameSocio"])){
+                $sociosByLastName = $this->Socio->getSociosByName($_POST["lastNameSocio"]);
+                $paymentsByLastName = $this->Payment->cGetPaymentsBySocio($sociosByLastName);
+                if(!empty($paymentsByLastName)) $paymentsByFilters = array_merge($paymentsByFilters, $paymentsByLastName);            
+            }
+            
+            if(!empty($_POST["ciSocio"])){
+                $socioByCi = $this->Socio->getSocioByDocument($_POST["ciSocio"]);
+                $socioId = $socioByCi['Socio']['id'];
+                $listPaymentsByName = $this->Payment->cGetPaymentsBySocioId($socioId);
+                
+                if(!empty($listPaymentsByName)) $paymentsByFilters = array_merge($paymentsByFilters, $listPaymentsByName);                           
+            }
+            
+            if(!empty($_POST["amountPayment"])){
+                $amount = $_POST["amountPayment"];
+                $paymentsByAmount = $this->Payment->cGetPaymentsByAmount($amount);
+                
+                if(!empty($paymentsByAmount)) $paymentsByFilters = array_merge($paymentsByFilters, $paymentsByAmount);                
+            }
+            $this->set('paymentsByFilters', $paymentsByFilters);
+            $this->render('/elements/payments_socio');
+        }
+        
     }
     
 }

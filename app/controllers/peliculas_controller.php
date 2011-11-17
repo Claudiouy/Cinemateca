@@ -6,7 +6,9 @@
  */
 
 class PeliculasController extends AppController{
-    var $name = 'Peliculas';
+    var $name = 'Peliculas'; 
+    var $hasMany = array('Actors, Directors');
+    var $components = array('RequestHandler');
     
     function index(){
         $this->Pelicula->recursive = 0;
@@ -87,17 +89,26 @@ class PeliculasController extends AppController{
     }
     
    function activar_peliculas(){
-       if(!empty($_POST['idSelec'])){
-            $ids = $_POST['idSelec'];
-            $array_ids = explode(",", $ids);
-            var_dump($array_ids);
-            #echo $array_ids;
-            $condiciones = array('Peliculas.id IN' =>  $ids);
-            $this->Pelicula->updateAll(array('Pelicula.activa' => 1), $condiciones);  //no funca, consultar   
+       if(!empty($_POST['idSelec']) || !empty($_POST['idNoSelec'])){
+            
+            if(!empty($_POST['idSelec'])){
+                $ids = $_POST['idSelec'];
+                $idsStr = explode(',', $ids);
+                $ids = implode('","', $idsStr);
+                $condiciones = 'Pelicula.id IN ("' .$ids .'")';
+                $this->Pelicula->updateAll(array('Pelicula.activa' => 1), $condiciones); 
+            }
+            
+            if(!empty($_POST['idNoSelec'])) {
+                $idsNot = $_POST['idNoSelec'];
+                $idsStr = explode(',', $idsNot);
+                $idsNot = implode('","', $idsStr);
+                $condicionesNot = 'Pelicula.id IN ("' .$idsNot .'")';
+                $this->Pelicula->updateAll(array('Pelicula.activa' => 0), $condicionesNot);
+            }  
+              
        }
-           return false;
-           
-       //seguir con renderizar un elemento con ajax ajaxreturn en marcadores
+       $this->redirect('/peliculas/seleccionar_peliculas');
    }
    
    function consultar_peliculas(){
@@ -128,6 +139,17 @@ class PeliculasController extends AppController{
            }           
        }
        $this->redirect('/peliculas');
+   }
+   
+   /*
+    * Devuelve el json para armar la pagina con peliculas en cartel
+    */
+   function json_peliculas_activas(){
+       $this->Pelicula->recursive = 2;
+       $conditions = array('Pelicula.activa = 1');
+       $activePeliculas = $this->Pelicula->find('all', array('conditions' => $conditions));
+       $activePeliculasJson = json_encode($activePeliculas);
+       return $activePeliculasJson;
    }
     
 }

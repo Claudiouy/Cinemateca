@@ -62,7 +62,7 @@
 	<div id="container">
 		<div id="header">
 
-			<div id="navbar"> <a href="index.htm" target="_parent">Ingreso a sala</a> · <a href="/cake_primero/socios" target="_parent">Modulo socios</a> · <a href="/cake_primero/peliculas" target="_parent">Modulo peliculas</a> · <a href="/cake_primero/payments" target="_parent">Modulo de pagos</a> · <a href="" target="_parent">Reportes de caja</a> ·  <a href="http://www.cinemateca.org.uy/plus.html" target="_parent">Otros Modulos</a> </div>    
+			<div id="navbar"> <a href="/cake_primero/tickets/ticket_socio" target="_parent">Ingreso a sala</a> · <a href="/cake_primero/socios" target="_parent">Modulo socios</a> · <a href="/cake_primero/peliculas" target="_parent">Modulo peliculas</a> · <a href="/cake_primero/payments" target="_parent">Modulo de pagos</a> · <a href="" target="_parent">Reportes de caja</a> ·  <a href="http://www.cinemateca.org.uy/plus.html" target="_parent">Otros Modulos</a> </div>    
 
 
 		</div>
@@ -84,7 +84,7 @@
 		</div>
 		<div id="footer">
 
-			<div id="navbar"> <a href="index.htm" target="_parent">Ingreso a sala</a> · <a href="/cake_primero/socios" target="_parent">Modulo socios</a> · <a href="institucional.html" target="_parent">Modulo peliculas</a> · <a href="cinemateca18.html" target="_parent">Modulo de pagos</a> · <a href="festivales.html" target="_parent">Reportes de caja</a> ·  <a href="http://www.cinemateca.org.uy/plus.html" target="_parent">Otros Modulos</a> </div>    
+			<div id="navbar"> <a href="/cake_primero/tickets/ticket_socio" target="_parent">Ingreso a sala</a> · <a href="/cake_primero/socios" target="_parent">Modulo socios</a> · <a href="/cake_primero/peliculas" target="_parent">Modulo peliculas</a> · <a href="/cake_primero/payments" target="_parent">Modulo de pagos</a> · <a href="" target="_parent">Reportes de caja</a> ·  <a href="http://www.cinemateca.org.uy/plus.html" target="_parent">Otros Modulos</a> </div>    
 
 		</div>
 	</div>

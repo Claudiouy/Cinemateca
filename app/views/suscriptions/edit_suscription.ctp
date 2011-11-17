@@ -6,6 +6,7 @@
     <body>
         
         <h3>Editar suscripción</h3>
+        <div style="width:50%">
         <?php
             if(!empty($my_suscription)){
                 echo $form->create('Suscription', array('action' => 'edit_suscription_proccess'));
@@ -16,7 +17,7 @@
                 echo $this->Form->end('Actualizar');
             }   
         ?>
-        
+        </div>
     </body>
     
     

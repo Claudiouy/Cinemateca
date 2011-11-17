@@ -22,6 +22,10 @@
     </tr>  
 </table>
 
+<<<<<<< HEAD
 <div style="margin-left:40%"> <?php echo $this->Form->end('Aplicar pago'); ?> </div>
+=======
+<div style="margin-left:40%"> <?php echo $this->Form->end('Generar entrada'); ?> </div>
+>>>>>>> 536d3e85739a2ce271238b5b112a609159f356b2
 
     

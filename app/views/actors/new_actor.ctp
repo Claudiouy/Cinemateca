@@ -5,7 +5,7 @@
     
     <body>
         Agregar actor
-        
+        <div style="width:50%">
         <?php 
             echo $form->create('Actor', array('action' => 'new_actor'));
             echo $this->Form->input('name', array('label' => 'Nombre'));
@@ -15,6 +15,7 @@
         
         ?>
         <?php echo $this->Session->flash(); ?>
+        </div>
     </body>
     
     

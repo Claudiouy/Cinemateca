@@ -1,5 +1,10 @@
 <div class="index">
+<<<<<<< HEAD
 	<h2 id="h2"><?php __('Peliculas');?></h2>
+=======
+    
+	<h2><?php __('Peliculas');?></h2>
+>>>>>>> 536d3e85739a2ce271238b5b112a609159f356b2
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
@@ -35,5 +40,6 @@
 	<h3><?php __('Acciones'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Nueva película', true), array('action' => 'nueva_pelicula')); ?></li>
-	</ul>
+                <li><?php echo $this->Html->link(__('Activar películas', true), array('action' => 'seleccionar_peliculas')); ?></li>
+        </ul>
 </div>

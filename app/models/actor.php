@@ -7,6 +7,7 @@
 
 class Actor extends AppModel{
     var $name = 'Actor';
+    public $hasMany = array('ActorPelicula');
     
     var $validate = array(
         'name' => array(

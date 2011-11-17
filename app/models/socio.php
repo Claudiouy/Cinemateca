@@ -57,9 +57,8 @@ var $belongsTo = array('Street','State','Suscription','PaymentMethod');
      'last' => true
         )  
     )
-    
 
-        );
+);
     
     function getSocioByDocument($docSocio){
         
@@ -68,6 +67,16 @@ var $belongsTo = array('Street','State','Suscription','PaymentMethod');
         }
         return $mySocio;
     }
+    
+    function getSociosByName($socioName){
+        
+        $conditions = array('OR' => array('Socio.name LIKE' => '%'.$socioName.'%',
+                                                'Socio.surname LIKE' => '%'.$socioName.'%'));
+        
+        $socioList = $this->find('all', array('conditions' => $conditions));
+        return $socioList;
+    }
+
   
 }
 ?>

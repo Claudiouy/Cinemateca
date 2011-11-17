@@ -107,10 +107,13 @@ display:block;
     
 }
 
+<<<<<<< HEAD
 
 #h2 { 
     font-family:'Lobster', "Times New Roman", Times, serif; color:#d5b433; font-size:26px;} 
 
+=======
+>>>>>>> 536d3e85739a2ce271238b5b112a609159f356b2
 #searchSocioTicketContainer{
     width:40%;
     margin-right:3%;
@@ -120,3 +123,24 @@ display:block;
     
 }
 
+<<<<<<< HEAD
+=======
+#closeButton{
+    float:right;
+    margin-right: 8px;
+    border: solid 1px white;
+    height:12px;
+    width:12px;
+}
+
+#selectedSocio{
+    width: 50%;
+    float:left;
+}
+
+#paymentsOfSocio{
+    width:37%;
+    float:left;
+}
+
+>>>>>>> 536d3e85739a2ce271238b5b112a609159f356b2
