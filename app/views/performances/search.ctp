@@ -31,8 +31,8 @@ echo $paginator->counter(array(
 	<td><?php echo $performance['Sala']['name'];?>&nbsp</td>
         <td><?php echo $performance['Performance']['fecha'];?>&nbsp</td>
 	<td><?php echo $performance['Performance']['hora_comienzo']; ?>&nbsp;</td>
-        <td><?php echo $performance['Pelicula']['titulo']; ?>&nbsp;</td>
-        <td><?php echo $performance['Performance']['estreno']; ?>&nbsp;</td>
+        <td><?php echo $performance['Pelicula']['name']; ?>&nbsp;</td>
+        <td><?php if($performance['Performance']['estreno']== 1) echo "SI"; else echo "NO";?></td>
         
 		<td class="actions">
 		        <?php echo $this->Html->link(__('Ver', true), array('action' => 'view', $performance['Performance']['id'])); ?>	
