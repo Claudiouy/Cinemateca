@@ -1,25 +1,6 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 $(document).ready(function(){
     
     $('.fadeOut').hide(6000);
-    
-    
-    /*$("#buscarPeliculaSP").click(function(){
-        nombreParcial = $("#textoBuscadorSP").val();
-        console.info(nombreParcial);
-        $.ajax({
-            data: "nombre=" + nombreParcial,
-            type: "POST",
-            url:  "/peliculas/peliculas_por_nombre",
-            success: function(data){
-                
-            }
-        });
-    });*/
     
     
     $("#consultarPeliculas").click(function(){
@@ -45,11 +26,8 @@ $(document).ready(function(){
             type: "POST",
             url:  "/cake_primero/peliculas/activar_peliculas",
             success: function(data){
-<<<<<<< HEAD
-                limpiarCheckboxes();
-=======
+
                 //console.info(data);
->>>>>>> 536d3e85739a2ce271238b5b112a609159f356b2
             },
             error: function(miError){
                //console.info(miError.statusText);
@@ -92,9 +70,7 @@ $(document).ready(function(){
          idsJoins = idsArray.join(',');
          return idsJoins;
     }
-    
-<<<<<<< HEAD
-=======
+
     //------------------filtered_payments------------------------
         
         $("#confirmSearchPayment").click(function(){
@@ -118,7 +94,6 @@ $(document).ready(function(){
     
     //------------------- /filtered_payments----------------
     
->>>>>>> 536d3e85739a2ce271238b5b112a609159f356b2
     
     //------------new_payment------------
     
@@ -151,14 +126,11 @@ $(document).ready(function(){
                 }
            });
         });*/
-<<<<<<< HEAD
-=======
-        
+
         $("#closeButton").click(function(){
             var divContenedor = $("#searchSocioContainer");
             divContenedor.hide();
         });
->>>>>>> 536d3e85739a2ce271238b5b112a609159f356b2
     
     
     //------------/ new_payment---------
@@ -186,9 +158,7 @@ $(document).ready(function(){
     
     
     //----------------- /tickets---------------
-<<<<<<< HEAD
-=======
-    
+
     
     function getMoviesData(){
         var movie_container = document.createElement('div');
@@ -198,7 +168,49 @@ $(document).ready(function(){
         $(addComment).addClass('movieImg');
         $(post_container).append(addComment);
     }
->>>>>>> 536d3e85739a2ce271238b5b112a609159f356b2
-});
+    
+    
+//----------------------Socios------------------------
+
+
+$("#asociarSociosColectivos").live('click', function(){
+        
+         var idsJoins = getSociosColectivos();
+         
+         $.ajax({
+            data: "idSelec=" + idsJoins,
+            type: "POST",
+            url:  "/cake_primero/socios/asoc_colectivos",
+            success: function(data){
+                window.location.href=window.location.href;
+              //  console.info(data);
+            },
+            error: function(miError){
+               //console.info(miError.statusText);
+            }
+         });
+         
+    });
+    
+        function getSociosColectivos(){
+        
+        var idsArray = new Array();
+         
+         $(".sociosSeleccionados").each(function(){
+             
+             if(this.checked){
+                 idsArray.push($(this).attr("id"));
+             }
+         });
+         idsJoins = idsArray.join(',');
+         return idsJoins;
+    }
+  
+    
+
+}
+
+
+);
 
 

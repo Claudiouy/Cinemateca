@@ -32,9 +32,10 @@ echo $paginator->counter(array(
         <td><?php echo $performance['Performance']['fecha'];?>&nbsp</td>
 	<td><?php echo $performance['Performance']['hora_comienzo']; ?>&nbsp;</td>
         <td><?php echo $performance['Pelicula']['name']; ?>&nbsp;</td>
-        <td><?php echo $performance['Performance']['estreno']; ?>&nbsp;</td>
+        <td><?php if($performance['Performance']['estreno']== 1) echo "SI"; else echo "NO";?></td>
+                
         
-		<td class="actions">
+                        <td class="actions">
 		        <?php echo $this->Html->link(__('Ver', true), array('action' => 'view', $performance['Performance']['id'])); ?>	
                         <?php echo $this->Html->link(__('Editar', true), array('action' => 'edit', $performance['Performance']['id'])); ?>
 			<?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $performance['Performance']['id']), null, sprintf(__('Esta Seguro de eliminar la funcion N° %s?', true), $performance['Performance']['id'])); ?>
@@ -58,8 +59,8 @@ echo $paginator->counter(array(
 	<h3><?php __('Acciones'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Nueva Funcion', true), array('action' => 'add')); ?></li>
+                <li><?php echo $this->Html->link(__('Menu Principal', true), array('controller'=>'pages','action' => 'home'));?></li></ul>
 
-                <li>
                 <?php
                 echo $form->create('', array('action'=>'search'));
                 echo $form->input('Buscar', array('type'=>'text'));

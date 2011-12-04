@@ -10,22 +10,21 @@
 	margin:0 auto;
 	text-align:center;
 }
-#calle_esq{
+
+.calle_princ ui-autocomplete-input defaultText{
 	border:1px solid silver;
 	padding:3px 10px;
 	clear:none;
 	width:460px;
+        float: left;
 }
-#calle_princ{
-	border:1px solid silver;
-	padding:3px 10px;
-	clear:none;
-	width:460px;
-}
+
+
 .input{
 	clear:none;
 	float:left;
 }
+
 .submit{
 	clear:none;
 	float:right;
@@ -75,3 +74,4 @@ ul.ui-autocomplete li span{
 	background-color:#efefef;
 	cursor:pointer;
 }
+.working{background:url('../img/indicator.gif') no-repeat right center;}

@@ -1,7 +1,7 @@
 <?php
 class Sala extends AppModel {
 var $name = 'Sala';
-var $hasMany = array('Performance');
+var $belongsTo = array('Performance');
 
 }
 ?>

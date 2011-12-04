@@ -1,7 +1,7 @@
 <div class="socios index">
     
 	<h2 id="h2"><?php __('Socios');?></h2>
-        
+
 <table cellpadding="0" cellspacing="0">
 	<tr>
             <th><?php echo('Id.');?></th>
@@ -17,7 +17,8 @@
 	</tr>
 	
 	<tr>
-            
+<?php echo $this->Session->flash();?>            
+           
 <td><?php echo $socio['Socio']['id']; ?>&nbsp;</td>
 <td><?php echo $socio['Socio']['surname'].', ';?><?php echo $socio['Socio']['name'];?></td>
 <td><?php echo $socio['Socio']['documento_identidad']; ?>&nbsp;</td>
@@ -30,21 +31,22 @@
     $url = $socio['Socio']['image_url'];  
     echo '<div class="uploaded_image">';  
     ?>
-<?php
-    echo $this->Html->image('/'.'app/webroot/'.$url, array('width'=>100 ,'height'=>100, 'border'=>1));
-    ?>
+<?php echo $this->Html->image('/'.'app/webroot/'.$url, array('width'=>100 ,'height'=>100, 'border'=>1));?>
 </td>
-    <?php
-    
-    
-    echo '</div>';  
-}  
-?>
+<?php echo '</div>';  }?>
+
 
 <td class="actions">
-        <?php echo $this->Html->link(__('Editar', true), array('action' => 'edit', $socio['Socio']['id'])); ?>
-	<?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $socio['Socio']['id']), null, sprintf(__('Esta Seguro de eliminar al socio N° %s?', true), $socio['Socio']['id'])); ?>
-             
+<?php
+if($socio['Socio']['estado']== 0){
+         echo $this->Html->link(__('Activar', true), array('action' => 'activar', $socio['Socio']['id']), null, sprintf(__('Esta Seguro de ACTIVAR al socio N° %s?', true), $socio['Socio']['id'])); 	
+         echo $this->Html->link(__('Ficha', true), array('action' => 'detalle_completo', $socio['Socio']['id'])); 
+        }else{
+         echo $this->Html->link(__('Editar', true), array('action' => 'edit', $socio['Socio']['id'])); 
+	 echo $this->Html->link(__('Ficha', true), array('action' => 'detalle_completo', $socio['Socio']['id'])); 
+         echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $socio['Socio']['id']), null, sprintf(__('Esta Seguro de eliminar al socio N° %s?', true), $socio['Socio']['id'])); 
+         }
+      ?>       
           
         </td>
 	</tr>
@@ -58,7 +60,7 @@
 	<ul>
         <li><?php echo $this->Html->link(__('Nuevo Socio', true), array('action' => 'add')); ?></li>
         <li><?php echo $this->Html->link(__('Listar Socios', true), array('action' => 'index'));?></li>
-	        <li><?php echo $this->Html->link(__('Imprimir', true), array('action' => 'pdf'));?></li>
+        <li><?php echo $this->Html->link(__('Menu Principal', true), array('controller'=>'pages','action' => 'home'));?></li>
 
         <li>
                 <?php

@@ -14,7 +14,16 @@
 @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400);
 @import url(http://fonts.googleapis.com/css?family=Lobster);
 
-
+.select{
+	clear:none;
+	float:left;
+}
+.gender{
+width: 25%;
+font-weight:100;
+display:block;
+float: left;
+}
 
 root { 
     display: block;
@@ -107,13 +116,9 @@ display:block;
     
 }
 
-<<<<<<< HEAD
-
 #h2 { 
     font-family:'Lobster', "Times New Roman", Times, serif; color:#d5b433; font-size:26px;} 
 
-=======
->>>>>>> 536d3e85739a2ce271238b5b112a609159f356b2
 #searchSocioTicketContainer{
     width:40%;
     margin-right:3%;
@@ -123,8 +128,6 @@ display:block;
     
 }
 
-<<<<<<< HEAD
-=======
 #closeButton{
     float:right;
     margin-right: 8px;
@@ -143,4 +146,41 @@ display:block;
     float:left;
 }
 
->>>>>>> 536d3e85739a2ce271238b5b112a609159f356b2
+.defaultText{
+width: 100%;
+color:#D5B433; 
+font-weight: 300;
+font-size: 20px;
+height: 25px;
+margin-top: 10px;
+margin-bottom:10px;
+display:block;   
+}
+
+.flash_good {   
+background: #e5f2be;   
+border:2px solid #bedf5d;   
+padding:10px;   
+font-weight:bold;  
+}  
+.flash_bad {   
+background: #eccecf;  
+border:2px solid #9e0b0f;  
+padding:10px;  
+font-weight:bold;  
+}  
+.flash_good img, .flash_bad img {  
+float:right;  
+}  
+
+#asociarSociosColectivos{
+    	display: inline;
+	font-size: 110%;
+	width: auto;
+}
+
+.flash_good, .flash_bad, .flash_warning, .flash_info { padding:6px 10px; color:white; display:block; margin:10px 0; }
+.flash_good { background-color:#009900; }
+.flash_bad { background-color:#AA0000; }
+.flash_warning { background-color:#EE5F00; }
+.flash_info { background-color:#0055AA; }

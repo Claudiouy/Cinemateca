@@ -28,9 +28,9 @@ echo $this->Html->link('Gestion de Socios', array(
 </li>
 <li>
 <?php 
-echo $this->Html->link('Peliculas', array(
-    'controller' => 'peliculas',
-    'action' => 'index',  
+echo $this->Html->link('Colectivos de Socios', array(
+    'controller' => 'socios',
+    'action' => 'colectivos',  
     )
     );
 ?>

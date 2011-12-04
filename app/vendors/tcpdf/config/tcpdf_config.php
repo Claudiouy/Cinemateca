@@ -111,32 +111,32 @@ if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
 	/**
 	 * document creator
 	 */
-	define ('PDF_CREATOR', 'TCPDF');
+	define ('PDF_CREATOR', 'Cinemateca Uy');
 
 	/**
 	 * document author
 	 */
-	define ('Cinemateca Uruguaya', 'TCPDF');
+	define ('PDF_AUTHOR', 'Cinemateca Uruguaya');
 
 	/**
 	 * header title
 	 */
-	define ('Contrato de Socio', 'TCPDF Example');
+	define ('PDF_HEADER_TITLE', '');
 
 	/**
 	 * header description string
 	 */
-	define ('PDF_HEADER_STRING', "by Leonardo Asuni - Tecnick.com\nwww.tcpdf.org");
+	define ('PDF_HEADER_STRING', "www.cinemateca.org.uy");
 
 	/**
 	 * image logo
 	 */
-	define ('PDF_HEADER_LOGO', 'tcpdf_logo.jpg');
+	define ('PDF_HEADER_LOGO', 'cinemateca_logo.jpg');
 
 	/**
 	 * header logo image width [mm]
 	 */
-	define ('PDF_HEADER_LOGO_WIDTH', 30);
+	define ('PDF_HEADER_LOGO_WIDTH', 25);
 
 	/**
 	 *  document unit of measure [pt=point, mm=millimeter, cm=centimeter, in=inch]
@@ -232,7 +232,7 @@ if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
 	 * if true allows to call TCPDF methods using HTML syntax
 	 * IMPORTANT: For security reason, disable this feature if you are printing user HTML content.
 	 */
-	define('K_TCPDF_CALLS_IN_HTML', true);
+	define('K_TCPDF_CALLS_IN_HTML', false);
 }
 
 //============================================================+

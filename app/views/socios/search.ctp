@@ -1,4 +1,7 @@
-<div class="socios index">
+<?php
+ini_set('memory_limit','128M');
+?>
+<div class="socios form">
    
 	<h2 id="h2"><?php __('Socios');?></h2>
 
@@ -14,6 +17,7 @@ echo $paginator->counter(array(
                         <th><?php echo $this->Paginator->sort('Doc. Identidad');?></th>
                         <th><?php echo $this->Paginator->sort('Suscripcion');?></th>
                         <th><?php echo $this->Paginator->sort('Forma de Pago');?></th>
+                        <th><?php echo $this->Paginator->sort('Estado');?></th>
 
 			<th class="actions"><?php __('Acciones');?></th>
 	</tr>
@@ -33,11 +37,14 @@ echo $paginator->counter(array(
 	<td><?php echo $socio['Socio']['documento_identidad']; ?>&nbsp;</td>
         	<td><?php echo $socio['Suscription']['name']; ?>&nbsp;</td>
 <td><?php echo $socio['PaymentMethod']['name']; ?>&nbsp;</td>
+        <td><?php if($socio['Socio']['estado']== 1) echo "ACTIVO"; else echo "DE BAJA";?></td>
         
 		<td class="actions">
 		        <?php echo $this->Html->link(__('Ver', true), array('action' => 'view', $socio['Socio']['id'])); ?>	
                         <?php echo $this->Html->link(__('Editar', true), array('action' => 'edit', $socio['Socio']['id'])); ?>
-			<?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $socio['Socio']['id']), null, sprintf(__('Esta Seguro de eliminar el Socio N° %s?', true), $socio['Socio']['id'])); ?>
+
+	
+		<?php if($socio['Socio']['estado']== 1)echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $socio['Socio']['id']), null, sprintf(__('Esta Seguro de eliminar el Socio N° %s?', true), $socio['Socio']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

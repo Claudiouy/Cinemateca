@@ -31,7 +31,7 @@ echo $paginator->counter(array(
 	<td><?php echo $performance['Sala']['name'];?>&nbsp</td>
         <td><?php echo $performance['Performance']['fecha'];?>&nbsp</td>
 	<td><?php echo $performance['Performance']['hora_comienzo']; ?>&nbsp;</td>
-        <td><?php echo $performance['Pelicula']['name']; ?>&nbsp;</td>
+        <td><?php echo $performance['Pelicula']['titulo']; ?>&nbsp;</td>
         <td><?php echo $performance['Performance']['estreno']; ?>&nbsp;</td>
         
 		<td class="actions">

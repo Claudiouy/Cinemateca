@@ -21,22 +21,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<?php 
-           echo $this->Html->css('miCss');
-           echo $this->Html->css('cake.generic');
+echo $this->Html->charset();
            echo $this->Html->css('miCss.css');
-           echo $this->Html->css('autocompleteui');
-           echo $this->Html->css('autoComplete.css');
-           echo $this->Html->css('datePicker.css');
+           echo $this->Html->css('cake.generic.css');
+           echo $this->Html->css('autocompleteui.css');
+           echo $this->Html->css('jquery.ui.datepicker');
            echo $this->Html->css('jquery-ui-1.8.16.custom.css');
-           echo $this->Html->charset();
            echo $this->Html->script('jQuery');
+           echo $this->Html->script('jquery.ui.core');
+
            echo $this->Html->script('miJQuery');
-           echo $this->Html->script('jquery-1.6.2.min.js');
-           echo $this->Html->script('jquery-ui-1.8.16.custom.min.js');
-           echo $this->Html->script('date.js');
-           echo $this->Html->script('application.js');
-           echo $this->Html->script('jquery.datePicker.js');
-           echo $this->Html->script('cake.datePicker.js');
+           echo $this->Html->script('jquery-1.6.2');
+           echo $this->Html->script('jquery-ui-1.8.16.custom.min');
+           echo $this->Html->script('jquery.ui.position');
+           echo $this->Html->script('jquery.ui.widget');
+            echo $this->Html->script('jquery.ui.datepicker');
+           echo $this->Html->script('application');
+           //echo $this->Html->script('jquery.datePicker.js');
+           //echo $this->Html->script('cake.datePicker.js');
+         
+
         
            ?>   
     
@@ -77,7 +81,10 @@
     <?php endif;?>
                     </div>
 
-	<?php $this->Session->flash();?>
+<?php
+    echo $this->Session->flash();
+    echo $this->Session->flash('auth');
+?>
 
 			<?php echo $content_for_layout;?>
 

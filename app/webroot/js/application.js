@@ -1,25 +1,102 @@
-////file:app/webroot/js/application.js
 $(document).ready(function(){
 // Caching the movieName textbox:
-var nombrecalle = $('#calle_princ');
+var nombrecalle = $('.callejero');
+var SocioDocumentoIdentidad = $('#SocioDocumentoIdentidad');
 // Defining a placeholder text:
-nombrecalle.defaultText('Ingrese la calle');
-
+nombrecalle.defaultText('Ingrese la calle...');
+SocioDocumentoIdentidad.defaultText('Sin puntos ni guiones');
+$(function() {
 // Using jQuery UI's autocomplete widget:
 nombrecalle.autocomplete({
 minLength: 2,
-maxRows: 12,
-style:'full',
-source: '/cake_primero/socios/getcalles'
-});
+source: '/cake_primero/socios/getcalles',
 
+
+                search  : function(){$(this).addClass('working');},
+                open    : function(){$(this).removeClass('working');}
+});    
+});
 // Usando jQuery UI con RadioButtons
 
-}
+$(function() {
+		$("#fec_nac").datepicker({ dateFormat: 'yy-mm-dd',
+                                           maxDate: '+0d' ,
+                                           minDate:'-100y'
+                                          // showOn: 'button',
+                                           //onSelect: updateSelected
+                                           });
 
-);
+		});
 
-// A custom jQuery method for placeholder text:
+
+function updateSelected(dateStr) { 
+    var date = $('#selectedPicker').datepicker('getDate');
+    $('#selectedMonth').val(date ? date.getMonth() + 1 : ''); 
+    $('#selectedDay').val(date ? date.getDate() : ''); 
+    $('#selectedYear').val(date ? date.getFullYear() : ''); 
+} 
+$('#selectedMonth,#selectedDay,#selectedYear').change(function() { 
+    $('#selectedPicker').datepicker('setDate', new Date( 
+        $('#selectedYear').val(), $('#selectedMonth').val() - 1, $('#selectedDay').val())); 
+});
+
+$(function() {
+		function log( message ) {
+			$( "<div/>" ).text( message ).prependTo( "#colectivos_log" );
+			$( "#colectivos_log" ).scrollTop( 0 );
+		}
+		$( "#colectivos" ).autocomplete({
+			source: "/cake_primero/socios/colectivos",
+			minLength: 2,
+			select: function( event, ui ) {
+                         $("#SocioSurname").val(ui.item.surname);
+                         $("#SocioName").val(ui.item.name);    
+                         $("#SocioDocumentoIdentidad").val(ui.item.doc);
+				log( ui.item ?
+					ui.item.surname +", " + ui.item.name + "( " + ui.item.doc + ")" :
+					"Nada seleccionado, ingreso: " + this.value );
+                },
+                search  : function(){$(this).addClass('working');},
+                open    : function(){$(this).removeClass('working');}
+		});
+	});
+        
+  
+  
+  
+  $('#SocioPaymentMethodId').bind('click', function()
+    {
+        $.ajax({
+               type: "GET",
+               url: "/cake_primero/socios/creditcards",
+              onclick: function() {
+                     },
+               success: function(msg){
+                   $('#div_tarjetas_cc').html(msg);
+               }
+             });
+    });
+
+$(function() {
+		$( "#dialog:ui-dialog" ).dialog( "destroy" );
+	
+		$( "#dialog-confirm" ).dialog({
+			resizable: false,
+			height:140,
+			modal: true,
+			buttons: {
+				"Delete all items": function() {
+					$( this ).dialog( "close" );
+				},
+				Cancel: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	});
+
+});
+
 
 $.fn.defaultText = function(value){
 

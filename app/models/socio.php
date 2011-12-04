@@ -2,9 +2,7 @@
 class Socio extends AppModel {
 var $name = 'Socio';
 var $hasMany = array('Payment');
-
-
-var $belongsTo = array('Street','State','Suscription','PaymentMethod');
+var $belongsTo = array('State','Suscription','PaymentMethod');
 
 
   var $validate = array(
@@ -57,9 +55,12 @@ var $belongsTo = array('Street','State','Suscription','PaymentMethod');
      'last' => true
         )  
     )
-
-);
     
+
+        );
+    
+  
+  
     function getSocioByDocument($docSocio){
         
         if(!empty($docSocio)){
@@ -67,16 +68,6 @@ var $belongsTo = array('Street','State','Suscription','PaymentMethod');
         }
         return $mySocio;
     }
-    
-    function getSociosByName($socioName){
-        
-        $conditions = array('OR' => array('Socio.name LIKE' => '%'.$socioName.'%',
-                                                'Socio.surname LIKE' => '%'.$socioName.'%'));
-        
-        $socioList = $this->find('all', array('conditions' => $conditions));
-        return $socioList;
-    }
-
   
 }
 ?>
