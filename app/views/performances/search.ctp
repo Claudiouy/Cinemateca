@@ -15,6 +15,7 @@ echo $paginator->counter(array(
                         <th><?php echo $this->Paginator->sort('Hora Comienzo');?></th>
                         <th><?php echo $this->Paginator->sort('Proyeccion');?></th>
                         <th><?php echo $this->Paginator->sort('Estreno?');?></th>
+                        <th><?php echo $this->Paginator->sort('Activa');?></th>
 
 			<th class="actions"><?php __('Acciones');?></th>
 	</tr>
@@ -33,11 +34,18 @@ echo $paginator->counter(array(
 	<td><?php echo $performance['Performance']['hora_comienzo']; ?>&nbsp;</td>
         <td><?php echo $performance['Pelicula']['name']; ?>&nbsp;</td>
         <td><?php if($performance['Performance']['estreno']== 1) echo "SI"; else echo "NO";?></td>
+        <td><?php if($performance['Performance']['estado']== 1) echo "SI"; else echo "NO";?></td>
         
 		<td class="actions">
 		        <?php echo $this->Html->link(__('Ver', true), array('action' => 'view', $performance['Performance']['id'])); ?>	
-                        <?php echo $this->Html->link(__('Editar', true), array('action' => 'edit', $performance['Performance']['id'])); ?>
-			<?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $performance['Performance']['id']), null, sprintf(__('Esta Seguro de eliminar la funcion N° %s?', true), $performance['Performance']['id'])); ?>
+<?php if($performance['Performance']['estado']== 1)
+echo $this->Html->link(__('Borrar', true), array('action' => 'delete', 
+$performance['Performance']['id']), null, sprintf(__('Esta Seguro de eliminar la funcion N° %s?', true),
+$performance['Performance']['id'])); else echo $this->Html->link(__('Activar', true), array('action' => 'activar', 
+$performance['Performance']['id']), null, sprintf(__('Esta Seguro de volver a Activar la funcion N° %s?', true),
+$performance['Performance']['id']));?></td>
+
+			
 		</td>
 	</tr>
 <?php endforeach; ?>

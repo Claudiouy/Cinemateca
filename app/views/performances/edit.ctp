@@ -6,10 +6,14 @@
 <?php echo $session->flash('auth');?>
 
 <?php
+$current_year = date('Y');
+$max_year = $current_year + 10;
+$min_year = $current_year - 2;
+
 echo $form->hidden('Performance.id');
 echo $form->input('Sala.id', array('type' => 'select', 'class'=>'select','label'=>'Sala:', 'options'=>$list_salas, 'empty'=>FALSE));
-echo $form->input('Performance.fecha', array('label'=>'Fecha:'));
-echo $form->input('Performance.horaComienzo', array('label'=>'Hora Comienzo:'));
+echo $form->input('Performance.fecha', array( 'minYear'=>$min_year, 'maxYear'=>$max_year));
+echo $form->input('Performance.hora_comienzo', array('timeFormat'=>24, 'label'=>'Hora Comienzo:'));
 echo $form->input('Pelicula.id', array('type' => 'select', 'class'=>'select','label'=>'Pelicula:', 'options'=>$list_pelis, 'empty'=>FALSE));
 echo $this->Form->hidden('Performance.estado', array('label'=>'Estado Funcion:','type'=> 'checkbox','empty'=>FALSE));
 

@@ -1,22 +1,26 @@
 <div class="performances form">
 <?php echo $this->Form->create('Performance');?>
 <fieldset>
- 	<legend id="legend"><?php __('Nueva Funcion'); ?></legend>
+ 	<legend id="legend"><?php __('Nueva Función'); ?></legend>
         
 <?php echo $session->flash('auth');?>
 
 <?php
+$current_year = date('Y');
+$max_year = $current_year + 10;
+$min_year = $current_year - 2;
+
 echo $form->hidden('id');
 echo $form->input('Sala.id', array('type' => 'select', 'class'=>'select','label'=>'Sala:', 'options'=>$list_salas));
-echo $form->input('Performance.fecha', array('label'=>'Fecha:'));
-echo $form->input('Performance.horaComienzo', array('label'=>'Hora Comienzo:'));
+echo $form->input('Performance.fecha', array( 'minYear'=>$min_year, 'maxYear'=>$max_year));
+echo $form->input('Performance.hora_comienzo', array('timeFormat'=>24, 'label'=>'Hora Comienzo:'));
 echo $form->input('Pelicula.id', array('type' => 'select', 'class'=>'select','label'=>'Pelicula:', 'options'=>$list_pelis));
 ?>
         <div class="estreno">
 <?php
 
 $options=array(1=>'SI',0=>'NO');
-$attributes=array('legend'=>"¿ Es Estreno ?", 'class'=>'estreno');
+$attributes=array('legend'=>"¿Es estreno? ", 'class'=>'estreno');
 echo $this->Form->radio('estreno',$options,$attributes);
 ?>
 </div>
