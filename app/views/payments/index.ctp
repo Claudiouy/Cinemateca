@@ -63,7 +63,7 @@
                         $flashChart->setData(array(1,2,4,8));
                         echo $flashChart->chart();
                         //var_dump($flashChart);
-                       echo $flashChart->render(400, 250);  */
+                       echo $flashChart->render(400, 250);  */  
                     ?>
 
                 </li>
