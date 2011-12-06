@@ -146,16 +146,6 @@ display:block;
     float:left;
 }
 
-<<<<<<< HEAD:app/webroot/css/miCss.css
-#aBorrar{
-    position:absolute;
-    border: solid 1px black;
-    background-color: white;
-    width: 640px;
-    padding: 10px 0px 0px 30px;
-    float: left;
-
-}
 
 .pelicula {
 margin: 0px 0px 20px;
@@ -182,7 +172,7 @@ float: right;
 padding: 2px;
 border: 1px solid #CCC;
 }
-=======
+
 .defaultText{
 width: 100%;
 color:#D5B433; 
@@ -221,4 +211,4 @@ float:right;
 .flash_bad { background-color:#AA0000; }
 .flash_warning { background-color:#EE5F00; }
 .flash_info { background-color:#0055AA; }
->>>>>>> 85f128f48cc7106cdad0f6dc72bcba0844a40067:app/webroot/css/miCss.css
+

@@ -1,21 +1,12 @@
-<<<<<<< HEAD:app/webroot/js/miJQuery.js
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 $j = jQuery.noConflict();
 
 
 $j(document).ready(function(){
-=======
-$(document).ready(function(){
->>>>>>> 85f128f48cc7106cdad0f6dc72bcba0844a40067:app/webroot/js/miJQuery.js
+
     
     $j('.fadeOut').hide(6000);
     
     
-<<<<<<< HEAD:app/webroot/js/miJQuery.js
     /*$j("#buscarPeliculaSP").click(function(){
         nombreParcial = $j("#textoBuscadorSP").val();
         console.info(nombreParcial);
@@ -33,11 +24,6 @@ $(document).ready(function(){
     $j("#consultarPeliculas").click(function(){
        var nombrePeli = $j("#filtroNombre").val();
        $j.ajax({
-=======
-    $("#consultarPeliculas").click(function(){
-       var nombrePeli = $("#filtroNombre").val();
-       $.ajax({
->>>>>>> 85f128f48cc7106cdad0f6dc72bcba0844a40067:app/webroot/js/miJQuery.js
             data: "miNombre=" + nombrePeli,
             type: "POST",
             url:  "/cake_primero/peliculas/otra_consulta",
@@ -117,7 +103,6 @@ $(document).ready(function(){
                 data: "nameSocio=" + nameSocio + "&lastNameSocio=" + lastNameSocio + "&ciSocio=" + ciSocio + "&amountPayment=" + amountPayment,
                 url:  "/cake_primero/payments/payment_filters",
                 success: function(data){
-                    console.info(data);
                     $j("#paymentsContainer").html(data);
                 }
            });
@@ -158,15 +143,10 @@ $(document).ready(function(){
                 }
            });
         });*/
-<<<<<<< HEAD:app/webroot/js/miJQuery.js
-        
-        $j("#closeButton").click(function(){
-            var divContenedor = $j("#searchSocioContainer");
-=======
+
 
         $("#closeButton").click(function(){
             var divContenedor = $("#searchSocioContainer");
->>>>>>> 85f128f48cc7106cdad0f6dc72bcba0844a40067:app/webroot/js/miJQuery.js
             divContenedor.hide();
         });
     
@@ -191,17 +171,8 @@ $(document).ready(function(){
                 }
            });
         });
-    
-    
-    
-    
-<<<<<<< HEAD:app/webroot/js/miJQuery.js
-    //------------------------------------------------
-    
-=======
     //----------------- /tickets---------------
 
->>>>>>> 85f128f48cc7106cdad0f6dc72bcba0844a40067:app/webroot/js/miJQuery.js
     
     function getMoviesData(){
         var movie_container = document.createElement('div');
@@ -212,7 +183,6 @@ $(document).ready(function(){
         $j(post_container).append(addComment);
     }
     
-<<<<<<< HEAD:app/webroot/js/miJQuery.js
     //--------------------------------------------------
     
     //------------------pagina Cinemateca---------------------------
@@ -233,8 +203,8 @@ $(document).ready(function(){
              
           });
     //--------------------------------------------------------------
-});
-=======
+
+
     
 //----------------------Socios------------------------
 
@@ -260,24 +230,18 @@ $("#asociarSociosColectivos").live('click', function(){
     
         function getSociosColectivos(){
         
-        var idsArray = new Array();
-         
-         $(".sociosSeleccionados").each(function(){
-             
-             if(this.checked){
-                 idsArray.push($(this).attr("id"));
-             }
-         });
-         idsJoins = idsArray.join(',');
-         return idsJoins;
-    }
-  
-    
+            var idsArray = new Array();
 
-}
+             $(".sociosSeleccionados").each(function(){
+
+                 if(this.checked){
+                     idsArray.push($(this).attr("id"));
+                 }
+             });
+             idsJoins = idsArray.join(',');
+             return idsJoins;
+        }
 
 
-);
->>>>>>> 85f128f48cc7106cdad0f6dc72bcba0844a40067:app/webroot/js/miJQuery.js
 
-
+});

@@ -11,7 +11,7 @@
   </a>
         <h4>
           <a href="" class="Estilo18">
-            <?php echo $pelicula['Pelicula']['titulo'];  ?>
+            <?php echo $pelicula['Pelicula']['name'];  ?>
           </a>
         </h4>
         <p>&nbsp; </p>

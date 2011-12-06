@@ -17,21 +17,14 @@
 	</tr>
 	
 	<tr>
-<<<<<<< HEAD:app/views/socios/view.ctp
-		<td><?php echo $socio['Socio']['id']; ?>&nbsp;</td>
-		<td><?php echo $socio['Socio']['surname'].', ';?>
-                 <?php echo $socio['Socio']['name'];?>
-                </td>
-	<td><?php echo $socio['Socio']['documento_identidad']; ?>&nbsp;</td>
-        	<td><?php echo $socio['Suscription']['name']; ?>&nbsp;</td>
-=======
+
 <?php echo $this->Session->flash();?>            
            
 <td><?php echo $socio['Socio']['id']; ?>&nbsp;</td>
 <td><?php echo $socio['Socio']['surname'].', ';?><?php echo $socio['Socio']['name'];?></td>
 <td><?php echo $socio['Socio']['documento_identidad']; ?>&nbsp;</td>
 <td><?php echo $socio['Suscription']['name']; ?>&nbsp;</td>
->>>>>>> 85f128f48cc7106cdad0f6dc72bcba0844a40067:app/views/socios/view.ctp
+
 <td><?php echo $socio['PaymentMethod']['name']; ?>&nbsp;</td>  
 <td><?php echo $socio['Socio']['created']; ?>&nbsp;</td>  
 <td><?php echo $socio['Socio']['fec_nac']; ?>&nbsp;</td>	

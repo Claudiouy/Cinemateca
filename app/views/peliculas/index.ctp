@@ -5,7 +5,7 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('título');?></th>
+			<th><?php echo $this->Paginator->sort('name');?></th>
                         <th><?php echo $this->Paginator->sort('duración');?></th>
 			<th class="actions"><?php __('Acciones');?></th>
 	</tr>

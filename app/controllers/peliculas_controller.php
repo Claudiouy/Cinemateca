@@ -47,7 +47,7 @@ class PeliculasController extends AppController{
             
             if($this->Pelicula->validates()){ //necesario, ya que validates() valida el metodo save(), no el update()               
                 $this->Pelicula->updateAll(
-                    array('Pelicula.titulo' => '"'.$nueva_pelicula['titulo'].'"',
+                    array('Pelicula.name' => '"'.$nueva_pelicula['name'].'"',
                           'Pelicula.duracion' => $nueva_pelicula['duracion'],
                           'Pelicula.anio' => $nueva_pelicula['anio'],
                           'Pelicula.activa' => $nueva_pelicula['activa']),
@@ -77,7 +77,7 @@ class PeliculasController extends AppController{
     function seleccionar_peliculas(){
         if(!empty($this->data['Pelicula']['nombre'])){
             $nombre_peli = $this->data['Pelicula']['nombre'];
-            $filtros =  array("Pelicula.titulo LIKE" => "%".$nombre_peli."%");
+            $filtros =  array("Pelicula.name LIKE" => "%".$nombre_peli."%");
             # tambien puede hacerse asi -> $filtros = 'Pelicula.nombre LIKE %"'.$nombre_peli.'"%';
             $listaPorPelicula = $this->Pelicula->find('all', array('conditions' => $filtros));
             $this->set('seleccionPelis', $listaPorPelicula);
@@ -118,7 +118,7 @@ class PeliculasController extends AppController{
    function otra_consulta(){
        if(!empty($_POST['miNombre'])){
            $nombreParcial = $_POST['miNombre'];
-           $filtros =  array("Pelicula.titulo LIKE" => "%".$nombreParcial."%");
+           $filtros =  array("Pelicula.name LIKE" => "%".$nombreParcial."%");
            $listaPorPelicula = $this->Pelicula->find('all', array('conditions' => $filtros));
            #var_dump($listadoFiltrado);
            $this->set('listadoFiltrado', $listaPorPelicula);

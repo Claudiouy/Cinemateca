@@ -20,28 +20,15 @@ echo $paginator->counter(array(
 	</tr>
 	<?php
 	$i = 0;
-<<<<<<< HEAD:app/views/socios/index.ctp
-        
-	foreach ($onlyActive as $socio):
-=======
+
         foreach ($onlyActive as $socio):
->>>>>>> 85f128f48cc7106cdad0f6dc72bcba0844a40067:app/views/socios/index.ctp
 		$class = null;
 		if ($i++ % 2 == 0) {
 			$class = ' class="altrow"';
 		}
 	?>
 	<tr<?php echo $class;?>>
-<<<<<<< HEAD:app/views/socios/index.ctp
-		<td><?php echo $socio['Socio']['id']; ?>&nbsp;</td>
-		<td><?php echo $socio['Socio']['surname'].', ';?>
-                 <?php echo $socio['Socio']['name'];?>
-                </td>
-	<td><?php echo $socio['Socio']['documento_identidad']; ?>&nbsp;</td>
-        	<td><?php echo $socio['Suscription']['name']; ?>&nbsp;</td>
-<td><?php echo $socio['PaymentMethod']['description']; ?>&nbsp;</td>
-        
-=======
+
 		<td>
                 <?php echo $socio['Socio']['id']; ?>&nbsp;</td>
 		<td>
@@ -52,7 +39,7 @@ echo $paginator->counter(array(
         <td>
                 <?php echo $socio['PaymentMethod']['name']; ?>&nbsp;</td><td>
                 <?php echo $socio['Suscription']['name']; ?>&nbsp;</td>
->>>>>>> 85f128f48cc7106cdad0f6dc72bcba0844a40067:app/views/socios/index.ctp
+        
 		<td class="actions">
                         <?php echo $this->Html->link(__('pdf', true), array('action' => 'contrato', $socio['Socio']['id'])); ?>	
 		        <?php echo $this->Html->link(__('Ver', true), array('action' => 'view', $socio['Socio']['id'])); ?>	

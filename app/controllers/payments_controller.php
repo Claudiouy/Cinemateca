@@ -7,8 +7,7 @@
 
 
 class PaymentsController extends AppController{
-    var $name = 'Payments';
-    var $helpers = array('FlashChart');    
+    var $name = 'Payments'; 
     var $components = array('RequestHandler');  // para no mostrar header y footer cuando cargo un element
     
     /*
