@@ -27,10 +27,11 @@ class Payment extends AppModel{
         return $safeDeleteOk;
     }
     
-    public function cCreateNewPayment($socioId, $totalAmount){
+    public function cCreateNewPayment($mySuscription, $mySocioId, $numberOfQuotas){
         
         $savedOk = false;
-        $data = array('Payment' => array('socio_id' => $socioId, 'amount' => $totalAmount));
+        $totalAmount = ($mySuscription['Suscription']['amount'] * $numberOfQuotas); 
+        $data = array('Payment' => array('socio_id' => $mySocioId, 'amount' => $totalAmount, 'numbers_quotas' => $numberOfQuotas));
         if($this->save($data)){
             $savedOk = true;
         }
@@ -42,7 +43,7 @@ class Payment extends AppModel{
         $canceledOk = false;
         $paymentToCancel = $this->findById($paymentId);
         $data = array('Payment' => array('socio_id' => $paymentToCancel['Payment']['socio_id'] , 'amount' => ($paymentToCancel['Payment']['amount'] * -1), 'id_canceled' => $paymentToCancel['Payment']['id'] ));
-        #var_dump($paymentToCancel);
+
         $fields = array('Payment.canceled' => 1);
         $conditions = array('Payment.id' => $paymentId);
         

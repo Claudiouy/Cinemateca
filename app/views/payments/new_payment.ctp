@@ -9,9 +9,10 @@
                echo $this->Form->input('idSocio', array('type' => 'hidden', 'value' => $selSocio["Socio"]["id"])); ?>
                
            <div style="width:50%;" >    <div id="amountContainer">
-                   Ingrese importe: <?php echo $this->Form->input('amountSocio', array('type' => 'text')); ?>
-               </div> </div>
-               <?php echo $this->Form->end('Aplicar pago'); }?>
+                   Ingrese cantidad de cuotas: <?php echo $this->Form->input('numberQuotas', array('type' => 'text')); ?>
+               </div> 
+           </div>
+           <?php echo $this->Form->end('Aplicar pago'); }?>
     </div>
     
     <div id="paymentsOfSocio">

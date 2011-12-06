@@ -24,6 +24,7 @@
             echo $this->Html->script('jQuery');
             echo $this->Html->script('miJQuery');
             echo $this->Html->css('miCss'); 
+            echo $scripts_for_layout;
         ?>
 	<title>
 		<?php __('Sistema de Gestion de Socios y Puntos de Venta ~ CINEMATECA URUGUAYA'); ?>

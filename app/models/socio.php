@@ -4,7 +4,8 @@ var $name = 'Socio';
 var $hasMany = array('Payment');
 
 
-var $belongsTo = array('Street','State','Subscription','PaymentMethod');
+
+var $belongsTo = array('Street','State','Subscription', 'Suscription', 'PaymentMethod');
 
 var $validate = array(
      'name' => array(
@@ -68,7 +69,37 @@ var $validate = array(
         $socioList = $this->find('all', array('conditions' => $conditions));
         return $socioList;
     }
-
+    
+    function cUpdateSocioEffectiveDate($suscription, $mySocio, $numberQuotas ){
+        
+        $safeDeleteOk = false; 
+        
+        if( !empty($suscription) && !empty($mySocio) ){
+            $oldDate = $mySocio['Socio']['effective_date'];
+            $months_size = $suscription['Suscription']['length_months'] * $numberQuotas;
+            $newDate = date("Y-m-d", strtotime("$oldDate + $months_size months"));
+            
+            $fields = array('Socio.effective_date' => '"'.$newDate.'"');
+            $conditions = array('Socio.id' => $mySocio['Socio']['id']);
+            if($this->updateAll($fields, $conditions) == true) $safeDeleteOk = true;
+             
+        }
+        return $safeDeleteOk;
+    }
+    
+    function cValidateSocioUpToDate($idSocio){
+        $my_socio = $this->findById($idSocio);
+        $isUpToDate = false;
+        
+        if(!empty($my_socio)){
+            $effectiveDate = $my_socio['Socio']['effective_date'];
+            $actual_date = date("Y-m-d");
+            if($actual_date < $effectiveDate) $isUpToDate = true;
+        }
+        return $isUpToDate;
+    }
+    
+    
 
 }
 ?>

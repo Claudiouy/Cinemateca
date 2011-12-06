@@ -142,14 +142,21 @@ class PeliculasController extends AppController{
    }
    
    /*
-    * Devuelve el json para armar la pagina con peliculas en cartel
+    * Devuelve el div con peliculas en cartel
     */
    function json_peliculas_activas(){
        $this->Pelicula->recursive = 2;
        $conditions = array('Pelicula.activa = 1');
        $activePeliculas = $this->Pelicula->find('all', array('conditions' => $conditions));
-       $activePeliculasJson = json_encode($activePeliculas);
-       return $activePeliculasJson;
+       //$activePeliculasJson = json_encode($activePeliculas);
+       //return $activePeliculasJson;
+       //$firstPelicula = $activePeliculas[0];
+       $this->set('activePeliculas', $activePeliculas);
+       $this->render('/elements/maquetado_pelicula');
+   }
+   
+   function json_peliculas_activas2(){
+       $this->render('/elements/maquetado_pelicula');
    }
     
 }

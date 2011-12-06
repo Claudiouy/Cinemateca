@@ -1,5 +1,8 @@
 <div class="index">
-    
+    <div id="aBorrar" style="display:none;">
+        
+        
+    </div>
 	<h2><?php __('Peliculas');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
@@ -37,5 +40,7 @@
 	<ul>
 		<li><?php echo $this->Html->link(__('Nueva película', true), array('action' => 'nueva_pelicula')); ?></li>
                 <li><?php echo $this->Html->link(__('Activar películas', true), array('action' => 'seleccionar_peliculas')); ?></li>
+                <input type="button" value="Cargar peliculas" id="showTemplateBut" />
         </ul>
+        
 </div>

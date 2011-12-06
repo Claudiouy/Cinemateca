@@ -33,4 +33,25 @@
  * @link http://book.cakephp.org/view/957/The-App-Controller
  */
 class AppController extends Controller {    
+    
+    var $components = array('Acl');
+    
+    function beforeFilter(){
+            echo 'asas';
+        $user = $this->Session->read(USER_LOGIN_KEY); 
+        $aco = $this->params['controller']; 
+        if ($this->Acl->check($user, "/$aco", '*')) { 
+            return;  
+        }else{ 
+            // if anonymous, redirect to login 
+            // otherwise, give permission error 
+            if( $user == ANONY_USER){ 
+                $this->redirect("/authentications/login"); 
+            }else{ 
+                $this->redirect("/pages/permission_denied"); 
+            } 
+        } 
+    }
+     
+    
 }

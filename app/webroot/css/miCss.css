@@ -120,3 +120,38 @@ display:block;
     float:left;
 }
 
+#aBorrar{
+    position:absolute;
+    border: solid 1px black;
+    background-color: white;
+    width: 640px;
+    padding: 10px 0px 0px 30px;
+    float: left;
+
+}
+
+.pelicula {
+margin: 0px 0px 20px;
+clear: right;
+}
+
+.Estilo18 {
+font-size: 27px;
+}
+
+.Estilo3 {
+font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.Estilo17 {
+color: #693;
+font-weight: bold;
+}
+
+.pelicula img {
+display: inline;
+margin: 10px 5px 25px 25px;
+float: right;
+padding: 2px;
+border: 1px solid #CCC;
+}

@@ -22,6 +22,10 @@
     </tr>  
 </table>
 
-<div style="margin-left:40%"> <?php echo $this->Form->end('Generar entrada'); ?> </div>
+<div style="margin-left:40%"> <?php echo $this->Form->end('Generar entrada'); ?> 
+    <div style="float:right;">
+                    <?php echo  $this->Html->link(__('Ingreso a no socio', true), array('action' => 'create_new_no_socio_ticket'), null, sprintf(__('¿Esta seguro de generar el pago?', true))); ?>
+        </div> 
+</div>
 
     

@@ -16,12 +16,12 @@ class Suscription extends AppModel{
              )    
     );
     
-    public function cUpdateSuscription($suscriptionId, $suscriptionName, $suscriptionDescription, $suscriptionRepeatsByYear){
+    public function cUpdateSuscription($suscriptionId, $suscriptionName, $suscriptionDescription, $suscriptionLengthMonths){
         
         $updatedOk = false;
         $fields = array('Suscription.name' => '"'.$suscriptionName.'"',
                         'Suscription.description' => '"'.$suscriptionDescription.'"' ,
-                        'Suscription.repeats_by_year' => $suscriptionRepeatsByYear);
+                        'Suscription.length_months' => $suscriptionLengthMonths);
         $conditions = array('Suscription.id' => $suscriptionId);
         
         if($this->updateAll($fields, $conditions) == true) $updatedOk = true;

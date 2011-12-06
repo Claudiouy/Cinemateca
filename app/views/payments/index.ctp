@@ -1,3 +1,8 @@
+<?php
+   //echo $javascript->link('prototype');
+   echo $javascript->link('swfobject');
+?>
+
 <div class="index">
 	<h2><?php __('Pagos');?></h2>
 	<table cellpadding="0" cellspacing="0">
@@ -52,5 +57,15 @@
 	<ul>
 		<li><?php echo $this->Html->link(__('Ingresar pago', true), array('action' => 'new_payment')); ?></li>
                 <li><?php echo $this->Html->link(__('Consultar pagos', true), array('action' => 'payment_filters')); ?></li>
+                <li>
+                    <?php  /*
+                       echo $flashChart->begin();
+                        $flashChart->setData(array(1,2,4,8));
+                        echo $flashChart->chart();
+                        //var_dump($flashChart);
+                       echo $flashChart->render(400, 250);  */
+                    ?>
+
+                </li>
         </ul>
 </div>

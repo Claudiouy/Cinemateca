@@ -8,8 +8,26 @@
 
 class PaymentsController extends AppController{
     var $name = 'Payments';
-    
+    var $helpers = array('FlashChart');    
     var $components = array('RequestHandler');  // para no mostrar header y footer cuando cargo un element
+    
+    /*
+    function beforeFilter(){
+        
+        $user = $this->Session->read(USER_LOGIN_KEY); 
+        $aco = $this->params['controller']; 
+        if ($this->Acl->check($user, "/$aco", '*')) { 
+            return;  
+        }else{ 
+            // if anonymous, redirect to login 
+            // otherwise, give permission error 
+            if( $user == ANONY_USER){ 
+                $this->redirect("/authentications/login"); 
+            }else{ 
+                $this->redirect("/pages/permission_denied"); 
+            } 
+        } 
+    }*/
     
     function index(){
         $this->Payment->recursive = 0;
@@ -31,7 +49,7 @@ class PaymentsController extends AppController{
     
     function new_payment(){
         if(!empty($this->data['Payment'])){
-            if($this->Actor->save($this->data['Payment'])){
+            if($this->Payment->save($this->data['Payment'])){
                 $this->Session->setFlash('El pago se realizó correctamente', 'default');   
                 $this->redirect('/payments');
             }
@@ -132,51 +150,75 @@ class PaymentsController extends AppController{
     }
     
     function set_payment(){
+        
         if(!empty($this->data['Payment'])){
             $rawPayment = $this->data['Payment'];
-            if($this->Payment->cCreateNewPayment($rawPayment['idSocio'], $rawPayment['amountSocio'])){
-                $this->redirect('/payments');
+            $this->loadModel('Socio');
+            $this->loadModel('Suscription');
+            $mySocio = $this->Socio->findById($rawPayment['idSocio']);
+            
+            if(!empty($mySocio)) {                
+                $mySuscription = $this->Suscription->findById($mySocio['Socio']['suscription_id']);
+                
+                try{
+                    if($this->Payment->cCreateNewPayment( $mySuscription, $rawPayment['idSocio'], $rawPayment['numberQuotas'])){
+
+                        if($this->Socio->cUpdateSocioEffectiveDate($mySuscription, $mySocio, $rawPayment['numberQuotas'])){
+                            $this->redirect('/payments');
+                        }
+                        else {
+                            throw new Exception();
+                        }
+
+                    }
+                    else {
+                        throw new Exception();
+                    }
+                }
+                catch(Exception $e){
+                    
+                }
             }
         }
         $this->redirect('/payments/new_payment');
     }
     
     function payment_filters(){
+        
         if(!empty($_POST["nameSocio"]) || !empty($_POST["lastNameSocio"]) || !empty($_POST["ciSocio"]) || !empty($_POST["amountPayment"])){
             
-            $this->loadModel('Socio');
             $this->Payment->recursive = 1;
-            $sociosIds = array();
             $paymentsByFilters = array();
+            $innerConditions = array();
             
             if(!empty($_POST["nameSocio"])){
-                $sociosByName = $this->Socio->getSociosByName($_POST["nameSocio"]);
-                $paymentsByName = $this->Payment->cGetPaymentsBySocio($sociosByName);
-                if(!empty($paymentsByName)) $paymentsByFilters = array_merge($paymentsByFilters, $paymentsByName);            
+                $sociosByNameCondition = array('Socio.name LIKE' => '%'.$_POST["nameSocio"].'%');                
+                $innerConditions = array_merge($innerConditions, $sociosByNameCondition);            
             }
             
             if(!empty($_POST["lastNameSocio"])){
-                $sociosByLastName = $this->Socio->getSociosByName($_POST["lastNameSocio"]);
-                $paymentsByLastName = $this->Payment->cGetPaymentsBySocio($sociosByLastName);
-                if(!empty($paymentsByLastName)) $paymentsByFilters = array_merge($paymentsByFilters, $paymentsByLastName);            
+                $sociosByLastNameCondition =  array('Socio.surname LIKE' => '%'.$_POST["lastNameSocio"].'%');
+                $innerConditions = array_merge($innerConditions, $sociosByLastNameCondition);            
             }
             
             if(!empty($_POST["ciSocio"])){
-                $socioByCi = $this->Socio->getSocioByDocument($_POST["ciSocio"]);
-                $socioId = $socioByCi['Socio']['id'];
-                $listPaymentsByName = $this->Payment->cGetPaymentsBySocioId($socioId);
-                
-                if(!empty($listPaymentsByName)) $paymentsByFilters = array_merge($paymentsByFilters, $listPaymentsByName);                           
+                $socioByCiCondition = array('Socio.documento_identidad = ' => $_POST["ciSocio"]);
+                $innerConditions = array_merge($innerConditions, $socioByCiCondition);                           
             }
             
             if(!empty($_POST["amountPayment"])){
-                $amount = $_POST["amountPayment"];
-                $paymentsByAmount = $this->Payment->cGetPaymentsByAmount($amount);
-                
-                if(!empty($paymentsByAmount)) $paymentsByFilters = array_merge($paymentsByFilters, $paymentsByAmount);                
+                $amountCondition = array('Payment.amount = ' => $_POST["amountPayment"]);
+                $innerConditions = array_merge($innerConditions, $amountCondition);
             }
+            $paymentsByFilters = $this->Payment->find('all', array('conditions' => $innerConditions));
+            
             $this->set('paymentsByFilters', $paymentsByFilters);
             $this->render('/elements/payments_socio');
+        }
+        else {
+            if($this->RequestHandler->isAjax()){  // Si no carga el formulario en la seccion de pagos.
+                $this->render('/elements/payments_socio');
+            }
         }
         
     }
