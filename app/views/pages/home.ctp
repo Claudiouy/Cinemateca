@@ -1,9 +1,76 @@
-<h3>
-    Login
-</h3>
-<?php echo $session->flash('auth');?>
-<?php echo $form->create('User', array ('action'=>'login'));?>
-<?php echo $form->input('username', array('label'=>'Nombre de Usuario'));?>
-<?php echo $form->input('password', array('label'=>'Ingrese la Clave', 'type'=>'password'));?>
-<?php echo $form->end('Login');
+<div class="menu index">
+   
+	<h2 id="h2"><?php __('Menú Principal');?></h2>    
 
+
+        <?php echo $this->Session->flash(); ?>
+
+
+<div class="actions">
+<ul>
+<li>
+<?php 
+echo $this->Html->link('Gestion de Usuarios', array(
+    'controller' => 'users',
+    'action' => 'index',  
+    )
+    );
+?>
+</li>
+<li>
+<?php 
+echo $this->Html->link('Gestion de Socios', array(
+    'controller' => 'socios',
+    'action' => 'index',  
+    )
+    );
+?>
+</li>
+<li>
+<?php 
+echo $this->Html->link('Colectivos de Socios', array(
+    'controller' => 'socios',
+    'action' => 'colectivos',  
+    )
+    );
+?>
+</li>
+<li>
+<?php 
+echo $this->Html->link('Actores', array(
+    'controller' => 'actors',
+    'action' => 'index',  
+    )
+    );
+?>
+</li>
+<li>
+<?php 
+echo $this->Html->link('Directores', array(
+    'controller' => 'directors',
+    'action' => 'index',  
+    )
+    );
+?>
+</li>
+<li>
+<?php 
+echo $this->Html->link('Funciones', array(
+    'controller' => 'performances',
+    'action' => 'index',  
+    )
+    );
+?>
+</li>
+<li>
+<?php 
+echo $this->Html->link('Pagos', array(
+    'controller' => 'payments',
+    'action' => 'index',  
+    )
+    );
+?>
+</li>
+</ul>
+</div>
+</div>

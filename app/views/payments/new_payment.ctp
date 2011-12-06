@@ -1,7 +1,11 @@
 <div>
     
 
+<<<<<<< HEAD
+    <div style="width:50%;" ><input type="button" id="openSearchSocio" value="Buscar cliente" /> </div>
+=======
     <div style="width:50%; margin-bottom:15px;" ><input type="button" id="openSearchSocio" value="Buscar cliente" /> </div>
+>>>>>>> 536d3e85739a2ce271238b5b112a609159f356b2
     <div id="selectedSocio">
                <?php if(!empty($selSocio)) {
                   echo $form->create('Payment', array('action' => 'set_payment')); 
@@ -15,6 +19,9 @@
            <?php echo $this->Form->end('Aplicar pago'); }?>
     </div>
     
+<<<<<<< HEAD
+    <div id="searchSocioContainer" style="color:red;">
+=======
     <div id="paymentsOfSocio">
         
         <?php if(!empty($selSocio) ){ ?>
@@ -59,6 +66,7 @@
     
     <div id="searchSocioContainer" style="color:white;">
         <div id="closeButton" ></div>
+>>>>>>> 536d3e85739a2ce271238b5b112a609159f356b2
         Busqueda por socio
         <input type="text" id="socioNameSearch" />
         <input type="button" value="Consultar" id="retrieveSocios" />        

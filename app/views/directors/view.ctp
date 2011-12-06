@@ -1,6 +1,6 @@
 <div class="directors index">
     
-	<h2><?php __('Directores');?></h2>
+	<h2 id="h2"><?php __('Directores');?></h2>
         
 <table cellpadding="0" cellspacing="0">
 	<tr>

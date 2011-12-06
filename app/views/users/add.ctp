@@ -1,7 +1,7 @@
 <div class="users form">
 <?php echo $this->Form->create('User');?>
     <fieldset>
-        <legend><?php __('Registro de  Usuario'); ?></legend>
+        <legend id="legend"><?php __('Registro de  Usuario'); ?></legend>
     
     
     <?php echo $session->flash('auth');?>
@@ -29,7 +29,3 @@
  <?php endif; ?>
         </ul>
 </div>
-
-
-
-

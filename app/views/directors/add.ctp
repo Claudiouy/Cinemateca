@@ -1,10 +1,12 @@
 <div class="directors form">
 <?php echo $this->Form->create('Director');?>
-	<fieldset>
- 		<legend><?php __('Nuevo Director'); ?></legend>
+<fieldset>
+ 	<legend id="legend"><?php __('Nuevo Director'); ?></legend>
+        
+<?php echo $session->flash('auth');?>
 
 <?php
-
+echo $form->hidden('id');
 echo $form->input('name', array('label'=>'Nombre:'));
 echo $form->input('surname', array('label'=>'Apellido:'));
 echo $form->input('Director.state_id', array('type' => 'select', 'label'=>'Nacionalidad:', 'options'=>$listado, 'empty'=>TRUE));

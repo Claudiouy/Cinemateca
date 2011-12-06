@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+<<<<<<< HEAD:nbproject/private/private.xml.0.nblh~
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+=======
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1">
+        <file>
+            <url>app/controllers/socios_controller.php</url>
+            <line>108</line>
+        </file>
+    </editor-bookmarks>
+>>>>>>> 85f128f48cc7106cdad0f6dc72bcba0844a40067:nbproject/private/private.xml.0.nblh~
 </project-private>

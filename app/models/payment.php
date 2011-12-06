@@ -37,7 +37,7 @@ class Payment extends AppModel{
         }
         return $savedOk;
     }
-    
+
     public function cCancelPayment($paymentId){
         
         $canceledOk = false;
@@ -85,7 +85,7 @@ class Payment extends AppModel{
         
         return $listOfPayments;
     }
-    
+
     
    
     

@@ -4,7 +4,7 @@
 ?>
 
 <div class="index">
-	<h2><?php __('Pagos');?></h2>
+	<h2 id="h2"><?php __('Pagos');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
@@ -32,6 +32,9 @@
                     <td><?php echo '$'.$pay['Payment']['amount'];?></td>
                     <td><?php echo 'fecha'; ?></td>
                     <td class="actions">
+<<<<<<< HEAD
+                            
+=======
                         <?php if(empty($pay['Payment']['id_canceled']) && $pay['Payment']['canceled'] == 0 ){ 
                             echo $this->Html->link(__('Anular', true), array('action' => 'cancel_payment', $pay['Payment']['id'])); 
                         
@@ -44,6 +47,7 @@
                             }
                         }
 ?>
+>>>>>>> 536d3e85739a2ce271238b5b112a609159f356b2
                     </td>
             </tr>
                 <?php endforeach;}?>
@@ -56,6 +60,9 @@
 	<h3><?php __('Acciones'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Ingresar pago', true), array('action' => 'new_payment')); ?></li>
+<<<<<<< HEAD
+	</ul>
+=======
                 <li><?php echo $this->Html->link(__('Consultar pagos', true), array('action' => 'payment_filters')); ?></li>
                 <li>
                     <?php  /*
@@ -68,4 +75,5 @@
 
                 </li>
         </ul>
+>>>>>>> 536d3e85739a2ce271238b5b112a609159f356b2
 </div>

@@ -7,11 +7,12 @@
 
 class Pelicula extends AppModel{
     var $name = 'Pelicula';
-    public $hasMany = array('ActorPelicula', 'DirectorPelicula');
+    public $hasMany = array('ActorPelicula', 'DirectorPelicula', 'Performance');
     
+
     
      var $validate = array(
-         'titulo' => array(
+         'name' => array(
              'rule' => 'notEmpty',
              'message' => 'Debe Indicar un título'
              ),

@@ -1,9 +1,7 @@
 <div class="index">
-    <div id="aBorrar" style="display:none;">
-        
-        
-    </div>
-	<h2><?php __('Peliculas');?></h2>
+
+	<h2 id="h2"><?php __('Peliculas');?></h2>
+
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
@@ -21,7 +19,7 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td><?php echo $peli['Pelicula']['id']; ?>&nbsp;</td>
-		<td><?php echo $peli['Pelicula']['titulo']; ?>&nbsp;</td>
+		<td><?php echo $peli['Pelicula']['name']; ?>&nbsp;</td>
                 <td><?php echo $peli['Pelicula']['duracion']; ?> min &nbsp;</td>
 	
 		<td class="actions">

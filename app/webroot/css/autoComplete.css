@@ -1,0 +1,23 @@
+.autoCompleteDiv    { 
+     position: absolute; 
+     border: 1px solid #888; 
+     margin: 0px; 
+     padding: 2px; 
+     display: none; 
+     background: white; 
+} 
+.autoCompleteDiv a:hover { 
+    background: none; 
+    background-color: darkblue; 
+    color: white; 
+    font-weight: normal; 
+} 
+.autoCompleteDiv a { 
+    background: none; 
+    background-color: white; 
+    color: black; 
+    text-decoration: none; 
+    padding: 2px; 
+    margin: 0px; 
+    display: block; 
+} 

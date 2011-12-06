@@ -1,2 +1,0 @@
-<?php echo $form->labelTag('Image/images', 'Image:' );?>
-<?php echo $html->file('Image/filedata');?>

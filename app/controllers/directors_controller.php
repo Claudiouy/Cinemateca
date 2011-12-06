@@ -3,7 +3,7 @@ class DirectorsController extends AppController {
 	
 	
 var $name =  'Directors';
-var $helpers = array('Html', 'Form');
+var $helpers = array('Html', 'Form','AutoComplete');
 
 public function index(){
 
@@ -20,7 +20,6 @@ $listado = $this->State->find('list', array('order' => 'State.name ASC'));
 $this->set('listado', $listado);
 		//var_dump($listado);
 	if (!empty($this->data)) {
-		
 		$this->Director->create();
 		if ($this->Director->save($this->data)) {
 			$this->Session->setFlash('El director ha sido guardado', 'flash_success');

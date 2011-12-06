@@ -1,29 +1,76 @@
-<?php echo $form->create('Socio');?>
-<fieldset>
-<legend>Añadir Nuevo Socio</legend>
+<div class="socios form">
+<?php echo $this->Form->create('Socio',array('type'=>'file'));?>
 
+ <fieldset>
+ <legend id="legend"><?php __('Registro de  Socio'); ?></legend>
+    
+    
+<?php echo $session->flash('auth');?>
 <?php
 
 echo $form->hidden('Socio.id');
-echo $form->label('Socio.image_url', 'Imagen');  
-echo $form->file('Socio.image_url');  
-echo $form->input('Socio.name', array('label'=>'Nombre:'));
+?>
+<label for="FileImage">Foto:</label>  
+<input type="file"  name="data[File][image]" id="FileImage" />  
+    
+<?php
+
+echo $form->input('Socio.name', array('label'=>'Nombre:' ,'id'=>'autoComplete'));
+
 echo $form->input('Socio.surname', array('label'=>'Apellido:'));
+echo $form->input('fec_nac');
+?>
+
+
+
+
+<?php
 echo $form->input('documento_identidad', array('label'=>'Documento de Identidad:'));
-echo $form->input('Socio.state_id', array('type' => 'select', 'label'=>'Nacionalidad:', 'options'=>$list_state, 'empty'=>FALSE));
-//echo $form->input('Socio.street_id', array('type' => 'select', 'label'=>'Calle:', 'options'=>$list_street, 'empty'=>FALSE));         
+echo $form->input('Socio.state_id', array('type' => 'select', 'class'=>'select','label'=>'Nacionalidad:', 'options'=>$list_state, 'default' => 229));
+echo $form->input('calle_princ',array('div'=>array('class'=>'false'),'class'=>'callejero','type'=>'text','id'=>'calle_princ','label'=>'Domicilio Particular :'));
 echo $form->input('Socio.ocupacion', array('label'=>'Ocupacion:'));
 echo $form->input('Socio.tel_fijo', array('label'=>'Tel.:'));
 echo $form->input('Socio.celular', array('label'=>'Cel.:'));
 echo $form->input('Socio.email', array('label'=>'Email.:'));
-echo $form->input('Socio.subscription_id', array( 'label'=>'Tipo de Suscripcion:','type'=> 'select','options'=>$list_suscription, 'empty'=>FALSE));
-echo $form->input('Socio.payment_method_id', array('type' => 'select', 'label'=>'Forma de Pago:', 'options'=>$list_pay_method, 'empty'=>FALSE));
-
 ?>
+<?php
+echo $form->input('Socio.suscription_id', array( 'label'=>'Tipo de Suscripcion:','type'=> 'select','options'=>$list_suscription, 'empty'=>FALSE));
+echo $form->input('Socio.payment_method_id', array('type' => 'select', 'label'=>'Forma de Pago:', 'options'=>$list_pay_method, 'empty'=>FALSE));
+?>
+<div id="div_tarjetas_cc"></div>
+<?php
+echo $form->input('calle_cobro',array('div'=>array('class'=>'false'),'class'=>'callejero','type'=>'text','id'=>'calle_cobro','label'=>'Direccion de cobro:'));
+?>
+
+<div class="gender">
+<?php
+
+$options=array('M'=>'Hombre','F'=>'Mujer');
+$attributes=array('legend'=>"Sexo:", 'class'=>'gender');
+echo $this->Form->radio('gender',$options,$attributes);
+?>
+</div>
+<div class="socios form">
+<?php
+
+$options=array('0'=>'Individual','1'=>'Colectivo');
+$attributes=array('legend'=>"¿ Es un asociado en Colectivo ?", 'class'=>'colectivo', 'default'=>'Individual');
+echo $this->Form->radio('colectivo',$options,$attributes);
+?>
+</div>
+
 
 </fieldset>
-<?php echo $form->end('Añadir Socio');?>
-<br />
-<?php echo $html->link('Listar todos los Socios Activos', array('action'=>'index')); 
-?>
-	
+<?php echo $this->Form->end(__('Agregar',true));?>
+</div>
+<div class="actions">
+	<h3><?php __('Acciones'); ?></h3>
+	<ul>
+ <?php if($admin): ?>
+<li><?php echo $this->Html->link(__('Listar Socios', true), array('action' => 'index'));?></li>
+<li><?php echo $this->Html->link(__('Colectivos de Socios', true), array('action' => 'colectivos'));?></li>
+ <?php endif; ?>
+<li><?php echo $this->Html->link(__('Menu Principal', true), array('controller'=>'pages','action' => 'home'));?></li>
+
+        </ul>
+</div>
