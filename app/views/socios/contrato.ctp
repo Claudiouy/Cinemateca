@@ -1,7 +1,6 @@
 <?php
 ini_set('memory_limit','128M');
 require_once('app\vendors\tcpdf\config\lang\spa.php');
-//require_once('app\vendors\tcpdf\tcpdf.php');
 require_once('app\vendors\xtcpdf.php');
 
 

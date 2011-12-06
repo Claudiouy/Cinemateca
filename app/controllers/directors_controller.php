@@ -3,7 +3,7 @@ class DirectorsController extends AppController {
 	
 	
 var $name =  'Directors';
-var $helpers = array('Html', 'Form','AutoComplete');
+var $helpers = array('Html', 'Form');
 
 public function index(){
 
@@ -72,4 +72,5 @@ $this->redirect(array('action'=>'index'), null, true);
 }
 
 }
+
 ?>

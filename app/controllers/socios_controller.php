@@ -204,7 +204,7 @@ function activar($id = null) {
 	}
      
 function contrato($id = null) {
- Configure::write('debug',3);
+ Configure::write('debug',0);
     $estado = $this->Socio->findById($id, array( 
         'fields' =>'Socio.estado',
         'recursive' => 0    ));
@@ -223,7 +223,7 @@ $this->layout = 'pdf'; //esto usara el layout pdf.ctp
         }
 
 function detalle_completo($id = null) {
- Configure::write('debug',3);
+ Configure::write('debug',0);
     $estado = $this->Socio->findById($id, array( 
         'fields' =>'Socio.estado',
         'recursive' => 0    ));
@@ -281,7 +281,7 @@ if($cantidad > 1){
     $this->paginate = array (
             'order' => array ('Socio.id' => 'DESC'),
             'limit'=> 6,
-            'fields' => array('Socio.id','Socio.name','Socio.surname','Socio.documento_identidad','Socio.estado'), //array of field names
+            'fields' => array('Socio.id','Socio.name','Socio.surname','Socio.documento_identidad','Socio.estado' ,'Socio.image_url'), //array of field names
             'conditions' => array ('Socio.colectivo'=>1));
 
 

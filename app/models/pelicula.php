@@ -7,8 +7,7 @@
 
 class Pelicula extends AppModel{
     var $name = 'Pelicula';
-    public $hasMany = array('ActorPelicula', 'DirectorPelicula', 'Performance');
-    
+    public $hasMany = array('ActorPelicula', 'DirectorPelicula','Performance');
 
     
      var $validate = array(

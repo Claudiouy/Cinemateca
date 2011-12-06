@@ -40,12 +40,11 @@ echo $paginator->counter(array(
         <td><?php if($socio['Socio']['estado']== 1) echo "ACTIVO"; else echo "DE BAJA";?></td>
         
 		<td class="actions">
-		        <?php echo $this->Html->link(__('Ver', true), array('action' => 'view', $socio['Socio']['id'])); ?>	
-                        <?php echo $this->Html->link(__('Editar', true), array('action' => 'edit', $socio['Socio']['id'])); ?>
-
-	
+		<?php echo $this->Html->link(__('Ver', true), array('action' => 'view', $socio['Socio']['id'])); ?>	
 		<?php if($socio['Socio']['estado']== 1)echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $socio['Socio']['id']), null, sprintf(__('Esta Seguro de eliminar el Socio N° %s?', true), $socio['Socio']['id'])); ?>
-		</td>
+		<?php if($socio['Socio']['estado']== 1)echo $this->Html->link(__('Editar', true), array('action' => 'edit', $socio['Socio']['id'])); ?>
+
+                </td>
 	</tr>
 <?php endforeach; ?>
 	</table>

@@ -15,6 +15,10 @@ function beforeFilter() {
     }
     
 function login() {
+ //ini_set('memory_limit', '32M');
+  //echo phpinfo(); 
+
+  
 }
 
 function logout() {
@@ -100,6 +104,16 @@ $this->Session->setFlash('El usuario no ha sido guardado, intentelo otra vez');
 		$this->redirect(array('action' => 'index'));
 	}
 
+function descargar($id = null){
+if (!$id) {
+Configure::write('debug',0); // Otherwise we cannot use this method while developing 
+
+$this->Session->setFlash('Sorry, there was no PDF selected.');
+$this->redirect(array('action'=>'index'), null, true);
+}
+$this->layout = 'pdf'; //this will use the pdf.ctp layout
+$this->render();
+}
 }
 
 ?>

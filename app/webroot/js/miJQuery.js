@@ -196,14 +196,15 @@ $("#asociarSociosColectivos").live('click', function(){
         
         var idsArray = new Array();
          
-         $(".sociosSeleccionados").each(function(){
+         $("img.ui-widget-content ui-draggable").(function(){
              
-             if(this.checked){
                  idsArray.push($(this).attr("id"));
-             }
+              
+            
          });
          idsJoins = idsArray.join(',');
-         return idsJoins;
+      alert(idsJoins);
+        return idsJoins;
     }
   
     

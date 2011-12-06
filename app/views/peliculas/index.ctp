@@ -1,10 +1,6 @@
 <div class="index">
-<<<<<<< HEAD
-	<h2 id="h2"><?php __('Peliculas');?></h2>
-=======
     
-	<h2><?php __('Peliculas');?></h2>
->>>>>>> 536d3e85739a2ce271238b5b112a609159f356b2
+	<h2 id="h2"><?php __('Peliculas');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>

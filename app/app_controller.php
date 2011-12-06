@@ -2,7 +2,7 @@
 
 class AppController extends Controller {
 
-var $components = array ('Auth', 'Session', 'RequestHandler');  
+var $components = array ('Auth', 'Session');  
 
 
 
@@ -73,7 +73,7 @@ function uploadFiles($folder, $formdata, $itemId = null) {
     }  
       
     // list of permitted file types, this is only images but documents can be added  
-    $permitted = array('image/gif','image/jpeg','image/pjpeg','image/png', 'image/jpg');  
+    $permitted = array('image/gif','image/jpeg','image/png', 'image/jpg');  
       
     // loop through and deal with the files  
     foreach($formdata as $file) {  
@@ -115,43 +115,46 @@ function uploadFiles($folder, $formdata, $itemId = null) {
                         // save the url of the file  
                         $result['urls'][] = $url;  
                     } else {  
-                        $result['errors'][] = "Error uploaded $filename. Please try again.";  
+                        $result['errors'][] = "Error cargando foto  $filename. Por favor , intente otra vez.";  
                     }  
                     break;  
                 case 3:  
                     // an error occured  
-                    $result['errors'][] = "Error uploading $filename. Please try again.";  
+                    $result['errors'][] = "Error cargando archivo $filename. Por favor , intente otra vez.";  
                     break;  
                 default:  
                     // an error occured  
-                    $result['errors'][] = "System error uploading $filename. Contact webmaster.";  
+                    $result['errors'][] = "Error de sistema cargando foto $filename.Pongase en contacto con el administrador.";  
                     break;  
             }  
         } elseif($file['error'] == 4) {  
             // no file was selected for upload  
-            $result['nofiles'][] = "No file Selected";  
+            $result['nofiles'][] = "No ha sido seleccionado un archivo";  
         } else {  
             // unacceptable file type  
-            $result['errors'][] = "$filename cannot be uploaded. Acceptable file types: gif, jpg, png, bmp.";  
+            $result['errors'][] = "$filename no puede ser subido. Solo se permiten extensiones: gif, jpg, png.";  
         }  
     }  
 return $result;  
 }
 
 function search(){
+    
 $this->autoRender = false;
+
 $search = $this->data[$this->modelClass]['Buscar'];
 $cond ="";
 $i=0;
 foreach($this->{$this->modelClass}->_schema as $field => $value){
 //debug($field);
-if($i>0){
+if( $i > 0){
 $cond = $cond. " OR ";
 }
 $cond = $cond. " ".$this->modelClass.".".$field." LIKE '%".$search."%' ";
 $i++;
 }
-$conditions = array('limit'=>10,'conditions'=> $cond);
+$conditions = array('recursive'=>0,'limit'=>10,'conditions'=> $cond);
+//var_dump($conditions);
 $this->paginate = $conditions;
 $this->set(strtolower($this->name), $this->paginate());
 $this->render('search');
