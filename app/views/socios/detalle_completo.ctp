@@ -1,8 +1,8 @@
 <?php
 ini_set('memory_limit','128M');
-require_once('app\vendors\tcpdf\config\lang\spa.php');
+require_once('app'.DS.'vendors'.DS.'tcpdf'.DS.'config'.DS.'lang'.DS.'spa.php');
 //require_once('app\vendors\tcpdf\tcpdf.php');
-require_once('app\vendors\xtcpdf.php');
+require_once('app'.DS.'vendors'.DS.'xtcpdf.php');
 
 
 // create new PDF document

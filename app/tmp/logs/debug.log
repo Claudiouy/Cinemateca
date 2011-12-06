@@ -8,3 +8,6 @@
 2011-12-06 19:19:20 Notice: Notice (8): Undefined variable: logged_in in [/var/www/cake_primero/app/views/layouts/default.ctp, line 77]
 2011-12-06 19:19:34 Notice: Notice (8): Undefined variable: logged_in in [/var/www/cake_primero/app/views/layouts/default.ctp, line 77]
 2011-12-06 19:28:35 Notice: Notice (8): Undefined index:  name in [/var/www/cake_primero/app/views/socios/index.ctp, line 40]
+2011-12-06 19:52:15 Notice: Notice (8): Undefined index:  tel_fijo in [/var/www/cake_primero/app/views/socios/detalle_completo.ctp, line 148]
+2011-12-06 19:52:15 Notice: Notice (8): Undefined index:  colectivo in [/var/www/cake_primero/app/views/socios/detalle_completo.ctp, line 167]
+2011-12-06 19:52:15 Notice: Notice (8): Undefined index:  calle_cobro in [/var/www/cake_primero/app/views/socios/detalle_completo.ctp, line 182]
