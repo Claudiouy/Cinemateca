@@ -45,6 +45,7 @@
 	<ul>
 		<li><?php echo $this->Html->link(__('Listar', true), array('action' => 'index'));?></li>
                 <li><?php echo $this->Html->link(__('Nuevo', true), array('action' => 'add')); ?></li>
+                <li><?php echo $this->Html->link(__('Pagos', true), array('controller'=>'payments','action' =>'index'));?></li>
                 <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li>
 
                 <li>

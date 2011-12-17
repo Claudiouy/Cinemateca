@@ -65,6 +65,7 @@ if($socio['Socio']['estado']== 0){
 	<ul>
         <li><?php echo $this->Html->link(__('Nuevo', true), array('action' => 'add')); ?></li>
         <li><?php echo $this->Html->link(__('Listado', true), array('action' => 'index'));?></li>
+        <li><?php echo $this->Html->link(__('Pagos', true), array('controller'=>'payments','action' =>'retrieveSocioById/'.$socio['Socio']['id']));?></li>
         <li><?php echo $this->Html->link(__('Colectivo', true), array('action' => 'colectivos'));?></li>
         <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li>
 

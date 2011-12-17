@@ -64,6 +64,7 @@ echo $paginator->counter(array(
 	<h3><?php __('Acciones'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Nuevo', true), array('action' => 'add')); ?></li>
+                <li><?php echo $this->Html->link(__('Pagos', true), array('controller'=>'payments','action' =>'index'));?></li>
                 <li><?php echo $this->Html->link(__('Colectivos', true), array('action' => 'colectivos'));?></li>
                 <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li>
                 <li>

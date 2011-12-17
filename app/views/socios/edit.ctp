@@ -69,6 +69,7 @@ if(!empty( $colec)){
 
 		<li><?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $this->Form->value('Socio.id')), null, sprintf(__('Esta seguro de borrar al Socio N° %s?', true), $this->Form->value('Socio.id'))); ?></li>
 		<li><?php echo $this->Html->link(__('Listado', true), array('action' => 'index'));?></li>
+                <li><?php echo $this->Html->link(__('Pagos', true), array('controller'=>'payments','action' =>'retrieveSocioById/'.$this->Form->value('Socio.id')));?></li>
                 <li><?php echo $this->Html->link(__('Colectivo', true), array('action' => 'colectivos'));?></li>
                 <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li>
 
