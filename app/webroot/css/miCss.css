@@ -146,6 +146,33 @@ display:block;
     float:left;
 }
 
+
+.pelicula {
+margin: 0px 0px 20px;
+clear: right;
+}
+
+.Estilo18 {
+font-size: 27px;
+}
+
+.Estilo3 {
+font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.Estilo17 {
+color: #693;
+font-weight: bold;
+}
+
+.pelicula img {
+display: inline;
+margin: 10px 5px 25px 25px;
+float: right;
+padding: 2px;
+border: 1px solid #CCC;
+}
+
 .defaultText{
 width: 100%;
 color:#D5B433; 
@@ -157,33 +184,15 @@ margin-bottom:10px;
 display:block;   
 }
 
-.flash_good {   
-background: #e5f2be;   
-border:2px solid #bedf5d;   
-padding:10px;   
-font-weight:bold;  
-}  
-.flash_bad {   
-background: #eccecf;  
-border:2px solid #9e0b0f;  
-padding:10px;  
-font-weight:bold;  
-}  
-.flash_good img, .flash_bad img {  
-float:right;  
-}  
 
 #asociarSociosColectivos{
     	display: inline;
 	font-size: 110%;
 	width: auto;
 }
+ 
 
-.flash_good, .flash_bad, .flash_warning, .flash_info { padding:6px 10px; color:white; display:block; margin:10px 0; }
-.flash_good { background-color:#009900; }
-.flash_bad { background-color:#AA0000; }
-.flash_warning { background-color:#EE5F00; }
-.flash_info { background-color:#0055AA; }
+
 
 #gallery { float: left; width: 65%; min-height: 12em; } * html #gallery { height: 12em; } /* IE6 */
 	.gallery.custom-state-active { background: #eee; }
@@ -211,4 +220,52 @@ margin-top: 10px;
 margin-bottom:10px;
 text-transform: uppercase;
 display:block;
+}
+
+.flash_good img, .flash_bad img,.flash_warning img, .flash_info img {  
+float:right;  
+}
+
+.flash_good {   
+background: #e5f2be;   
+border:2px solid #bedf5d;   
+padding:10px;   
+font-weight:bold;  
+}  
+
+.flash_bad {   
+background: #eccecf;  
+border:2px solid #9e0b0f;  
+padding:10px;  
+font-weight:bold;  
+}  
+
+.flash_info {  
+background: #66CCFF;  
+border:2px solid #000066;  
+padding:10px; 
+font-weight:bold;  
+} 
+.flash_warning {  
+background: #EE5F00;  
+border:2px solid #9e0b0f;  
+padding:10px; 
+font-weight:bold;  
+} 
+
+.uploaded_image {
+float:left;
+background: url(shadowAlpha.png) no-repeat bottom right !important;
+background: url(shadow.gif) no-repeat bottom right;
+margin: 10px 0 0 10px !important;
+margin: 10px 0 0 5px;
+}
+
+.uploaded_image img {
+display: block;
+position: relative;
+background-color: #fff;
+border: 1px solid #a9a9a9;
+margin: -6px 6px 6px -6px;
+padding: 4px;
 }

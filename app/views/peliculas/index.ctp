@@ -1,10 +1,11 @@
 <div class="index">
-    
+
+
 	<h2 id="h2"><?php __('Peliculas');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('título');?></th>
+			<th><?php echo $this->Paginator->sort('name');?></th>
                         <th><?php echo $this->Paginator->sort('duración');?></th>
 			<th class="actions"><?php __('Acciones');?></th>
 	</tr>
@@ -37,5 +38,7 @@
 	<ul>
 		<li><?php echo $this->Html->link(__('Nueva película', true), array('action' => 'nueva_pelicula')); ?></li>
                 <li><?php echo $this->Html->link(__('Activar películas', true), array('action' => 'seleccionar_peliculas')); ?></li>
+                <input type="button" value="Cargar peliculas" id="showTemplateBut" />
         </ul>
+        
 </div>

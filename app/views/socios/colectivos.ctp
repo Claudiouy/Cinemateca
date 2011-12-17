@@ -1,8 +1,7 @@
+<?php ini_set('memory_limit','128M');?>
 <div class="socios form">
 <div class="demo ui-widget ui-helper-clearfix">
-
 <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
-   
 <?php
       $i = 0;
       foreach ($onlyColectivos as $socio):
@@ -18,7 +17,7 @@
           
              <?php endforeach; ?>
 </ul>
-    <div id="agrupado" class="ui-widget-content ui-state-default">
+<div id="agrupado" class="ui-widget-content ui-state-default">
 	<h4 class="ui-widget-header"><span class="ui-icon ui-icon-agrupado">agrupado</span> Agrupe aqui a los socios</h4>
 </div>
 </div>
@@ -44,9 +43,9 @@
 <div class="actions">
 	<h3><?php __('Acciones'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Listar Socios', true), array('action' => 'index'));?></li>
-                <li><?php echo $this->Html->link(__('Nuevo Socio', true), array('action' => 'add')); ?></li>
-                <li><?php echo $this->Html->link(__('Menu Principal', true), array('controller'=>'pages','action' => 'home'));?></li>
+		<li><?php echo $this->Html->link(__('Listar', true), array('action' => 'index'));?></li>
+                <li><?php echo $this->Html->link(__('Nuevo', true), array('action' => 'add')); ?></li>
+                <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li>
 
                 <li>
                 <?php

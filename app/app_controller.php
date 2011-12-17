@@ -6,7 +6,7 @@ var $components = array ('Auth', 'Session');
 
 
 
-    function beforeFilter() {
+function beforeFilter() {
 $this->Auth->allow('login');    
 $this->Auth->authError='Debe estar logueado en el sistema para tener acceso';    
 $this->Auth->loginError='Usuario/Clave combinacion inválida .';    
@@ -111,54 +111,34 @@ function uploadFiles($folder, $formdata, $itemId = null) {
                         $success = move_uploaded_file($file['tmp_name'], $url);  
                     }  
                     // if upload was successful  
-                    if($success) {  
+                 if($success) {  
                         // save the url of the file  
-                        $result['urls'][] = $url;  
-                    } else {  
-                        $result['errors'][] = "Error cargando foto  $filename. Por favor , intente otra vez.";  
-                    }  
-                    break;  
+                $result['urls'][] = $url;  
+                } else {  
+                $result['errors'][] = "Error cargando foto  $filename. Por favor , intente otra vez.";  
+                }  
+                break;  
                 case 3:  
-                    // an error occured  
-                    $result['errors'][] = "Error cargando archivo $filename. Por favor , intente otra vez.";  
+                 // an error occured  
+                $result['errors'][] = "Error cargando archivo $filename. Por favor , intente otra vez.";  
                     break;  
                 default:  
-                    // an error occured  
-                    $result['errors'][] = "Error de sistema cargando foto $filename.Pongase en contacto con el administrador.";  
-                    break;  
-            }  
-        } elseif($file['error'] == 4) {  
-            // no file was selected for upload  
-            $result['nofiles'][] = "No ha sido seleccionado un archivo";  
-        } else {  
-            // unacceptable file type  
-            $result['errors'][] = "$filename no puede ser subido. Solo se permiten extensiones: gif, jpg, png.";  
+                 // an error occured  
+                 $result['errors'][] = "Error de sistema cargando foto $filename.Pongase en contacto con el administrador.";  
+                break;  
+                }  
+                } elseif($file['error'] == 4) {  
+                // no file was selected for upload  
+                $result['nofiles'][] = "No ha sido seleccionado un archivo";  
+                } else {  
+                // unacceptable file type  
+                $result['errors'][] = "$filename no puede ser subido. Solo se permiten extensiones: gif, jpg, png.";  
         }  
     }  
 return $result;  
 }
 
-function search(){
-    
-$this->autoRender = false;
 
-$search = $this->data[$this->modelClass]['Buscar'];
-$cond ="";
-$i=0;
-foreach($this->{$this->modelClass}->_schema as $field => $value){
-//debug($field);
-if( $i > 0){
-$cond = $cond. " OR ";
-}
-$cond = $cond. " ".$this->modelClass.".".$field." LIKE '%".$search."%' ";
-$i++;
-}
-$conditions = array('recursive'=>0,'limit'=>10,'conditions'=> $cond);
-//var_dump($conditions);
-$this->paginate = $conditions;
-$this->set(strtolower($this->name), $this->paginate());
-$this->render('search');
-}
 
 }
 

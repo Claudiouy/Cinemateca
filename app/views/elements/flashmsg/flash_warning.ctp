@@ -1,1 +1,3 @@
-<div id="flashMessage" class="flash_warning"><div id="status-msg-left"></div><?php echo $message; ?><div id="status-msg-right"></div></div>
+<div class="flash_bad">  
+    <a href="/" class="cancel"><?php echo $message; ?><img src="/cake_primero/app/webroot/img/icons/cross.png" alt="Atencion!" /></a>  
+</div>  

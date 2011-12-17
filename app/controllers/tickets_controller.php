@@ -31,18 +31,34 @@ class TicketsController extends AppController{
     }
     
     function create_new_socio_ticket(){
+        
         if(!empty($this->data['Ticket']['id'])){
             $my_id = $this->data['Ticket']['id'];
-            if($this->Ticket->createSocioTicket($my_id)){
-                $this->redirect('/tickets');
+            $this->loadModel('Socio');
+            
+            if($this->Socio->cValidateSocioUpToDate($my_id)){
+                if($this->Ticket->createSocioTicket($my_id)){
+                    $this->redirect('/tickets');
+                }
+                else{
+                    $this->redirect('/tickets/ticket_socio');
+                }
             }
             else{
-                $this->redirect('/tickets/ticket_socio');
+                    $this->redirect('/tickets/ticket_socio');
             }
         }
         else{
             $this->redirect('/tickets/ticket_socio');
         }
+    }
+    
+    function create_new_no_socio_ticket(){
+        
+        $data = array('Ticket' => array('socio_id' => 0, 'amount_ticket' => 120)); //este amount_Ticket seria el propio de la funcion
+        $this->Ticket->save($data);
+        $this->redirect('/tickets');
+
     }
 }
 

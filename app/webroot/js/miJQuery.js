@@ -1,27 +1,46 @@
-$(document).ready(function(){
+$j = jQuery.noConflict();
+
+
+$j(document).ready(function(){
+$j("#content form:first div.error:first input:first").focus(); 
+
     
-    $('.fadeOut').hide(6000);
+    $j('.fadeOut').hide(6000);
     
     
-    $("#consultarPeliculas").click(function(){
-       var nombrePeli = $("#filtroNombre").val();
-       $.ajax({
+    /*$j("#buscarPeliculaSP").click(function(){
+        nombreParcial = $j("#textoBuscadorSP").val();
+        console.info(nombreParcial);
+        $j.ajax({
+            data: "nombre=" + nombreParcial,
+            type: "POST",
+            url:  "/peliculas/peliculas_por_nombre",
+            success: function(data){
+                
+            }
+        });
+    });*/
+    
+    
+    $j("#consultarPeliculas").click(function(){
+       var nombrePeli = $j("#filtroNombre").val();
+       $j.ajax({
             data: "miNombre=" + nombrePeli,
             type: "POST",
             url:  "/cake_primero/peliculas/otra_consulta",
             success: function(data){
-                $("#listadoFiltradoPeliculas").html(data);
+                $j("#listadoFiltradoPeliculas").html(data);
                 //console.info(data);
             }
        });
     });
     
-    $("#activarPeliculasSeleccionadas").click(function(){
+    $j("#activarPeliculasSeleccionadas").click(function(){
         
          var idsJoins = getPeliculasMarcadas();
          var idsJoinsNoMarcadas = getPeliculasNoMarcadas();
          
-         $.ajax({
+         $j.ajax({
             data: "idSelec=" + idsJoins + "&idNoSelec=" + idsJoinsNoMarcadas,
             type: "POST",
             url:  "/cake_primero/peliculas/activar_peliculas",
@@ -38,8 +57,8 @@ $(document).ready(function(){
     
     
     function limpiarCheckboxes(){
-        $("input:checkbox").each(function(){
-            $(this).attr("checked", false);
+        $j("input:checkbox").each(function(){
+            $j(this).attr("checked", false);
         }); 
     }
     
@@ -47,13 +66,14 @@ $(document).ready(function(){
         
         var idsArray = new Array();
          
-         $(".peliculaSeleccionada").each(function(){
+         $j(".peliculaSeleccionada").each(function(){
              
              if(this.checked){
-                 idsArray.push($(this).attr("id"));
+                 idsArray.push($j(this).attr("id"));
              }
          });
          idsJoins = idsArray.join(',');
+         alert(idsJoins);
          return idsJoins;
     }
     
@@ -61,10 +81,10 @@ $(document).ready(function(){
         
         var idsArray = new Array();
          
-         $(".peliculaSeleccionada").each(function(){
+         $j(".peliculaSeleccionada").each(function(){
              
              if(!this.checked){
-                 idsArray.push($(this).attr("id"));
+                 idsArray.push($j(this).attr("id"));
              }
          });
          idsJoins = idsArray.join(',');
@@ -73,20 +93,19 @@ $(document).ready(function(){
 
     //------------------filtered_payments------------------------
         
-        $("#confirmSearchPayment").click(function(){
+        $j("#confirmSearchPayment").click(function(){
             
-            if($("#nameSocioOfPayment").val() != null)  nameSocio = $("#nameSocioOfPayment").val();
-            if($("#lastNameSocioOfPayment").val() != null ) lastNameSocio = $("#lastNameSocioOfPayment").val();
-            if($("#ciSocioOfPayment").val() != null)  ciSocio = $("#ciSocioOfPayment").val();
-            if($("#amountOfPayment").val() != null)  amountPayment = $("#amountOfPayment").val();
+            if($j("#nameSocioOfPayment").val() != null)  nameSocio = $j("#nameSocioOfPayment").val();
+            if($j("#lastNameSocioOfPayment").val() != null ) lastNameSocio = $j("#lastNameSocioOfPayment").val();
+            if($j("#ciSocioOfPayment").val() != null)  ciSocio = $j("#ciSocioOfPayment").val();
+            if($j("#amountOfPayment").val() != null)  amountPayment = $j("#amountOfPayment").val();
             
-            $.ajax({
+            $j.ajax({
                 type: "POST",
                 data: "nameSocio=" + nameSocio + "&lastNameSocio=" + lastNameSocio + "&ciSocio=" + ciSocio + "&amountPayment=" + amountPayment,
                 url:  "/cake_primero/payments/payment_filters",
                 success: function(data){
-                    console.info(data);
-                    $("#paymentsContainer").html(data);
+                    $j("#paymentsContainer").html(data);
                 }
            });
            
@@ -97,35 +116,36 @@ $(document).ready(function(){
     
     //------------new_payment------------
     
-        $("#openSearchSocio").click(function(){
-            $("#searchSocioContainer").toggle();
+        $j("#openSearchSocio").click(function(){
+            $j("#searchSocioContainer").toggle();
         });
     
-        $("#retrieveSocios").click(function(){
-           var nombreSocio = $("#socioNameSearch").val();
-           $.ajax({
+        $j("#retrieveSocios").click(function(){
+           var nombreSocio = $j("#socioNameSearch").val();
+           $j.ajax({
                 data: "nameSocio=" + nombreSocio,
                 type: "POST",
                 url:  "/cake_primero/payments/retrieveSociosByName",
                 success: function(data){
-                    $("#socioData").html(data);
+                    $j("#socioData").html(data);
                 }
            });
         });
         /*
-        $(".selectSocio").live('click', function(){  
-           var idSocio = $(this).attr('id');
+        $j(".selectSocio").live('click', function(){  
+           var idSocio = $j(this).attr('id');
            console.info(idSocio);
-           $.ajax({
+           $j.ajax({
                 data: "idSocio=" + idSocio,
                 type: "POST",
                 datatype: 'json',
                 url:  "/cake_primero/payments/retrieveSocioById",
                 success: function(data){
-                    $("#socioData").html(data);
+                    $j("#socioData").html(data);
                 }
            });
         });*/
+
 
         $("#closeButton").click(function(){
             var divContenedor = $("#searchSocioContainer");
@@ -138,9 +158,9 @@ $(document).ready(function(){
     //------------- tickets------------------
     
     
-         $("#findSocioByDoc").click(function(){
-           var socioDocument = $("#socioDocument").val();
-           $.ajax({
+         $j("#findSocioByDoc").click(function(){
+           var socioDocument = $j("#socioDocument").val();
+           $j.ajax({
                 data: "socioDoc=" + socioDocument,
                 type: "POST",
                 url:  "/cake_primero/tickets/retrieve_socio_by_document",
@@ -148,27 +168,45 @@ $(document).ready(function(){
                     var sociosName = data.split('--||--')[0];
                     var sociosId = data.split('--||--')[1];
                     
-                    $('#inputReadOnlySocio').val(sociosName);
-                    $('#TicketId').val(sociosId);
+                    $j('#inputReadOnlySocio').val(sociosName);
+                    $j('#TicketId').val(sociosId);
                 }
            });
         });
-    
-    
-    
-    
     //----------------- /tickets---------------
 
     
     function getMoviesData(){
         var movie_container = document.createElement('div');
-        $(movie_container).addClass('movieContainer');
+        $j(movie_container).addClass('movieContainer');
         
         var movie_image = document.createElement('img');
-        $(addComment).addClass('movieImg');
-        $(post_container).append(addComment);
+        $j(addComment).addClass('movieImg');
+        $j(post_container).append(addComment);
     }
     
+    //--------------------------------------------------
+    
+    //------------------pagina Cinemateca---------------------------
+    
+    
+          $j("#showTemplateBut").click(function(){
+             
+             $j.ajax({
+                
+                type: "POST",
+                url:  "/cake_primero/peliculas/json_peliculas_activas",
+                success: function(data){
+                    //console.info(data);
+                    $j("#aBorrar").html(data);
+                    $j("#aBorrar").show();
+                }
+             });
+             
+          });
+    //--------------------------------------------------------------
+
+
     
 //----------------------Socios------------------------
 
@@ -182,7 +220,7 @@ $("#asociarSociosColectivos").live('click', function(){
             type: "POST",
             url:  "/cake_primero/socios/asoc_colectivos",
             success: function(data){
-                window.location.href=window.location.href;
+               window.location.href=window.location.href;
               //  console.info(data);
             },
             error: function(miError){
@@ -191,27 +229,36 @@ $("#asociarSociosColectivos").live('click', function(){
          });
          
     });
-    
-        function getSociosColectivos(){
-        
-        var idsArray = new Array();
-         
-         $("img.ui-widget-content ui-draggable").(function(){
-             
-                 idsArray.push($(this).attr("id"));
-              
-            
-         });
-         idsJoins = idsArray.join(',');
-      alert(idsJoins);
-        return idsJoins;
-    }
+
   
-    
+    function getSociosColectivos(){
+  var idsArray = new Array();
+// Obtenemos el elemento con el id "agrupado"
+var agrupados = document.getElementById("agrupado");
+// todos los elementos con tag img que hay
+// dentro del elemento 'agrupado'
+socios = agrupados.getElementsByTagName('img');
+ for (var i=0; i<socios.length; i++) {
+   idsArray.push(socios[i].id);
+}
+idJoins = idsArray.join(',');
+  
+       return idJoins;
 
 }
 
 
-);
+});
 
-
+//   function getPeliculasNoMarcadas(){
+//        
+//        var idsArray = new Array();
+//         
+//         $j(".peliculaSeleccionada").each(function(){
+//             
+//             if(!this.checked){
+//                 idsArray.push($j(this).attr("id"));
+//             }
+//         });
+//         idsJoins = idsArray.join(',');
+//         return idsJoins;

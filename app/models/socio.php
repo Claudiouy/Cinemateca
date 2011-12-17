@@ -2,48 +2,41 @@
 class Socio extends AppModel {
 var $name = 'Socio';
 var $hasMany = array('Payment');
-var $belongsTo = array('State','Suscription','PaymentMethod');
+
+var $belongsTo  = array('State','Suscription','PaymentMethod',"Creditcard");
+
 
 
   var $validate = array(
      'name' => array(
      'rule' => 'notEmpty',
-     'message' => 'Favor ingresar un nombre'),
+     'message' => 'Favor ingresar un nombre',
+     'last' => true),
      
      'surname' => array(
      'rule' => 'notEmpty',
-     'message' => 'Favor ingresar un apellido'),
+     'message' => 'Favor ingresar un apellido',
+     'last' => true),
     
      'fec_nac' => array(
      'rule' => 'date',
      'message' => 'Favor ingrese una fecha de nacimiento'),
         
      'tel_fijo' => array(
-     'required' => true,    
      'rule' => 'numeric',
+     'allowEmpty' => true,    
      'message' => 'Favor ingresar solo numeros'
      ),
      'celular' => array(
      'rule' => 'numeric',
-     'required' => false,
-     'message' => 'Favor ingresar solo numeros'
-     ),
-    'celular' => array(
-     'rule' => 'notEmpty',
-     'required' => false,
+     'allowEmpty' => true,    
      'message' => 'Favor ingresar solo numeros'
      ),
      'email' => array(
-     'required' => false,
      'rule' => 'email',
+     'allowEmpty' => true,
      'message' => 'Favor ingresar un email valido'),
     
-    'documento_identidad' => array(
-     'noVacio' => array(
-     'rule' => 'notEmpty',  
-     'message' => 'Se debe ingresar un documento de identidad',
-     'last' => true),
-       
      'soloNumeros' => array(
      'rule' => 'numeric',  
      'message' => 'Debe ser solo numeros sin puntos ni guiones',
@@ -51,23 +44,120 @@ var $belongsTo = array('State','Suscription','PaymentMethod');
         
      'esUnico' => array(
      'rule' => 'isUnique',  
-     'message' => 'Ese documentos ya ha sido ingresado, consulte al Administrador',
+     'message' => 'Ese documento ya ha sido ingresado.',
      'last' => true
-        )  
-    )
-    
+        ),
+         
+     'between' => array(
+     'rule' => array('between', 5, 8),
+     'message' => 'Entre 5 y 8 digitos',
+     'last'=> true
+      ),
+     'documento_identidad' => array(
+     'esValida' => array(
+     'rule' => 'verficarCI',  
+     'message' => 'Ese documento no verifica correctamente',
+     'last' => true),)
+          );
+  
 
-        );
     
   
   
     function getSocioByDocument($docSocio){
-        
+        //var_dump($docsocio);
+        //debug($docSocio);
         if(!empty($docSocio)){
             $mySocio = $this->find('first', array('conditions' => array('Socio.documento_identidad' => $docSocio)));
         }
         return $mySocio;
     }
-  
+    
+    function getSociosByName($socioName){
+        
+        $conditions = array('OR' => array('Socio.name LIKE' => '%'.$socioName.'%',
+                                                'Socio.surname LIKE' => '%'.$socioName.'%'));
+        
+        $socioList = $this->find('all', array('conditions' => $conditions));
+        return $socioList;
+    }
+    
+    function cUpdateSocioEffectiveDate($suscription, $mySocio, $numberQuotas ){
+        
+        $safeDeleteOk = false; 
+        
+        if( !empty($suscription) && !empty($mySocio) ){
+            $oldDate = $mySocio['Socio']['effective_date'];
+            $months_size = $suscription['Suscription']['length_months'] * $numberQuotas;
+            $newDate = date("Y-m-d", strtotime("$oldDate + $months_size months"));
+            
+            $fields = array('Socio.effective_date' => '"'.$newDate.'"');
+            $conditions = array('Socio.id' => $mySocio['Socio']['id']);
+            if($this->updateAll($fields, $conditions) == true) $safeDeleteOk = true;
+             
+        }
+        return $safeDeleteOk;
+    }
+    
+    function cValidateSocioUpToDate($idSocio){
+        $my_socio = $this->findById($idSocio);
+        $isUpToDate = false;
+        
+        if(!empty($my_socio)){
+            $effectiveDate = $my_socio['Socio']['effective_date'];
+            $actual_date = date("Y-m-d");
+            if($actual_date < $effectiveDate) $isUpToDate = true;
+        }
+        return $isUpToDate;
+    }
+
+ function verficarCI($data) {
+        //Inicializo los coefcientes en el orden correcto
+        $arrCoefs = array(2,9,8,7,6,3,4,1);
+        //saco caracteres extraños de la ci recibida
+        $suma = 0;
+        //Para el caso en el que la CI tiene menos de 8 digitos
+        //calculo cuantos coeficientes no voy a usar
+        $largoval =count($arrCoefs);
+     $ci=$data['documento_identidad'];
+        $largo =strlen($data['documento_identidad']);
+        $difCoef = ($largoval - $largo);
+        
+    if($largo < 9 && $largo > 2){
+            for ($i = $largo - 1; $i > -1; $i--) {
+            $dig = substr($ci,$i, 1);
+            $digInt = intval($dig);
+            $coef = $arrCoefs[$i + $difCoef];
+            $suma = $suma + ($digInt * $coef);
+            
+        }
+   
+        if ( ($suma % 10) == 0 ) {
+return true;
+} else {
+return false;
+} }
+return false;
+
+    }   
+
+
+    
+function generaDeuda($suscripcion) {
+    switch ($suscripcion) {
+    case 2:
+        break;
+    case 13:
+        break;
+    case 12:
+        break;
+{
+        ;
 }
+
+}
+}
+}
+   
+
 ?>

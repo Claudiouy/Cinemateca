@@ -1,7 +1,7 @@
 <?php
 ini_set('memory_limit','128M');
-require_once('app\vendors\tcpdf\config\lang\spa.php');
-require_once('app\vendors\xtcpdf.php');
+require_once('app'.DS.'vendors'.DS.'tcpdf'.DS.'config'.DS.'lang'.DS.'spa.php');
+require_once('app'.DS.'vendors'.DS.'xtcpdf.php');
 
 
 // create new PDF document
@@ -185,17 +185,14 @@ $pdf->SetFillColor(220, 255, 220);
 $pdf->MultiCell(0, 0,$text, 1, 'L', 1, 0, '', '', true);
 $pdf->Ln(8);
 
-
-/*if($socio['Socio']['payment_method_id']== 2){
+if($socio['Socio']['payment_method_id']== 2){
 //Datos de la tarjeta de credito.
-$text='Emisor: '.$socio['CreditcarsSocio']['creditcard_id']. ' Numero : '.$socio['CreditcarsSocio']['name'];
+$text='Emisor :: :: '.$socio['Creditcard']['name']. ' :: :: Numero : '.$socio['Socio']['creditcard_number'];
 $pdf->SetFillColor(220, 255, 220);
 $pdf->MultiCell(0, 0,$text, 1, 'L', 1, 0, '', '', true);
-$pdf->Ln(8);
+$pdf->Ln(10);
     
 } 
- * S
- */
 //Direccion cobro
 
 $text='Dirección de Cobro : '.$socio['Socio']['calle_cobro'];

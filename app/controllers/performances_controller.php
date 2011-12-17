@@ -6,19 +6,11 @@ var $helpers = array('Html','Form');
 var $components = array('RequestHandler');
 
 public function index(){
-//$current_year = date('Y');
-//$current_month = date('M');
-//$current_day = date('D');
-//$dia=(date('Y-m-d', strtotime("-1 days")));
-
 
 $this->paginate = array (
             'order' => array ('Performance.id' => 'DESC'),
             'limit'=> 5,
-//            'Performance.fecha >'=>$dia,
-             'recursive' => 0,
-
-    //'fields' => array('Performance.id','Socio.name','Sala.name','Socio.documento_identidad'), //array of field names
+            //'fields' => array('id','sala_id','fecha','hora_comienzo','pelicula_id','estreno'), //array of field names
             'conditions' => array ('Performance.estado'=>1,
 ));
 $onlyActive = $this->paginate('Performance');
@@ -37,7 +29,7 @@ $this->set('list_pelis', $list_pelis);
 
 //var_dump($listado);
 	if (!empty($this->data)) {
-		if ($this->Performance->saveAll($this->data)) {
+		if ($this->Performance->save($this->data)) {
 			$this->Session->setFlash('La nueva funcion ha sido guardada', 'flashmsg/flash_good');
 			$this->redirect(array('action'=>'index'), null, true);
 		} else {
@@ -126,9 +118,7 @@ function activar($id = null) {
 		}
 		$this->Session->setFlash('La funcion no ha podido ser dada de Alta', 'flashmsg/flash_warning');
 		$this->redirect(array('action' => 'index'));
-	}
-        
-        
+	}      
         
 }
 ?>

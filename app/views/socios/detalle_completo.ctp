@@ -1,8 +1,8 @@
 <?php
 ini_set('memory_limit','128M');
-require_once('app\vendors\tcpdf\config\lang\spa.php');
+require_once('app'.DS.'vendors'.DS.'tcpdf'.DS.'config'.DS.'lang'.DS.'spa.php');
 //require_once('app\vendors\tcpdf\tcpdf.php');
-require_once('app\vendors\xtcpdf.php');
+require_once('app'.DS.'vendors'.DS.'xtcpdf.php');
 
 
 // create new PDF document
@@ -164,7 +164,7 @@ $pdf->Ln(10);
 
 $text = 'Afiliado en forma : ';
 
-if($socio['Socio']['colectivo']== 0) $text.='"individual"'; else $text = $text.'"colectiva"'; 
+if($socio['Socio']['colectivo']== 0) $text.='"Individual"'; else $text = $text.'"Colectiva"'; 
 
 $pdf->SetFillColor(220, 255, 220);
 $pdf->MultiCell(0, 0,$text, 1, 'L', 1, 0, '', '', true);
@@ -184,15 +184,15 @@ $pdf->SetFillColor(220, 255, 220);
 $pdf->MultiCell(0, 0,$text, 1, 'L', 1, 0, '', '', true);
 $pdf->Ln(12);
 
-/*if($socio['Socio']['payment_method_id']== 2){
+if($socio['Socio']['payment_method_id']== 2){
 //Datos de la tarjeta de credito.
-$text='Emisor: '.$socio['CreditcarsSocio']['creditcard_id']. ' Numero : '.$socio['CreditcarsSocio']['name'];
+$text='Emisor :: :: '.$socio['Creditcard']['name']. ' :: :: Numero : '.$socio['Socio']['creditcard_number'];
 $pdf->SetFillColor(220, 255, 220);
 $pdf->MultiCell(0, 0,$text, 1, 'L', 1, 0, '', '', true);
 $pdf->Ln(10);
     
 } 
-*/
+
 // EAN 13
 $style = array(
     'position' => 'R',
@@ -215,7 +215,7 @@ $pdf->write1DBarcode($socio['Socio']['documento_identidad'], 'EAN13', '', '', ''
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('contrato'.$socio['Socio']['id'].'.pdf', 'I');
+$pdf->Output('contrato'.$socio['Socio']['id'].'.pdf', 'D');
 
 //============================================================+
 // END OF FILE

@@ -27,7 +27,7 @@
                                   <li class="liAlineados" >
                                       <div id="contenedorPelicula" >
                                           <div id="contenedorNombrePelicula" >
-                                            <?php echo $peli['Pelicula']['titulo'] ?>
+                                            <?php echo $peli['Pelicula']['name'] ?>
                                           </div>
                                             <div id="contenedorDuracionPelicula" > 
                                                 <?php echo $peli['Pelicula']['duracion'] ?>

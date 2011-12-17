@@ -5,7 +5,7 @@
     
     <body>
         <div id="contenedorDetalle" >
-            Nombre: <?php   echo $la_peli['titulo'] ?>
+            Nombre: <?php   echo $la_peli['name'] ?>
             <br />
             Duracion: <?php   echo $la_peli['duracion'] ?> minutos          
             
