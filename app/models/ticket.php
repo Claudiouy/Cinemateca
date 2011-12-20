@@ -7,19 +7,25 @@
 
 class Ticket extends AppModel{
     var $name = 'Ticket';
-    //var $belongsTo = 'Function';
-    var $hasOne = 'Socio';
+    var $belongsTo = array('Performance', 'Socio', 'Sala');
     
     
-    function createSocioTicket($mySocioId){
+    function createSocioTicket($mySocioId, $performanceId){
         
         $ticketSold = false;
-        if(!empty($mySocioId)){
-            //falta if preguntando al modelo socio si el cliente esta al dia
-            $data = array('Ticket' => array('socio_id' => $mySocioId));
+        if(!empty($mySocioId) ){
+            
+            $data = array('Ticket' => array('socio_id' => $mySocioId, 'performance_id' => $performanceId));
             if($this->save($data)) $ticketSold = true;
         }
         return $ticketSold;
+    }
+    
+    function cRetrieveTickets($dateFrom, $dateTo){
+        
+        $conditions = array('Ticket.created >' => $dateFrom, 'Ticket.created <=' => $dateTo);
+        $listOfTickets = $this->find('all', array('conditions' => $conditions));
+        return $listOfTickets;
     }
 }
 ?>

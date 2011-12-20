@@ -67,6 +67,7 @@ echo $paginator->counter(array(
 		<li><?php echo $this->Html->link(__('Nuevo Socio', true), array('action' => 'add')); ?></li>
                 <li><?php echo $this->Html->link(__('Colectivos de Socios', true), array('action' => 'colectivos'));?></li>
                 <li><?php echo $this->Html->link(__('Menu Principal', true), array('controller'=>'pages','action' => 'home'));?></li>
+                
 
                 <li>
                 <?php

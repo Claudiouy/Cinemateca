@@ -73,4 +73,25 @@ echo $this->Html->link('Pagos', array(
 </li>
 </ul>
 </div>
+        <div>
+            <div style="float:right;">
+                <div>Sala</div>
+                <select id="globalSalaId" name="globalSalaId" style="clear:none;float:right;">
+                    <option value="-1" >Administrador</option>
+                <?php 
+                        if(!empty($allSalas)){ 
+                            foreach($allSalas as $sal){
+                    ?>
+                                <option <?php if($this->Session->read("SalaId") == $sal['Sala']['id']) echo 'selected="selected"'; ?> value="<?php echo $sal['Sala']['id']?>" ><?php echo $sal['Sala']['name'];?></option>
+                
+                    <?php   } 
+                        }
+                      
+                      ?>
+                </select>
+            </div>
+            <?php     
+                    
+                    ?>
+        </div>   
 </div>

@@ -82,7 +82,9 @@ var $belongsTo = array('State','Suscription','PaymentMethod');
         $safeDeleteOk = false; 
         
         if( !empty($suscription) && !empty($mySocio) ){
+            
             $oldDate = $mySocio['Socio']['effective_date'];
+            if(empty($oldDate)) $oldDate = $mySocio['Socio']['created'];
             $months_size = $suscription['Suscription']['length_months'] * $numberQuotas;
             $newDate = date("Y-m-d", strtotime("$oldDate + $months_size months"));
             
@@ -104,6 +106,65 @@ var $belongsTo = array('State','Suscription','PaymentMethod');
             if($actual_date < $effectiveDate) $isUpToDate = true;
         }
         return $isUpToDate;
+    }
+    
+    function cGetUpToDateSocios(){
+        
+        $conditions = array('Socio.effective_date >'  => date('Y-m-d'));
+        $upToDateSocios = $this->find('count', array('conditions' => $conditions));
+        return $upToDateSocios;
+    }
+    
+    function getUpToDatePieData(){
+        $upToDateSize = $this->cGetUpToDateSocios();
+        $socioSize = $this->find('count');
+        $pieData[] = array('Al dia' => $upToDateSize);
+        $pieData[] = array('Con deuda' => $socioSize - $upToDateSize);
+        
+        return $pieData;
+    }
+    
+    function getSociosByAge(){
+        $listOfSocios = $this->find('all');
+        $arrayToReturn = array();
+        $arrayData = array();
+        for( $i = 0; $i < 5; $i ++ ){
+            $arrayData[$i] = 0;
+        }
+        foreach($listOfSocios as $soc){           
+            $socioAge = (time() - strtotime($soc['Socio']['fec_nac'])) / 60 / 60 / 24 / 365;
+            $indexToAdd = $this->getPositionFromAge($socioAge);
+            $arrayData[$indexToAdd] ++; 
+        }
+        $arrayToReturn['Menos de 20'] = $arrayData[0];
+        $arrayToReturn['Entre 20 y 34'] = $arrayData[1];
+        $arrayToReturn['Entre 35 y 49'] = $arrayData[2];
+        $arrayToReturn['Entre 50 y 65'] = $arrayData[3];
+        $arrayToReturn['66 o mas'] = $arrayData[4];
+        return $arrayToReturn;
+    }
+    
+    function getPositionFromAge($age){
+        
+        if( $age < 20 ) return 0;
+        if( 20 <= $age && $age < 35 ) return 1;
+        if( 35 <= $age && $age < 50 ) return 2;
+        if( 50 <= $age && $age < 65 ) return 3;
+        if( 65 <= $age ) return 4;
+    }
+    
+    function  reduceEffectiveDate($socio_id, $month_size){
+        
+        $mySocio = $this->findById($socio_id);
+        
+        if(!empty($mySocio)){
+            $oldDate = $mySocio['Socio']['effective_date'];
+            $newDate = date("Y-m-d", strtotime("$oldDate - $month_size months"));
+            
+            $fields = array('Socio.effective_date' => '"'.$newDate.'"');
+            $conditions = array('Socio.id' => $mySocio['Socio']['id']);
+            if($this->updateAll($fields, $conditions) == true) $correctlyUpdated = true;
+        }
     }
 
 }

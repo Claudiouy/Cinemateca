@@ -212,3 +212,18 @@ float:right;
 .flash_warning { background-color:#EE5F00; }
 .flash_info { background-color:#0055AA; }
 
+.filterPaymentContainer{
+    width:40%;
+    position:absolute;
+    top:30%;
+    left:25%;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    background-color: #8BD;
+    -moz-opacity: 0.9 !important;
+    -webkit-opacity: 0.9!important;
+    opacity: 0.9 !important;
+    display:none;
+    border: solid 3px #003D4C;
+}

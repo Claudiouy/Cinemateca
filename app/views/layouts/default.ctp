@@ -30,7 +30,7 @@
            echo $this->Html->css('jquery-ui-1.8.16.custom.css');
            echo $this->Html->script('jQuery');
            echo $this->Html->script('jquery.ui.core');
-
+           echo $this->Html->script('highcharts');
            echo $this->Html->script('miJQuery');
            echo $this->Html->script('jquery-1.6.2');
            echo $this->Html->script('jquery-ui-1.8.16.custom.min');
@@ -38,6 +38,7 @@
            echo $this->Html->script('jquery.ui.widget');
             echo $this->Html->script('jquery.ui.datepicker');
            echo $this->Html->script('application');
+           
            //echo $this->Html->script('jquery.datePicker.js');
            //echo $this->Html->script('cake.datePicker.js');
          
