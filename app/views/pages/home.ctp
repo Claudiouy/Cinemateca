@@ -10,7 +10,16 @@
 <ul>
 <li>
 <?php 
-echo $this->Html->link('Gestion de Usuarios', array(
+echo $this->Html->link('Boleteria', array(
+    'controller' => 'tickets',
+    'action' => 'ticket_socio',  
+    )
+    );
+?>
+</li>    
+<li>
+<?php 
+echo $this->Html->link('Usuarios', array(
     'controller' => 'users',
     'action' => 'index',  
     )
@@ -19,7 +28,7 @@ echo $this->Html->link('Gestion de Usuarios', array(
 </li>
 <li>
 <?php 
-echo $this->Html->link('Gestion de Socios', array(
+echo $this->Html->link('Socios', array(
     'controller' => 'socios',
     'action' => 'index',  
     )
@@ -28,7 +37,7 @@ echo $this->Html->link('Gestion de Socios', array(
 </li>
 <li>
 <?php 
-echo $this->Html->link('Colectivos de Socios', array(
+echo $this->Html->link('Colectivos', array(
     'controller' => 'socios',
     'action' => 'colectivos',  
     )
@@ -36,6 +45,16 @@ echo $this->Html->link('Colectivos de Socios', array(
 ?>
 </li>
 <li>
+<?php 
+echo $this->Html->link('Peliculas', array(
+    'controller' => 'peliculas',
+    'action' => 'index',  
+    )
+    );
+?>
+</li>    
+<li>
+
 <?php 
 echo $this->Html->link('Actores', array(
     'controller' => 'actors',
@@ -71,27 +90,14 @@ echo $this->Html->link('Pagos', array(
     );
 ?>
 </li>
+<li>
+<?php 
+echo $this->Html->link('Salas', array(
+    'controller' => 'salas',
+    'action' => 'index',  
+    )
+    );
+?>
+</li>
+
 </ul>
-</div>
-        <div>
-            <div style="float:right;">
-                <div>Sala</div>
-                <select id="globalSalaId" name="globalSalaId" style="clear:none;float:right;">
-                    <option value="-1" >Administrador</option>
-                <?php 
-                        if(!empty($allSalas)){ 
-                            foreach($allSalas as $sal){
-                    ?>
-                                <option <?php if($this->Session->read("SalaId") == $sal['Sala']['id']) echo 'selected="selected"'; ?> value="<?php echo $sal['Sala']['id']?>" ><?php echo $sal['Sala']['name'];?></option>
-                
-                    <?php   } 
-                        }
-                      
-                      ?>
-                </select>
-            </div>
-            <?php     
-                    
-                    ?>
-        </div>   
-</div>

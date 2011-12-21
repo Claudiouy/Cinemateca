@@ -184,28 +184,84 @@ margin-bottom:10px;
 display:block;   
 }
 
-.flash_good {   
-background: #e5f2be;   
-border:2px solid #bedf5d;   
-padding:10px;   
-font-weight:bold;  
-}  
-.flash_bad {   
-background: #eccecf;  
-border:2px solid #9e0b0f;  
-padding:10px;  
-font-weight:bold;  
-}  
-.flash_good img, .flash_bad img {  
-float:right;  
-}  
 
 #asociarSociosColectivos{
     	display: inline;
 	font-size: 110%;
 	width: auto;
 }
+ 
 
+
+
+#gallery { float: left; width: 65%; min-height: 12em; } * html #gallery { height: 12em; } /* IE6 */
+	.gallery.custom-state-active { background: #eee; }
+	.gallery li { float: left; width: 96px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
+	.gallery li h5 { margin: 0 0 0.4em; cursor: move; }
+	.gallery li a { float: right; }
+	.gallery li a.ui-icon-zoomin { float: left; }
+	.gallery li img { width: 100%; cursor: move; }
+
+	#agrupado { float: right; width: 32%; min-height: 18em; padding: 1%;} * html #agrupado { height: 18em; } /* IE6 */
+	#agrupado h4 { line-height: 16px; margin: 0 0 0.4em; }
+	#agrupado h4 .ui-icon { float: left; }
+	#agrupado .gallery h5 { display: none; }
+        
+        
+        
+#navbar {
+text-align: Center;
+width: 100%;
+font-family: 'Yanone Kaffeesatz', Arial, Helvetica, sans-serif;
+font-weight: 300;
+font-size: 24px;
+height: 35px;
+margin-top: 10px;
+margin-bottom:10px;
+text-transform: uppercase;
+display:block;
+}
+
+.flash_good img, .flash_bad img,.flash_warning img, .flash_info img {  
+float:right;  
+}
+
+.flash_good {   
+background: #e5f2be;   
+border:2px solid #bedf5d;   
+padding:10px;   
+font-weight:bold;  
+}  
+
+.flash_bad {   
+background: #eccecf;  
+border:2px solid #9e0b0f;  
+padding:10px;  
+font-weight:bold;  
+}  
+
+.flash_info {  
+background: #66CCFF;  
+border:2px solid #000066;  
+padding:10px; 
+font-weight:bold;  
+} 
+.flash_warning {  
+background: #EE5F00;  
+border:2px solid #9e0b0f;  
+padding:10px; 
+font-weight:bold;  
+} 
+
+.uploaded_image {
+float:left;
+background: url(shadowAlpha.png) no-repeat bottom right !important;
+background: url(shadow.gif) no-repeat bottom right;
+margin: 10px 0 0 10px !important;
+margin: 10px 0 0 5px;
+}
+
+<<<<<<< HEAD:app/webroot/css/miCss.css
 .flash_good, .flash_bad, .flash_warning, .flash_info { padding:6px 10px; color:white; display:block; margin:10px 0; }
 .flash_good { background-color:#009900; }
 .flash_bad { background-color:#AA0000; }
@@ -226,4 +282,13 @@ float:right;
     opacity: 0.9 !important;
     display:none;
     border: solid 3px #003D4C;
+=======
+.uploaded_image img {
+display: block;
+position: relative;
+background-color: #fff;
+border: 1px solid #a9a9a9;
+margin: -6px 6px 6px -6px;
+padding: 4px;
+>>>>>>> 2037c340ee58c4bc81346a236529c8a8d3e3d336:app/webroot/css/miCss.css
 }

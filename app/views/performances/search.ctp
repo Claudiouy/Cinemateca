@@ -1,3 +1,4 @@
+
 <div class="performances index">
    
 	<h2 id="h2"><?php __('Funciones');?></h2>
@@ -63,16 +64,19 @@ $performance['Performance']['id']));?></td>
 </div>
 
 <div class="actions">
-	<h3><?php __('Acciones'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Nueva Funcion', true), array('action' => 'add')); ?></li>
+<h3><?php __('Acciones'); ?></h3>
+<ul>
+        <li><?php echo $this->Html->link(__('Nuevo', true), array('action' => 'add')); ?></li>
+        <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li>
+        <li><?php echo $this->Html->link(__('Listado', true), array('action' => 'index'));?></li>
+        <li><?php echo $this->Html->link(__('Colectivo', true), array('action' => 'colectivos'));?></li>
 
-                <li>
-                <?php
-                echo $form->create('', array('action'=>'search'));
-                echo $form->input('Buscar', array('type'=>'text'));
-                echo $form->end('Buscar');             
-                ?>
-                </li>
-	</ul>
+        <li>
+        <?php
+        echo $form->create('', array('action'=>'search'));
+        echo $form->input('Buscar', array('type'=>'text'));
+        echo $form->end('Buscar');             
+        ?>
+        </li>
+</ul>
 </div>

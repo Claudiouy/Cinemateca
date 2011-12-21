@@ -1,47 +1,26 @@
+<?php ini_set('memory_limit','128M');?>
 <div class="socios form">
-<?php echo $this->Form->create('Socio');?>
-
-    
-<h2 id="h2"><?php __('Asociacion en colectivo de Socios');?></h2>
-
-<p><?php
-echo $paginator->counter(array(
-'format' => __('Pag. %page% de %pages%, mostrando %current% registros de %count% en total, comenzando en registro %start%, finalizando en registro %end%', true)
-));
-?></p>        
-<table cellpadding="0" cellspacing="0">
-	<tr>
-			<th><?php echo $this->Paginator->sort('N° Socio');?></th>
-			<th><?php echo $this->Paginator->sort('Apellido, Nombre');?></th>
-                        <th><?php echo $this->Paginator->sort('Doc. Identidad');?></th>
-
-			<th class="actions"><?php __('Agrupar');?></th>
-	</tr>
-
-	<?php
-        $i = 0;
-        foreach ($onlyColectivos as $socio):
-		$class = null;
-		if ($i++ % 2 == 0) {
-			$class = ' class="altrow"';
-		}
+<div class="demo ui-widget ui-helper-clearfix">
+<ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+<?php
+      $i = 0;
+      foreach ($onlyColectivos as $socio):
+		
 	?>
-	<tr<?php echo $class;?>>
-		<td>
-                <?php echo $socio['Socio']['id']; ?>&nbsp;</td>
-		<td>
-                <?php echo $socio['Socio']['surname'].', ';?>
-                <?php echo $socio['Socio']['name'];?></td>
-                <td>
-                <?php echo $socio['Socio']['documento_identidad']; ?>&nbsp;</td>
+	<li class=ui-widget-content ui-corner-tr ui-draggable>
+	<h5 class="ui-widget-header">C.I:<?php echo $socio['Socio']['documento_identidad']; ?></h5>
+                <?php 
+                $url = $socio['Socio']['image_url'];?>
+<?php echo $this->Html->image('/app/webroot/'.$url, array('class'=>'sociosSeleccionados','id'=>$socio['Socio']['id'],'title'=>$socio['Socio']['surname'].", ".$socio['Socio']['name'], 'width'=>96, 'height'=>72));?>
 
-		<td class="actions">
-                    <?php echo $this->Form->checkbox('colectivo' ,array ('class'=>'sociosSeleccionados','id'=>$socio['Socio']['id'])); ?>
-
-		</td>
-	</tr>
-<?php endforeach; ?>
-	</table>
+	 </li>
+          
+             <?php endforeach; ?>
+</ul>
+<div id="agrupado" class="ui-widget-content ui-state-default">
+	<h4 class="ui-widget-header"><span class="ui-icon ui-icon-agrupado">agrupado</span> Agrupe aqui a los socios</h4>
+</div>
+</div>
 
     <div class="actions">
 <ul>
@@ -60,24 +39,14 @@ echo $paginator->counter(array(
 
 </ul>
     </div>
-    
-<div><p>
-<div class="paging">
-	<?php echo $paginator->prev('<< '.__('previa', true), array(), null, array('class'=>'disabled'));?>
- | 	<?php echo $paginator->numbers();?>
-	<?php echo $paginator->next(__('siguiente', true).' >>', array(), null, array('class' => 'disabled'));?>
 </div>
-</p>
-</div>	
-</div>
-
-
 <div class="actions">
 	<h3><?php __('Acciones'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Listar Socios', true), array('action' => 'index'));?></li>
-                <li><?php echo $this->Html->link(__('Nuevo Socio', true), array('action' => 'add')); ?></li>
-                <li><?php echo $this->Html->link(__('Menu Principal', true), array('controller'=>'pages','action' => 'home'));?></li>
+		<li><?php echo $this->Html->link(__('Listar', true), array('action' => 'index'));?></li>
+                <li><?php echo $this->Html->link(__('Nuevo', true), array('action' => 'add')); ?></li>
+                <li><?php echo $this->Html->link(__('Pagos', true), array('controller'=>'payments','action' =>'index'));?></li>
+                <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li>
 
                 <li>
                 <?php

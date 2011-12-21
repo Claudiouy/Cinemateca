@@ -10,7 +10,7 @@ echo $paginator->counter(array(
 ?></p>        
 <table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('N° Socio');?></th>
+			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('Apellido, Nombre');?></th>
                         <th><?php echo $this->Paginator->sort('Doc. Identidad');?></th>
                         <th><?php echo $this->Paginator->sort('Forma de Pago');?></th>
@@ -41,7 +41,6 @@ echo $paginator->counter(array(
                 <?php echo $socio['Suscription']['name']; ?>&nbsp;</td>
         
 		<td class="actions">
-                        <?php echo $this->Html->link(__('pdf', true), array('action' => 'contrato', $socio['Socio']['id'])); ?>	
 		        <?php echo $this->Html->link(__('Ver', true), array('action' => 'view', $socio['Socio']['id'])); ?>	
                         <?php echo $this->Html->link(__('Editar', true), array('action' => 'edit', $socio['Socio']['id'])); ?>
 			<?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $socio['Socio']['id']), null, sprintf(__('Esta Seguro de eliminar el Socio N° %s?', true), $socio['Socio']['id'])); ?>
@@ -64,11 +63,18 @@ echo $paginator->counter(array(
 <div class="actions">
 	<h3><?php __('Acciones'); ?></h3>
 	<ul>
+<<<<<<< HEAD:app/views/socios/index.ctp
 		<li><?php echo $this->Html->link(__('Nuevo Socio', true), array('action' => 'add')); ?></li>
                 <li><?php echo $this->Html->link(__('Colectivos de Socios', true), array('action' => 'colectivos'));?></li>
                 <li><?php echo $this->Html->link(__('Menu Principal', true), array('controller'=>'pages','action' => 'home'));?></li>
                 
 
+=======
+		<li><?php echo $this->Html->link(__('Nuevo', true), array('action' => 'add')); ?></li>
+                <li><?php echo $this->Html->link(__('Pagos', true), array('controller'=>'payments','action' =>'index'));?></li>
+                <li><?php echo $this->Html->link(__('Colectivos', true), array('action' => 'colectivos'));?></li>
+                <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li>
+>>>>>>> 2037c340ee58c4bc81346a236529c8a8d3e3d336:app/views/socios/index.ctp
                 <li>
                 <?php
                 echo $form->create('', array('action'=>'search'));

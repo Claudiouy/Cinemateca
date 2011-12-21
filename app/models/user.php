@@ -6,33 +6,32 @@ var $name = 'User';
 var $displayField = 'username';
 
 var $validate = array(
-		'username'=>array(
-			'El nombre de usuario debe contener entre 5 y 15 caracteres.'=>array(
-				'rule'=>array('between', 5, 15),
-				'message'=>'El nombre de usuario debe contener entre 5 y 15 caracteres.'
-			),
-			'Ese nombre de usuario ya esta en uso'=>array(
-				'rule'=>'isUnique',
-				'message'=>'Ese nombre de usuario ya esta en uso.'
-			)
-		),
+		'username' => array(
+			'between' => array(
+			'rule' => array('between', 5, 15),
+                        'message'=>'El nombre de usuario debe contener entre 5 y 15 caracteres.',
+			'last' => true),
+			'characters' => array(
+                        'rule' => array('custom', '/^[a-zA-Z0-9]*$/i'),
+			'last' => true),
+			'isUnique' => 'isUnique',
+                        'message'=>'Ese nombre de usuario ya esta en uso.',
+                        'last' => true),
+		
+
 		'password'=>array(
 			'La clave de usuario debe contener entre 5 y 15 caracteres.'=>array(
-				'rule'=>array('between', 5, 15),
-				'message'=>'La clave de usuario debe contener entre 5 y 15 caracteres.'
-			),
+			'rule'=>array('between', 5, 15),
+			'message'=>'La clave de usuario debe contener entre 5 y 15 caracteres.'	),
 			'Las claves no son iguales'=>array(
-				'rule'=>'matchPasswords',
-				'message'=>'Las claves no son iguales.'
-			)
-		
-		
-		)
-	);
+			'rule'=>'matchPasswords',
+			'message'=>'Las claves no son iguales.')
+                                )
+                    );
+	
 
 
-function matchPasswords($data)
-	{
+function matchPasswords($data)	{
     
 		if($data['password'] == $this->data['User']['password_confirmation'])
 		{

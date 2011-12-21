@@ -2,6 +2,7 @@ $j = jQuery.noConflict();
 
 
 $j(document).ready(function(){
+$j("#content form:first div.error:first input:first").focus(); 
 
     
     $j('.fadeOut').hide(6000);
@@ -72,6 +73,7 @@ $j(document).ready(function(){
              }
          });
          idsJoins = idsArray.join(',');
+         alert(idsJoins);
          return idsJoins;
     }
     
@@ -260,7 +262,7 @@ $j(document).ready(function(){
             type: "POST",
             url:  "/cake_primero/socios/asoc_colectivos",
             success: function(data){
-                window.location.href=window.location.href;
+               window.location.href=window.location.href;
               //  console.info(data);
             },
             error: function(miError){
@@ -269,6 +271,7 @@ $j(document).ready(function(){
          });
          
     });
+<<<<<<< HEAD:app/webroot/js/miJQuery.js
     
     function getSociosColectivos(){
 
@@ -409,6 +412,25 @@ $j(document).ready(function(){
              alert("La fecha de inicio debe ser anterior a la de fin");
          }
     }
+=======
+
+  
+    function getSociosColectivos(){
+  var idsArray = new Array();
+// Obtenemos el elemento con el id "agrupado"
+var agrupados = document.getElementById("agrupado");
+// todos los elementos con tag img que hay
+// dentro del elemento 'agrupado'
+socios = agrupados.getElementsByTagName('img');
+ for (var i=0; i<socios.length; i++) {
+   idsArray.push(socios[i].id);
+}
+idJoins = idsArray.join(',');
+  
+       return idJoins;
+
+}
+>>>>>>> 2037c340ee58c4bc81346a236529c8a8d3e3d336:app/webroot/js/miJQuery.js
 
     function graficar(myData, myLegend, myLegendTitle){
      
@@ -480,3 +502,16 @@ $j(document).ready(function(){
     }
 
 });
+
+//   function getPeliculasNoMarcadas(){
+//        
+//        var idsArray = new Array();
+//         
+//         $j(".peliculaSeleccionada").each(function(){
+//             
+//             if(!this.checked){
+//                 idsArray.push($j(this).attr("id"));
+//             }
+//         });
+//         idsJoins = idsArray.join(',');
+//         return idsJoins;

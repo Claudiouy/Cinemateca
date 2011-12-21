@@ -19,7 +19,7 @@
 	foreach ($onlyActive as $user):
 		$class = null;
 		if ($i++ % 2 == 0) {
-			$class = ' class="altrow"';
+			$class = 'class="altrow"';
 		}
 	?>
 	<tr<?php echo $class;?>>
@@ -28,6 +28,8 @@
 		<td><?php echo $user['User']['roles']; ?>&nbsp;</td>
 	
 		<td class="actions">
+			<?php echo $this->Html->link(__('pdf', true), array('action' => 'descargar', $user['User']['id'])); ?>
+
 			<?php echo $this->Html->link(__('Editar', true), array('action' => 'edit', $user['User']['id'])); ?>
 			<?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $user['User']['id']), null, sprintf(__('Esta Seguro de eliminar el usuario %s?', true), $user['User']['username'])); ?>
 		</td>

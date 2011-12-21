@@ -9,6 +9,7 @@
             <th><?php echo('Fecha');?></th>
             <th><?php echo('Comienzo');?></th>
             <th><?php echo('Proyeccion');?></th>
+            <th><?php echo('Precio');?></th>
             
             <th class="actions"><?php __('Acciones');?></th>
 	</tr>
@@ -20,6 +21,7 @@
 <td><?php echo $performance['Performance']['fecha']; ?>&nbsp;</td>
 <td><?php echo $performance['Performance']['hora_comienzo']; ?>&nbsp;</td>
 <td><?php echo $performance['Pelicula']['name']; ?>&nbsp;</td>  
+<td><?php echo $performance['Performance']['precio']; ?> $U &nbsp;</td>  
   
 
 <td class="actions">

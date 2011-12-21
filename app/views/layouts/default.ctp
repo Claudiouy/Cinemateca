@@ -20,9 +20,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-
 	<?php 
-           echo $this->Html->charset();
+echo $this->Html->charset();
            echo $this->Html->css('miCss.css');
            echo $this->Html->css('cake.generic.css');
            echo $this->Html->css('autocompleteui.css');
@@ -36,7 +35,10 @@
            echo $this->Html->script('jquery-ui-1.8.16.custom.min');
            echo $this->Html->script('jquery.ui.position');
            echo $this->Html->script('jquery.ui.widget');
-            echo $this->Html->script('jquery.ui.datepicker');
+             echo $this->Html->script('jquery.ui.mouse');
+                   echo $this->Html->script('jquery.ui.droppable');
+           echo $this->Html->script('jquery.ui.draggable');
+           echo $this->Html->script('jquery.ui.datepicker');
            echo $this->Html->script('application');
            
            //echo $this->Html->script('jquery.datePicker.js');
@@ -68,7 +70,7 @@
 	<div id="container">
 		<div id="header">
 
-			<div id="navbar"> <a href="/cake_primero/tickets/ticket_socio" target="_parent">Ingreso a sala</a> · <a href="/cake_primero/socios" target="_parent">Modulo socios</a> · <a href="/cake_primero/peliculas" target="_parent">Modulo peliculas</a> · <a href="/cake_primero/payments" target="_parent">Modulo de pagos</a> · <a href="" target="_parent">Reportes de caja</a> ·  <a href="http://www.cinemateca.org.uy/plus.html" target="_parent">Otros Modulos</a> </div>    
+			<div id="navbar"> <a href="/cake_primero/tickets/ticket_socio" target="_parent">Ingreso a sala</a> - <a href="/cake_primero/socios" target="_parent">Modulo socios</a> - <a href="/cake_primero/peliculas" target="_parent">Modulo peliculas</a> - <a href="/cake_primero/payments" target="_parent">Modulo de pagos</a> - <a href="" target="_parent">Reportes de caja</a> -  <a href="http://www.cinemateca.org.uy/plus.html" target="_parent">Otros Modulos</a> </div>    
 
 
 		</div>
@@ -76,7 +78,7 @@
                         
                     <div id="user-nav">
 <?php if ($logged_in):?>
-                        Bienvenido <?php echo $users_username;?>&nbsp;-<?php echo $users_userRol;?>-&nbsp;<?php echo $html->link('Cerrar Sesión', array('controller'=>'users','action'=>'logout'));?>
+                        Bienvenido <?php echo $users_username;?>&nbsp;-<?php echo $users_userRol;?>-&nbsp;<?php echo $html->link('Cerrar Sesi�n', array('controller'=>'users','action'=>'logout'));?>
                         <?php else: ?>
     <?php echo $html->link('Registro', array('controller'=>'users','action'=>'add'));?> o 
                         <?php echo $html->link('Login', array('controller'=>'users','action'=>'login'));?>
@@ -93,7 +95,7 @@
 		</div>
 		<div id="footer">
 
-			<div id="navbar"> <a href="/cake_primero/tickets/ticket_socio" target="_parent">Ingreso a sala</a> · <a href="/cake_primero/socios" target="_parent">Modulo socios</a> · <a href="/cake_primero/peliculas" target="_parent">Modulo peliculas</a> · <a href="/cake_primero/payments" target="_parent">Modulo de pagos</a> · <a href="" target="_parent">Reportes de caja</a> ·  <a href="http://www.cinemateca.org.uy/plus.html" target="_parent">Otros Modulos</a> </div>    
+			<div id="navbar"> <a href="/cake_primero/tickets/ticket_socio" target="_parent">Ingreso a sala</a> - <a href="/cake_primero/socios" target="_parent">Modulo socios</a> - <a href="/cake_primero/peliculas" target="_parent">Modulo peliculas</a> - <a href="/cake_primero/payments" target="_parent">Modulo de pagos</a> - <a href="" target="_parent">Reportes de caja</a> - <a href="http://www.cinemateca.org.uy/plus.html" target="_parent">Otros Modulos</a> </div>    
 
 		</div>
 	</div>

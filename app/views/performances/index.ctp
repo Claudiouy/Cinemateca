@@ -9,13 +9,12 @@ echo $paginator->counter(array(
 ?></p>        
 <table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('N° Funcion');?></th>
-			<th><?php echo $this->Paginator->sort('Sala');?></th>
+			<th><?php echo $this->Paginator->sort('id');?></th>
+<!--			<th><?php echo $this->Paginator->sort('Sala');?></th>-->
                         <th><?php echo $this->Paginator->sort('Fecha');?></th>
                         <th><?php echo $this->Paginator->sort('Hora Comienzo');?></th>
                         <th><?php echo $this->Paginator->sort('Proyeccion');?></th>
                         <th><?php echo $this->Paginator->sort('Estreno?');?></th>
-
 			<th class="actions"><?php __('Acciones');?></th>
 	</tr>
 	<?php
@@ -28,7 +27,7 @@ echo $paginator->counter(array(
 	?>
 	<tr<?php echo $class;?>>
 	<td><?php echo $performance['Performance']['id']; ?>&nbsp;</td>
-	<td><?php echo $performance['Sala']['name'];?>&nbsp</td>
+<!--	<td><?php echo $performance['Sala']['name'];?>&nbsp</td>-->
         <td><?php echo $performance['Performance']['fecha'];?>&nbsp</td>
 	<td><?php echo $performance['Performance']['hora_comienzo']; ?>&nbsp;</td>
         <td><?php echo $performance['Pelicula']['name']; ?>&nbsp;</td>
@@ -60,12 +59,6 @@ echo $paginator->counter(array(
 	<ul>
 		<li><?php echo $this->Html->link(__('Nueva Funcion', true), array('action' => 'add')); ?></li>
                 <li><?php echo $this->Html->link(__('Menu Principal', true), array('controller'=>'pages','action' => 'home'));?></li></ul>
-
-                <?php
-                echo $form->create('', array('action'=>'search'));
-                echo $form->input('Buscar', array('type'=>'text'));
-                echo $form->end('Buscar');             
-                ?>
-                </li>
+  
 	</ul>
 </div>
