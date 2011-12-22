@@ -62,6 +62,12 @@ class PagesController extends AppController {
  * @access public
  */
 	function display() {
+            
+                //$this->loadModel('Sala');
+                //$mySalas = $this->Sala->find('all');
+                //var_dump($mySalas);
+                 
+                //$this->set('allSalas', $mySalas);
 		$path = func_get_args();
 
 		$count = count($path);
@@ -82,4 +88,5 @@ class PagesController extends AppController {
 		$this->set(compact('page', 'subpage', 'title_for_layout'));
 		$this->render(implode('/', $path));
 	}
+        
 }

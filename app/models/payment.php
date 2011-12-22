@@ -8,7 +8,7 @@
 class Payment extends AppModel{
     var $name = 'Payment';
     var $belongsTo = 'Socio';
-    
+    var $actsAs = array('UtilDate');
     
    /* public function getSocio($socioId){
         $this->loadModel('Socio');
@@ -42,13 +42,13 @@ class Payment extends AppModel{
         
         $canceledOk = false;
         $paymentToCancel = $this->findById($paymentId);
-        $data = array('Payment' => array('socio_id' => $paymentToCancel['Payment']['socio_id'] , 'amount' => ($paymentToCancel['Payment']['amount'] * -1), 'id_canceled' => $paymentToCancel['Payment']['id'] ));
-
+        
         $fields = array('Payment.canceled' => 1);
         $conditions = array('Payment.id' => $paymentId);
         
         $okUpdated = $this->updateAll($fields, $conditions);
         $this->create();
+        $data = array('Payment' => array('socio_id' => $paymentToCancel['Payment']['socio_id'] , 'amount' => ($paymentToCancel['Payment']['amount'] * -1), 'id_canceled' => $paymentToCancel['Payment']['id'], 'created' => date('Y-m-d-H-i-s')));
         $okCreatedCanceled = $this->save($data);
         $canceledOk = $okUpdated && $okCreatedCanceled;
         return $canceledOk;
@@ -85,8 +85,50 @@ class Payment extends AppModel{
         
         return $listOfPayments;
     }
-
     
+    public function cGetMonthCount(){
+        // revisar si se puede hacer un group by para traer los datos
+        
+        $conditions = array('Payment.created >= ' => '2011-01-01');
+
+        $listOfPaymentsDate = $this->find('all', array('conditions' => $conditions));
+        return $listOfPaymentsDate;
+    }
+    
+    public function cPaymentChart(){
+        
+         $listP = $this->cGetMonthCount();
+    }
+    
+    public function cGetFilteredPayments( $nameSocio, $lastNameSocio, $ciSocio, $amountPayment ){
+        
+        $this->recursive = 1;
+        $innerConditions = array('Payment.deleted = ' => 0);
+
+        if(!empty($nameSocio)){
+            $sociosByNameCondition = array('Socio.name LIKE' => '%'.$nameSocio.'%');                
+            $innerConditions = array_merge($innerConditions, $sociosByNameCondition);            
+        }
+
+        if(!empty($lastNameSocio)){
+            $sociosByLastNameCondition =  array('Socio.surname LIKE' => '%'.$lastNameSocio.'%');
+            $innerConditions = array_merge($innerConditions, $sociosByLastNameCondition);            
+        }
+
+        if(!empty($ciSocio)){
+            $socioByCiCondition = array('Socio.documento_identidad = ' => $ciSocio);
+            $innerConditions = array_merge($innerConditions, $socioByCiCondition);                           
+        }
+
+        if(!empty($amountPayment)){
+            $amountCondition = array('Payment.amount = ' => $amountPayment);
+            $innerConditions = array_merge($innerConditions, $amountCondition);
+        }
+        
+        //$paymentsByFilters = array();
+        //$paymentsByFilters = $this->find('all', array('conditions' => $innerConditions));
+        return $innerConditions;
+    }
    
     
 }

@@ -40,6 +40,9 @@
                   <?php  $i++;  }
                       echo '</div>';
                   }
+                  else{
+                      echo 'No hay películas con esos datos';
+                  }
                 ?> 
                 <input style="width:50%" type="button" value="Activar seleccionadas" id="activarPeliculasSeleccionadas" />
            </ul>         

@@ -29,9 +29,21 @@ class PaymentsController extends AppController{
     }*/
     
     function index(){
-        $this->Payment->recursive = 0;
+        $this->Payment->recursive = 1;
         $conditions = array('Payment.deleted = ' => 0);
         $this->set('allPayments', $this->paginate('Payment', $conditions));
+    }
+    
+    function payment_filters_method(){
+        if(!empty($this->data['Payment'])){
+            $this->autoRender = false;
+            $my_data = $this->data['Payment'];        
+            $filteredList = $this->Payment->cGetFilteredPayments( $my_data['nameSocioOfPayment'], $my_data['lastNameSocioOfPayment'], $my_data['ciSocioOfPayment'], $my_data['amountOfPayment']);
+            $this->set('allPayments', $this->paginate('Payment', $filteredList));
+            $this->render('index');          
+            return false;
+        }
+        $this->redirect('/payments');
     }
     
     function detail(){
@@ -102,8 +114,20 @@ class PaymentsController extends AppController{
     function cancel_payment(){
         
         if(!empty($this->params['pass']['0'])){
+            $this->loadModel('Socio');
             $payment_id_to_cancel = $this->params['pass']['0'];
             if($this->Payment->cCancelPayment($payment_id_to_cancel)){
+                
+                //Baja la fecha de vigencia de pago del socio
+                $my_payment = $this->Payment->findById($payment_id_to_cancel);
+                $id_of_socio = $my_payment['Socio']['id'];
+                $number_of_quotas = $my_payment['Payment']['numbers_quotas'];
+                $this->loadModel('Suscription');
+                $my_socio = $this->Socio->findById($id_of_socio);
+                $my_suscription = $this->Suscription->findById($my_socio['Socio']['suscription_id']);
+                $month_size = $number_of_quotas * $my_suscription['Suscription']['length_months'];
+                
+                $this->Socio->reduceEffectiveDate($id_of_socio, $month_size);
                 $this->Session->setFlash('El pago se anuló correctamente');
             }
             else{
@@ -121,9 +145,8 @@ class PaymentsController extends AppController{
             $this->loadModel('Socio');
             $this->Payment->recursive = 1;
             $conditions = array('OR' => array('Socio.name LIKE' => '%'.$socioName.'%',
-                                                'Socio.surname LIKE' => '%'.$socioName.'%'));
-            //$conditions = array('Socio.id' => 1);
-            //$conditions = 'Socio.apellido LIKE %'.$socioName.'%';
+                                                'Socio.surname LIKE' => '%'.$socioName.'%',
+                                                 'Socio.documento_identidad' => $socioName));
                                                 
             $socioList = $this->Socio->find('all', array('conditions' => $conditions));
             //var_dump($socioList);
@@ -182,6 +205,7 @@ class PaymentsController extends AppController{
         $this->redirect('/payments/new_payment');
     }
     
+    /*
     function payment_filters(){
         
         if(!empty($_POST["nameSocio"]) || !empty($_POST["lastNameSocio"]) || !empty($_POST["ciSocio"]) || !empty($_POST["amountPayment"])){
@@ -220,6 +244,42 @@ class PaymentsController extends AppController{
             }
         }
         
+    }*/
+    
+    
+    
+    function charts(){
+        
+    }
+    
+    /*
+     * Distintos tipos de graficas
+     */
+    
+    function retrievePaymentsDataChart(){
+        
+        if(!empty($_POST)){
+          $dateFrom = date('Y-m-d', strtotime($_POST['dateFrom']));
+          $dateTo = date('Y-m-d', strtotime($_POST['dateTo']));
+        }
+        $legendArray = $this->Payment->get_legend_data($dateFrom,  $dateTo);
+        $dataArray = $this->Payment->get_data_array($dateFrom,  $dateTo, null);
+        $this->set('data', $dataArray);
+        $this->set('legend', $legendArray);
+        $this->render('/elements/empty_layout');
+    }
+    
+     function retrievePaymentsAmountDataChart(){
+        
+        if(!empty($_POST)){
+          $dateFrom = date('Y-m-d', strtotime($_POST['dateFrom']));
+          $dateTo = date('Y-m-d', strtotime($_POST['dateTo']));
+        }
+        $legendArray = $this->Payment->get_legend_data($dateFrom,  $dateTo);
+        $dataArray = $this->Payment->get_data_array($dateFrom,  $dateTo, 'amount');
+        $this->set('data', $dataArray);
+        $this->set('legend', $legendArray);
+        $this->render('/elements/empty_layout');
     }
     
 }

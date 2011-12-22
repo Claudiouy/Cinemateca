@@ -101,5 +101,3 @@ echo $this->Html->link('Salas', array(
 </li>
 
 </ul>
-</div>
-</div>

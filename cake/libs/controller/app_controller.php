@@ -33,7 +33,7 @@
  * @link http://book.cakephp.org/view/957/The-App-Controller
  */
 class AppController extends Controller {    
-    
+    /*
     var $components = array('Acl');
     
     function beforeFilter(){
@@ -51,7 +51,8 @@ class AppController extends Controller {
                 $this->redirect("/pages/permission_denied"); 
             } 
         } 
-    }
+    }*/
+            
      
     
 }

@@ -39,7 +39,7 @@ class SuscriptionsController extends AppController{
     
     function edit_suscription_proccess(){
         if(!empty($this->data['Suscription'])){
-            $correctly_updated = $this->Suscription->cUpdateSuscription($this->data['Suscription']['id'], $this->data['Suscription']['name'], $this->data['Suscription']['description'], $this->data['Suscription']['repeats_by_year']);
+            $correctly_updated = $this->Suscription->cUpdateSuscription($this->data['Suscription']['id'], $this->data['Suscription']['name'], $this->data['Suscription']['description'], $this->data['Suscription']['length_months']);
             if($correctly_updated){
                 $this->Session->setFlash('La suscripción se guardó correctamente', 'default');
                 $this->redirect('/suscriptions');
