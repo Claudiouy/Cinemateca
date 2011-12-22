@@ -1,7 +1,7 @@
 <?php
 class State extends AppModel {
 var $name = 'State';
-var $hasMany = array('Director','Socio');
+//var $hasMany = array('Director','Socio');
 	
 
 }

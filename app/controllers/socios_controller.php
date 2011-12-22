@@ -1,12 +1,14 @@
 <?php
 class SociosController extends AppController {
-
 var $name =  'Socios';
 var $components = array('RequestHandler');
 var $helpers = array('Html','Form');
 
 public function index(){
-   
+//ini_set('memory_limit','128M');
+
+$cantidad =  $this->Socio->find('count', array('conditions' => array('Socio.colectivo' => 1))); 
+$this->set('cantidad', $cantidad);
 $this->paginate = array (
             'order' => array ('Socio.id' => 'DESC'),
             'limit'=> 5,
@@ -19,6 +21,9 @@ $this->set(compact('onlyActive'));
 
 }
 function edit($id = null) {
+$cantidad =  $this->Socio->find('count', array('conditions' => array('Socio.colectivo' => 1))); 
+$this->set('cantidad', $cantidad);    
+
 $this->loadModel('State'); 
 $list_state = $this->State->find('list', array('order' => 'State.id ASC'));
 $this->set('list_state', $list_state);
@@ -38,18 +43,27 @@ $list_cc = $this->Creditcard->find('list', array('order' => 'Creditcard.id ASC')
 $this->set('list_cc', $list_cc);
 
 /*
-aca hay que agregar a los socios colectivos. * 
+Si esta asociado en forma colectiva. * 
  */
-//$list_colectivos = $this->Socio->find('list', array('fields' => array('Socio.', 'User.first_name', 'User.group'));
+$socio = $this->Socio->findById(($id));
+$idColec = $socio['Socio']['colectivo'];
+if($idColec!= 0 && $idColec!= 1 ){
+$colec = $this->Socio->findAllByColectivo($idColec);
+$this->set('colec',$colec);
 
-$this->set('list_pay_method', $list_pay_method);
+}else {$this->set('colec',null);}
+
+
 
 if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Socio Invalido', true));
+
+    $this->Session->setFlash(__('Socio Invalido', true));
 			$this->redirect(array('action' => 'index'));
 		}
 if (!empty($this->data)) {
-		$fileOK = $this->uploadFiles('img/files', $this->data['File']);
+
+    
+    $fileOK = $this->uploadFiles('img/files', $this->data['File']);
                 
 if(array_key_exists('urls', $fileOK)) {
 // save the url in the form data
@@ -66,6 +80,20 @@ if (empty($this->data)) {
 		$this->data = $this->Socio->read(null, $id);
 		}
 	}
+function bajarColectivo ($id = null){
+    if (!$id) {
+			$this->Session->setFlash('ID de Socio No Valido', 'flashmsg/flash_bad');
+			$this->redirect(array('action'=>'index'));
+		}
+		if ($this->Socio->saveField('colectivo', 0)) {
+
+                    
+			$this->Session->setFlash('Socio N° '.$id.' ha sido dado de Baja del Colectivo', 'flashmsg/flash_good');
+			$this->redirect(array('action'=>'index'));
+		}
+		$this->Session->setFlash('El socio no ha podido ser dado de Baja del Colectivo', 'flashmsg/flash_warning');
+		$this->redirect(array('action' => 'index'));
+}
 function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash('ID de Socio No Valido', 'flashmsg/flash_bad');
@@ -81,7 +109,8 @@ function delete($id = null) {
 		$this->redirect(array('action' => 'index'));
 	}
 function add(){
-  
+ $cantidad =  $this->Socio->find('count', array('conditions' => array('Socio.colectivo' => 1))); 
+ $this->set('cantidad', $cantidad);  
 $this->loadModel('State'); 
 $list_state = $this->State->find('list', array('order' => 'State.id ASC'));
 $this->set('list_state', $list_state);
@@ -175,7 +204,8 @@ $i++;
 		}
 	}
 function view($id = null){    
-    
+ $cantidad =  $this->Socio->find('count', array('conditions' => array('Socio.colectivo' => 1))); 
+ $this->set('cantidad', $cantidad);
     $activo = $this->Socio->findById($id, array( 
         'fields' =>'Socio.estado',
         'recursive' => 0));
@@ -206,7 +236,21 @@ function activar($id = null) {
 		$this->redirect(array('action' => 'index'));
 	}
 function contrato($id = null) {
- Configure::write('debug',0);
+ini_set('memory_limit','128M');
+
+Configure::write('debug',0);   
+$socio = $this->Socio->findById(($id));
+$idColec = $socio['Socio']['colectivo'];
+if($idColec!= 0 && $idColec!= 1 ){
+   
+$colec= $this->Socio->find('all',
+                  array('conditions'=>array('Socio.colectivo'=>$idColec),
+                        //'fields'=>'Socio.id','Socio.name','Socio.surname','Socio.documento_identidad',
+                     'recursive'=>-1));
+$this->set('colec',$colec);
+}else {$this->set('colec',null);}
+
+
     $estado = $this->Socio->findById($id, array( 
         'fields' =>'Socio.estado',
         'recursive' => 0    ));
@@ -223,8 +267,40 @@ $this->layout = 'pdf'; //esto usara el layout pdf.ctp
         
         
         }
+function tarjetaidentidad ($id = null){
+           ini_set('memory_limit','128M');
+
+Configure::write('debug',0);    
+if(!$id){ 
+ $this->Session->setFlash('ID de Socio No Valido', 'flashmsg/flash_bad');
+$this->redirect(array('action'=>'index'));  
+}else{
+$this->Socio->id = $id;
+$this->set('socio', $this->Socio->read());
+$this->layout = 'pdf'; //esto usara el layout pdf.ctp
+        $this->render();
+        
+}   
+
+
+}
+        
 function detalle_completo($id = null) {
- Configure::write('debug',0);
+ini_set('memory_limit','128M');
+
+Configure::write('debug',0);   
+$socio = $this->Socio->findById(($id));
+$idColec = $socio['Socio']['colectivo'];
+if($idColec!= 0 && $idColec!= 1 ){
+   
+$colec= $this->Socio->find('all',
+                  array('conditions'=>array('Socio.colectivo'=>$idColec),
+                        //'fields'=>'Socio.id','Socio.name','Socio.surname','Socio.documento_identidad',
+                     'recursive'=>-1));
+$this->set('colec',$colec);
+}else {$this->set('colec',null);}
+
+
     $estado = $this->Socio->findById($id, array( 
         'fields' =>'Socio.estado',
         'recursive' => 0    ));
@@ -243,9 +319,9 @@ $this->layout = 'pdf'; //esto usara el layout pdf.ctp
         }
 function asoc_colectivos(){
  
-$cantidad =  $this->Socio->find('count', array('conditions' => array('Socio.colectivo' => 1)));
-
-if($cantidad > 1){
+//$cantidad =  $this->Socio->find('count', array('conditions' => array('Socio.colectivo' => 1)));
+//
+//if($cantidad > 1){
      
 $this->loadModel('Colectivo'); 
 $this->Colectivo->save();
@@ -285,15 +361,18 @@ $this->Session->setFlash('No fue posible armar dicho colectivo.', '/flashmsg/fla
                     			$this->redirect(array('action' => 'index'));
 
 
-}else{
-$this->Session->setFlash('Para Asociaciones Colectivas: Deben de haber un MINIMO de 2 SOCIOS COLECTIVOS para agrupar.
-   Al momento hay : '.$cantidad, 'flashmsg/flash_warning');
-$this->redirect(array('action' => 'index'));
-}    
+//}else{
+//$this->Session->setFlash('Para Asociaciones Colectivas: Deben de haber un MINIMO de 2 SOCIOS COLECTIVOS para agrupar.
+//   Al momento hay : '.$cantidad, 'flashmsg/flash_warning');
+//$this->redirect(array('action' => 'index'));
+//}    
  
 
 }
+
+
 function colectivos (){
+//ini_set('memory_limit','128M');
 $cantidad =  $this->Socio->find('count', array('conditions' => array('Socio.colectivo' => 1)));
 
 if($cantidad > 1){  
@@ -312,6 +391,7 @@ $this->redirect(array('action' => 'index'));
 }
 }
 function search(){
+//ini_set('memory_limit','128M');
 
 $search = $this->data['Socio']['Buscar'];
 

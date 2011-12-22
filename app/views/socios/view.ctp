@@ -1,4 +1,3 @@
-<?php ini_set('memory_limit','16M');?>
 <div class="socios view">
     
 	<h2 id="h2"><?php __('Socios');?></h2>
@@ -48,6 +47,7 @@ if($socio['Socio']['estado']== 0){
         }else{
 
          echo $this->Html->link(__('Editar', true), array('action' => 'edit', $socio['Socio']['id'])); 
+         echo $this->Html->link(__('Tarjeta', true), array('action' => 'tarjetaidentidad', $socio['Socio']['id']));
          echo $this->Html->link(__('Contrato', true), array('action' => 'contrato', $socio['Socio']['id']));
          echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $socio['Socio']['id']), null, sprintf(__('Esta Seguro de eliminar al socio N° %s?', true), $socio['Socio']['id'])); 
          }
@@ -66,7 +66,7 @@ if($socio['Socio']['estado']== 0){
         <li><?php echo $this->Html->link(__('Nuevo', true), array('action' => 'add')); ?></li>
         <li><?php echo $this->Html->link(__('Listado', true), array('action' => 'index'));?></li>
         <li><?php echo $this->Html->link(__('Pagos', true), array('controller'=>'payments','action' =>'retrieveSocioById/'.$socio['Socio']['id']));?></li>
-        <li><?php echo $this->Html->link(__('Colectivo', true), array('action' => 'colectivos'));?></li>
+        <?php if($cantidad > 1){?><li><?php echo $this->Html->link(__('Colectivos', true), array('action' => 'colectivos'));?></li> <?php }?>
         <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li>
 
         <li>

@@ -1,4 +1,4 @@
-<div class="users index">
+<div class="users view">
     
 	<h2 id="h2"><?php __('Usuarios');?></h2>
         

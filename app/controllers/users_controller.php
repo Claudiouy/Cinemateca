@@ -54,7 +54,7 @@ function inicio(){
 
  function view($id = null) {
         if(!$id){
-        $this->Session->setFlash(__('Usuario no valido',true));
+        $this->Session->setFlash('Usuario no Valido.', '/flashmsg/flash_bad');
         $this->redirect(array('action'=>'index'));
         }
                 
@@ -69,12 +69,12 @@ function inicio(){
 			
 			if ($this->User->save($this->data)) 
 			{
-				$this->Session->setFlash(__('El usuario ha sido guardado', true));
+				$this->Session->setFlash('El usuario ha sido dado de Alta.', '/flashmsg/flash_good');
 				$this->redirect(array('action' => 'index'));
 			} 
 			else 
 			{
-				$this->Session->setFlash(__('El usuario no ha sido guardado, intentelo otra vez.', true));
+				$this->Session->setFlash('El usuario no ha sido guardado, intentelo otra vez', '/flashmsg/flash_bad');
 			}
 		}
 	}
@@ -88,38 +88,28 @@ if (empty($this->data)) {
 $this->data = $this->User->find(array('User.id' => $id));
 } else {
 if ($this->User->save($this->data)) {
-$this->Session->setFlash('El Usuario ha sido salvado');
+$this->Session->setFlash('El Usuario ha sido salvado', '/flashmsg/flash_good');
 $this->redirect(array('action'=>'index'), null, true);
 } else {
-$this->Session->setFlash('El usuario no ha sido guardado, intentelo otra vez');
+$this->Session->setFlash('El usuario no ha sido guardado, intentelo otra vez', '/flashmsg/flash_warning');
 }
 }
 }
 
  function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('ID de Usuario No Valido', true));
+			$this->Session->setFlash('ID de usuario no valido', '/flashmsg/flash_bad');
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->User->saveField('estado', 'False')) {
                     
-			$this->Session->setFlash(__('Usuario dado de Baja', true));
+			$this->Session->setFlash('El usuario no ha sido desactivado.', '/flashmsg/flash_info');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(__('El usuario no ha podido ser dado de Baja', true));
+		$this->Session->setFlash('El usuario no ha podido darse de baja.', '/flashmsg/flash_info');
 		$this->redirect(array('action' => 'index'));
 	}
 
-function descargar($id = null){
-if (!$id) {
-Configure::write('debug',0); // Otherwise we cannot use this method while developing 
-
-$this->Session->setFlash('Sorry, there was no PDF selected.');
-$this->redirect(array('action'=>'index'), null, true);
-}
-$this->layout = 'pdf'; //this will use the pdf.ctp layout
-$this->render();
-}
 }
 
 ?>

@@ -211,41 +211,7 @@ $j("#content form:first div.error:first input:first").focus();
 //----------------------Socios------------------------
 
 
-$("#asociarSociosColectivos").live('click', function(){
-        
-         var idsJoins = getSociosColectivos();
-         
-         $.ajax({
-            data: "idSelec=" + idsJoins,
-            type: "POST",
-            url:  "/cake_primero/socios/asoc_colectivos",
-            success: function(data){
-               window.location.href=window.location.href;
-              //  console.info(data);
-            },
-            error: function(miError){
-               //console.info(miError.statusText);
-            }
-         });
-         
-    });
 
-  
-    function getSociosColectivos(){
-  var idsArray = new Array();
-// Obtenemos el elemento con el id "agrupado"
-var agrupados = document.getElementById("agrupado");
-// todos los elementos con tag img que hay
-// dentro del elemento 'agrupado'
-socios = agrupados.getElementsByTagName('img');
- for (var i=0; i<socios.length; i++) {
-   idsArray.push(socios[i].id);
-}
-idJoins = idsArray.join(',');
-  
-       return idJoins;
-
-}
 
 
 });

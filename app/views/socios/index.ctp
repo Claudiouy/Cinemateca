@@ -1,6 +1,4 @@
-<?php ini_set('memory_limit','128M');?>
 <div class="socios index">
-   
 <h2 id="h2"><?php __('Socios');?></h2>
 
 <p><?php
@@ -65,7 +63,7 @@ echo $paginator->counter(array(
 	<ul>
 		<li><?php echo $this->Html->link(__('Nuevo', true), array('action' => 'add')); ?></li>
                 <li><?php echo $this->Html->link(__('Pagos', true), array('controller'=>'payments','action' =>'index'));?></li>
-                <li><?php echo $this->Html->link(__('Colectivos', true), array('action' => 'colectivos'));?></li>
+                <?php if($cantidad > 1){?><li><?php echo $this->Html->link(__('Colectivos', true), array('action' => 'colectivos'));?></li> <?php }?>
                 <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li>
                 <li>
                 <?php

@@ -65,7 +65,7 @@ echo $this->Form->radio('colectivo',$options,$attributes);
 	<ul>
  <?php if($admin): ?>
 <li><?php echo $this->Html->link(__('Listado', true), array('action' => 'index'));?></li>
-<li><?php echo $this->Html->link(__('Colectivo', true), array('action' => 'colectivos'));?></li>
+<?php if($cantidad > 1){?><li><?php echo $this->Html->link(__('Colectivos', true), array('action' => 'colectivos'));?></li> <?php }?>
  <?php endif; ?>
 <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li>
 

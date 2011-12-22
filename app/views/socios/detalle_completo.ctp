@@ -1,8 +1,8 @@
 <?php
-ini_set('memory_limit','128M');
 require_once('app'.DS.'vendors'.DS.'tcpdf'.DS.'config'.DS.'lang'.DS.'spa.php');
 //require_once('app\vendors\tcpdf\tcpdf.php');
 require_once('app'.DS.'vendors'.DS.'xtcpdf.php');
+  
 
 
 // create new PDF document
@@ -160,15 +160,35 @@ $text='Email : '.$socio['Socio']['email'];
 $pdf->SetFillColor(220, 255, 220);
 $pdf->MultiCell(0, 0,$text, 1, 'L', 1, 0, '', '', true);
 $pdf->Ln(10);
-
+//Colectivos
 
 $text = 'Afiliado en forma : ';
 
-if($socio['Socio']['colectivo']== 0) $text.='"Individual"'; else $text = $text.'"Colectiva"'; 
+if(!empty ($colec)){
+$pdf->writeHTML('Colectivo conformado por :', '','', '', '', 'L');
+$pdf->Ln(3);
+//Column titles
+$header = array('Socio Id', 'Apellido', 'Nombre', 'Doc. Identidad');
+
+$pdf->Ln(3);
+
+// print colored table
+$pdf->ColoredTable($header, $colec);
+$pdf->Ln(10);
+ } else {
+     
+$text = 'Esta afiliación se realiza en forma ';
+
+if($socio['Socio']['colectivo']== 0) $text.='INDIVIDUAL'; else $text = $text.'colectiva, resta agrupar miembros'; 
 
 $pdf->SetFillColor(220, 255, 220);
 $pdf->MultiCell(0, 0,$text, 1, 'L', 1, 0, '', '', true);
-$pdf->Ln(10);
+$pdf->Ln(8);
+}
+
+
+$pdf->setTextRenderingMode($stroke=0, $fill=true, $clip=false);
+$pdf->SetFont('helvetica', '', 12);
 
 //forma de pago
 
@@ -177,12 +197,6 @@ $pdf->SetFillColor(220, 255, 220);
 $pdf->MultiCell(0, 0,$text, 1, 'L', 1, 0, '', '', true);
 $pdf->Ln(10);
 
-//Direccion cobro
-
-$text='Dirección de Cobro : '.$socio['Socio']['calle_cobro'];
-$pdf->SetFillColor(220, 255, 220);
-$pdf->MultiCell(0, 0,$text, 1, 'L', 1, 0, '', '', true);
-$pdf->Ln(12);
 
 if($socio['Socio']['payment_method_id']== 2){
 //Datos de la tarjeta de credito.
@@ -192,6 +206,12 @@ $pdf->MultiCell(0, 0,$text, 1, 'L', 1, 0, '', '', true);
 $pdf->Ln(10);
     
 } 
+//Direccion cobro
+
+$text='Dirección de Cobro : '.$socio['Socio']['calle_cobro'];
+$pdf->SetFillColor(220, 255, 220);
+$pdf->MultiCell(0, 0,$text, 1, 'L', 1, 0, '', '', true);
+$pdf->Ln(12);
 
 // EAN 13
 $style = array(
@@ -215,7 +235,7 @@ $pdf->write1DBarcode($socio['Socio']['documento_identidad'], 'EAN13', '', '', ''
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('contrato'.$socio['Socio']['id'].'.pdf', 'D');
+$pdf->Output('ficha'.$socio['Socio']['id'].'.pdf', 'D');
 
 //============================================================+
 // END OF FILE

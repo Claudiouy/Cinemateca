@@ -7,8 +7,8 @@
 
 <?php
 $current_year = date('Y');
-$max_year = $current_year + 10;
-$min_year = $current_year - 2;
+$max_year = $current_year + 1;
+$min_year = $current_year;
 
 echo $form->hidden('Performance.id');
 echo $form->input('Sala.id', array('type' => 'select', 'class'=>'select','label'=>'Sala:', 'options'=>$list_salas, 'empty'=>FALSE));

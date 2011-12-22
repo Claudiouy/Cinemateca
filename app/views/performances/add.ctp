@@ -7,12 +7,12 @@
 
 <?php
 $current_year = date('Y');
-$max_year = $current_year + 10;
-$min_year = $current_year - 2;
+$max_year = $current_year + 1;
+$min_year = $current_year;
 
 echo $form->hidden('id');
 echo $form->input('Sala.id', array('type' => 'select', 'class'=>'select','label'=>'Sala:', 'options'=>$list_salas));
-echo $form->input('Performance.fecha', array( 'minYear'=>$min_year, 'maxYear'=>$max_year));
+echo $form->input('Performance.fecha', array( 'minYear' => $min_year, 'maxYear'=>$max_year));
 echo $form->input('Performance.hora_comienzo', array('timeFormat'=>24, 'label'=>'Hora Comienzo:'));
 echo $form->input('Pelicula.id', array('type' => 'select', 'class'=>'select','label'=>'Pelicula:', 'options'=>$list_pelis));
 echo $form->input('Performance.precio', array('label'=>'Precio Funcion:'));

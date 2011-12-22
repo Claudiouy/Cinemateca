@@ -10,7 +10,9 @@
             echo $form->create('Actor', array('action' => 'new_actor'));
             echo $this->Form->input('name', array('label' => 'Nombre'));
             echo $this->Form->input('lastname', array('label' => 'Apellido'));
-            echo $this->Form->input('birthdate', array('type' => 'date', 'label' => 'Fecha de nacimento'));
+            echo $form->input('birthdate',array('label' => 'Fecha de nacimento','maxYear' => date('Y', strtotime('+  0 years')),
+                                  'minYear' => date('Y', strtotime('- 200 years')
+                          )));
             echo $this->Form->end('Guardar');
         
         ?>
