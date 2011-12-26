@@ -1,4 +1,3 @@
-<?php ini_set('memory_limit','128M');?>
 <div class="socios form">
 <div class="demo ui-widget ui-helper-clearfix">
 <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">

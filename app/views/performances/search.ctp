@@ -22,7 +22,9 @@ echo $paginator->counter(array(
 	</tr>
 	<?php
 	$i = 0;
+       // debug($performances);
 	foreach ($performances as $performance):
+           
 		$class = null;
 		if ($i++ % 2 == 0) {
 			$class = ' class="altrow"';
@@ -71,12 +73,5 @@ $performance['Performance']['id']));?></td>
         <li><?php echo $this->Html->link(__('Listado', true), array('action' => 'index'));?></li>
         <li><?php echo $this->Html->link(__('Colectivo', true), array('action' => 'colectivos'));?></li>
 
-        <li>
-        <?php
-        echo $form->create('', array('action'=>'search'));
-        echo $form->input('Buscar', array('type'=>'text'));
-        echo $form->end('Buscar');             
-        ?>
-        </li>
 </ul>
 </div>

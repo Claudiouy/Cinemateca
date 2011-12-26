@@ -46,7 +46,7 @@ $listado = $this->State->find('list', array('order' => 'State.id ASC'));
 $this->set('listado', $listado);
 
     if (!$id) {
-$this->Session->setFlash('Director No Válida');
+$this->Session->setFlash('Director No Válido');
 $this->redirect(array('action'=>'index'), null, true);
 }
 if (empty($this->data)) {
@@ -54,7 +54,7 @@ $this->data = $this->Director->find(array('Director.id' => $id));
 } else {
 if ($this->Director->save($this->data)) {
 $this->Session->setFlash('El Director ha sido salvado', '/flashmsg/flash_good');
-$this->redirect(array('action'=>'index'), null, true);
+$this->redirect(array('action'=>'view/'.$id));
 } else {
 $this->Session->setFlash('El Director no ha podido ser salvado.
 Inténtalo de nuevo.' ,'/flashmsg/flash_warning');

@@ -1,8 +1,7 @@
 <?php
-ini_set('memory_limit','128M');
 require_once('app'.DS.'vendors'.DS.'tcpdf'.DS.'config'.DS.'lang'.DS.'spa.php');
 require_once('app'.DS.'vendors'.DS.'xtcpdf.php');
-
+pr($socio);
 
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -49,7 +48,7 @@ $pdf->setFontSubsetting(false);
 $pdf->SetFont('helvetica', '', 10, '', false);
 
 // add a page
-$pdf->AddPage();
+$pdf->AddPage('P','A4');
 
 /*
 It is possible to create text fields, combo boxes, check boxes and buttons.
@@ -170,13 +169,29 @@ $pdf->MultiCell(0, 0,$text, 1, 'L', 1, 0, '', '', true);
 $pdf->Ln(8);
 
 
+$text = 'Afiliado en forma : ';
+
+if(!empty ($colec)){
+$pdf->writeHTML('Colectivo conformado por :', '','', '', '', 'L');
+$pdf->Ln(3);
+//Column titles
+$header = array('Socio Id', 'Apellido', 'Nombre', 'Doc. Identidad');
+
+$pdf->Ln(5);
+
+// print colored table
+$pdf->ColoredTable($header, $colec);
+$pdf->Ln(10);
+ } else {
+     
 $text = 'Esta afiliación se realiza en forma ';
 
-if($socio['Socio']['colectivo']== 0) $text.='INDIVIDUAL'; else $text = $text.'COLECTIVA'; 
+if($socio['Socio']['colectivo']== 0) $text.='INDIVIDUAL'; else $text = $text.'colectiva, resta agrupar miembros'; 
 
 $pdf->SetFillColor(220, 255, 220);
 $pdf->MultiCell(0, 0,$text, 1, 'L', 1, 0, '', '', true);
 $pdf->Ln(8);
+}
 
 //forma de pago
 

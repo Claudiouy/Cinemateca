@@ -1,4 +1,4 @@
 <div class="flash_info">  
-    <div id="status-msg-left"></div><?php echo $message; ?><div id="status-msg-right"></div>
-    <a href="/" class="cancel"><img src="/cake_primero/app/webroot/img/icons/cross.png" alt="Informacion" /></a>  
+<img src="/cake_primero/app/webroot/img/icons/info.png" alt="Informacion" /> 
+<?php echo $message; ?>
 </div>  

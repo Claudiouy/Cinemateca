@@ -110,7 +110,8 @@ ul, li {
 /** containers **/
 div.form,
 div.index,
-div.view {
+div.view 
+{
 	float:right;
 	width:76%;
 	border-left:1px solid #666;
@@ -285,7 +286,7 @@ input, textarea {
 	font-size: 140%;
 	font-family: "frutiger linotype", "lucida grande", "verdana", sans-serif;
 	padding: 1%;
-	width:98%;
+	width:70%;
 }
 select {
 	clear: both;
@@ -390,6 +391,7 @@ div.actions li {
 	list-style-type: none;
 	white-space: nowrap;
 	padding: 0;
+        
 }
 div.actions ul li a {
 	font-weight: normal;
@@ -403,7 +405,7 @@ div.actions ul li a:hover {
 input[type=submit],
 div.actions ul li a,
 td.actions a {
-	font-weight:normal;
+	font-weight: lighter;
 	padding: 4px 8px;
 	background:#e6e49f;
 	background: -webkit-gradient(linear, left top, left bottom, from(#f1f1d4), to(#e6e49f));

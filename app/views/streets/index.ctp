@@ -1,7 +1,11 @@
 <div class="streets index">
     
 	<h2 id="h2"><?php __('Calles');?></h2>
-        
+ <p><?php
+echo $paginator->counter(array(
+'format' => __('Pag. %page% de %pages%, mostrando %current% registros de %count% en total, comenzando en registro %start%, finalizando en registro %end%', true)
+));
+?></p>         
 <table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('Id');?></th>
@@ -30,7 +34,14 @@
 <?php endforeach; ?>
 	</table>
 	
-
+<div><p>
+<div class="paging">
+	<?php echo $paginator->prev('<< '.__('previa', true), array(), null, array('class'=>'disabled'));?>
+ | 	<?php echo $paginator->numbers();?>
+	<?php echo $paginator->next(__('siguiente', true).' >>', array(), null, array('class' => 'disabled'));?>
+</div>
+</p>
+</div>	
 	
 </div>
 <div class="actions">

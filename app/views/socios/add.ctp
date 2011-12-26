@@ -42,8 +42,8 @@ echo $form->input('Socio.payment_method_id', array('type' => 'select', 'label'=>
 ?>
 <div id="list-creditcards" style="display: none;">
 <?php 
-echo $form->input('Socio.creditcard_id', array('type' => 'select', 'class'=>'select','label'=>'Emisor:', 'options'=>$list_cc));
-echo $form->input('Socio.creditcard_number', array('label'=>'Número:', 'title'=>'Ingrese N° de tarjeta de Credito'));
+echo $form->input('Financiera.id', array('type' => 'select', 'class'=>'select','label'=>'Emisor:', 'options'=>$list_f));
+echo $form->input('Creditcard.numero', array('label'=>'Número:', 'title'=>'Ingrese N° de tarjeta de Credito'));
 ?>
 </div>
 <?php
@@ -65,7 +65,7 @@ echo $this->Form->radio('colectivo',$options,$attributes);
 	<ul>
  <?php if($admin): ?>
 <li><?php echo $this->Html->link(__('Listado', true), array('action' => 'index'));?></li>
-<li><?php echo $this->Html->link(__('Colectivo', true), array('action' => 'colectivos'));?></li>
+<?php if($cantidad > 1){?><li><?php echo $this->Html->link(__('Colectivos', true), array('action' => 'colectivos'));?></li> <?php }?>
  <?php endif; ?>
 <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li>
 

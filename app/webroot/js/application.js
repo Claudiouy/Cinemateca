@@ -3,9 +3,21 @@ $(document).ready(function(){
 var nombrecalle = $('.callejero');
 var SocioDocumentoIdentidad = $('#SocioDocumentoIdentidad');
 // Defining a placeholder text:
-nombrecalle.defaultText('Ingrese la calle...');
+//nombrecalle.defaultText('Ingrese la calle...');
 SocioDocumentoIdentidad.defaultText('Sin puntos ni guiones');
+ 
 
+ // fadeout mensajes flash al clickear
+    $('.cancel').click(function(){  
+        $(this).parent().fadeOut();  
+    return false;  
+    });  
+  
+    // fade out good flash messages after 5 seconds  
+    $('.flash_good').animate({opacity: 1.0}, 4000).fadeOut();
+    $('.flash_bad').animate({opacity: 1.0}, 4000).fadeOut();
+    $('.flash_warning').animate({opacity: 1.0}, 4000).fadeOut();
+    $('.flash_info').animate({opacity: 1.0}, 4000).fadeOut();
 
 	$(function() {
 		// there's the gallery and the agrupado
@@ -50,9 +62,9 @@ SocioDocumentoIdentidad.defaultText('Sin puntos ni guiones');
 				$item.find( "a.ui-icon-agrupado" ).remove();
 				$item.append( recycle_icon ).appendTo( $list ).fadeIn(function() {
 					$item
-						.animate({ width: "48px" })
+						.animate({width: "48px"})
 						.find( "img" )
-						.animate({ height: "36px" });
+						.animate({height: "36px"});
 				});
 			});
 		}
@@ -75,26 +87,7 @@ SocioDocumentoIdentidad.defaultText('Sin puntos ni guiones');
 			});
 		}
 
-//		// image preview function, demonstrating the ui.dialog used as a modal window
-//		function viewLargerImage( $link ) {
-//			var src = $link.attr( "href" ),
-//				title = $link.siblings( "img" ).attr( "alt" ),
-//				$modal = $( "img[src$='" + src + "']" );
-//
-//			if ( $modal.length ) {
-//				$modal.dialog( "open" );
-//			} else {
-//				var img = $( "<img alt='" + title + "' width='384' height='288' style='display: none; padding: 8px;' />" )
-//					.attr( "src", src ).appendTo( "body" );
-//				setTimeout(function() {
-//					img.dialog({
-//						title: title,
-//						width: 400,
-//						modal: true
-//					});
-//				}, 1 );
-//			}
-//		}
+
 
 		// resolve the icons behavior with event delegation
 		$( "ul.gallery > li" ).click(function( event ) {
@@ -128,7 +121,7 @@ source: '/cake_primero/socios/getcalles',
 // Usando jQuery UI con RadioButtons
 
 $(function() {
-		$("#fec_nac").datepicker({ dateFormat: 'yy-mm-dd',
+		$("#fec_nac").datepicker({dateFormat: 'yy-mm-dd',
                                            maxDate: '+0d' ,
                                            minDate:'-100y'
                                           // showOn: 'button',
@@ -173,19 +166,52 @@ $(function() {
   
   
   
-  $('#SocioPaymentMethodId').bind('click', function()
-    {
-        $.ajax({
-               type: "GET",
-               url: "/cake_primero/socios/creditcards",
-              onclick: function() {
-                     },
-               success: function(msg){
-                   $('#div_tarjetas_cc').html(msg);
-               }
-             });
+  
+$('#SocioPaymentMethodId').click('change', function() {
+    if($(this).val()== 2) {
+          $('#list-creditcards').show();
+                
+      } else {
+         $('#list-creditcards').hide();
+         
+      }
+    });
+    
+    $("#asociarSociosColectivos").live('click', function(){
+        
+         var idsJoins = getSociosColectivos();
+         
+         $.ajax({
+            data: "idSelec=" + idsJoins,
+            type: "POST",
+            url:  "/cake_primero/socios/asoc_colectivos",
+            success: function(data){
+               window.location.href=window.location.href;
+              //  console.info(data);
+            },
+            error: function(miError){
+               //console.info(miError.statusText);
+            }
+         });
+         
     });
 
+  
+    function getSociosColectivos(){
+  var idsArray = new Array();
+// Obtenemos el elemento con el id "agrupado"
+var agrupados = document.getElementById("agrupado");
+// todos los elementos con tag img que hay
+// dentro del elemento 'agrupado'
+socios = agrupados.getElementsByTagName('img');
+ for (var i=0; i<socios.length; i++) {
+   idsArray.push(socios[i].id);
+}
+idJoins = idsArray.join(',');
+  
+       return idJoins;
+
+}
 });
 
 

@@ -3,9 +3,12 @@ class Socio extends AppModel {
 var $name = 'Socio';
 var $hasMany = array('Payment');
 
-var $belongsTo  = array('State','Suscription','PaymentMethod',"Creditcard");
 
 
+    
+//var $hasMany('Creditcard');
+
+var $belongsTo  = array('State','Suscription','PaymentMethod','Colectivo','Creditcard');
 
   var $validate = array(
      'name' => array(
@@ -20,23 +23,38 @@ var $belongsTo  = array('State','Suscription','PaymentMethod',"Creditcard");
     
      'fec_nac' => array(
      'rule' => 'date',
-     'message' => 'Favor ingrese una fecha de nacimiento'),
+     'message' => 'Favor ingrese una fecha de nacimiento',
+     'last' => true),
+     
+     'calle_princ' => array(
+     'rule' => 'notEmpty',
+     'message' => 'Ingrese una direccion',
+     'last' => true),
         
      'tel_fijo' => array(
      'rule' => 'numeric',
      'allowEmpty' => true,    
-     'message' => 'Favor ingresar solo numeros'
-     ),
+     'message' => 'Favor ingresar solo numeros',
+     'last' => true),
+      
      'celular' => array(
      'rule' => 'numeric',
-     'allowEmpty' => true,    
-     'message' => 'Favor ingresar solo numeros'
-     ),
+     'allowEmpty' => true,
+     'message' => 'Favor ingresar solo numeros',
+     'last' => true),
+      
      'email' => array(
      'rule' => 'email',
      'allowEmpty' => true,
-     'message' => 'Favor ingresar un email valido'),
-    
+     'message' => 'Favor ingresar un email valido',
+     'last' => true),
+      
+      
+     'documento_identidad' => array(
+     'esValida' => array(
+     'rule' => 'verficarCI',  
+     'message' => 'Ese documento no verifica correctamente',
+     'last' => true),
      'soloNumeros' => array(
      'rule' => 'numeric',  
      'message' => 'Debe ser solo numeros sin puntos ni guiones',
@@ -51,20 +69,15 @@ var $belongsTo  = array('State','Suscription','PaymentMethod',"Creditcard");
      'between' => array(
      'rule' => array('between', 5, 8),
      'message' => 'Entre 5 y 8 digitos',
-     'last'=> true
-      ),
-     'documento_identidad' => array(
-     'esValida' => array(
-     'rule' => 'verficarCI',  
-     'message' => 'Ese documento no verifica correctamente',
-     'last' => true),)
+     'last'=> true))
+         
+     
+     
           );
-  
-
-    
   
   
     function getSocioByDocument($docSocio){
+              
         //var_dump($docsocio);
         //debug($docSocio);
         if(!empty($docSocio)){
@@ -172,15 +185,20 @@ var $belongsTo  = array('State','Suscription','PaymentMethod',"Creditcard");
         }
     }
 
- function verficarCI($data) {
-        //Inicializo los coefcientes en el orden correcto
+
+
+function verficarCI($data) {
+
+
+if(1==1){
+//Inicializo los coefcientes en el orden correcto
         $arrCoefs = array(2,9,8,7,6,3,4,1);
         //saco caracteres extraños de la ci recibida
         $suma = 0;
         //Para el caso en el que la CI tiene menos de 8 digitos
         //calculo cuantos coeficientes no voy a usar
         $largoval =count($arrCoefs);
-     $ci=$data['documento_identidad'];
+        $ci=$data['documento_identidad'];
         $largo =strlen($data['documento_identidad']);
         $difCoef = ($largoval - $largo);
         
@@ -199,6 +217,11 @@ return true;
 return false;
 } }
 return false;
+    
+}else {
+
+return true;
+}        
 
     }   
 
@@ -220,5 +243,4 @@ function generaDeuda($suscripcion) {
 }
 }
    
-
 ?>

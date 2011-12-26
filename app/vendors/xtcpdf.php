@@ -29,5 +29,6 @@ class XTCPDF  extends TCPDF
         $this->SetFont($this->xfooterfont,'',$this->xfooterfontsize);
         $this->Cell(0,8, $footertext,'T',1,'C');
     }
+    
 }
 ?>

@@ -13,7 +13,9 @@
 
 echo $form->input('Socio.name', array('label'=>'Nombre:'));
 echo $form->input('Socio.surname', array('label'=>'Apellido:'));
-echo $form->input('fec_nac');
+echo $form->input('fec_nac',array('maxYear' => date('Y', strtotime('-  1 days')),
+                                  'minYear' => date('Y', strtotime('- 100 years')
+                          )));
 ?>
 <div class="gender">
 <?php
@@ -51,15 +53,42 @@ echo $this->Form->hidden('Socio.estado', array('label'=>'Socio activo:','type'=>
 <div class="colectivo">
 <?php
 
+if(!empty ($colec)){?>
+    </p>    
+<h1>Colectivo :</h1>
+<table cellpadding="0" cellspacing="0">
+	 
+
+    <tr>
+			<th>Socio Id</th>
+			<th>Apellido, Nombre</th>
+                        <th>Doc. Identidad</th>
+	</tr>
+	<?php
+	$i = 0;
+
+        foreach ($colec as $socio):
+		$class = null;
+		if ($i++ % 2 == 0) {
+			$class = ' class="altrow"';
+		}
+	?>
+	<tr<?php echo $class;?>>
+
+		<td><?php echo $socio['Socio']['id']; ?>&nbsp;</td>
+		<td><?php echo $socio['Socio']['surname'].', ';?>
+                <?php echo $socio['Socio']['name'];?></td>
+                <td><?php echo $socio['Socio']['documento_identidad']; ?>&nbsp;</td>
+	</tr>
+<?php endforeach; ?>
+	</table>
+<?php } else {
+
 $options=array(0=>'Individual',1=>'Colectivo');
 $attributes=array('legend'=>"¿ Es un asociado en Colectivo ?", 'class'=>'colectivo', 'default'=>'Individual','id'=>'colectivo');
 echo $this->Form->radio('colectivo',$options,$attributes);
-if(!empty( $colec)){
-    echo $form->input('Socio.Colectivo.Colectivo', array('label'=>'Asociados:', 'title'=>'Asociados'));
+}?>
 
-}
-?>
-</div>
 	</fieldset>
 <?php echo $this->Form->end(__('Actualizar', true));?>
 </div>
@@ -69,8 +98,9 @@ if(!empty( $colec)){
 
 		<li><?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $this->Form->value('Socio.id')), null, sprintf(__('Esta seguro de borrar al Socio N° %s?', true), $this->Form->value('Socio.id'))); ?></li>
 		<li><?php echo $this->Html->link(__('Listado', true), array('action' => 'index'));?></li>
+                <?php if (count($colec)>2){?><li><?php echo $this->Html->link(__('Bajar Colectivo', true), array('action' => 'bajarColectivo', $this->Form->value('Socio.id')), null, sprintf(__('Esta seguro Bajar del Colectivo al Socio N° %s?', true), $this->Form->value('Socio.id'))); ?></li><?php }?>
                 <li><?php echo $this->Html->link(__('Pagos', true), array('controller'=>'payments','action' =>'retrieveSocioById/'.$this->Form->value('Socio.id')));?></li>
-                <li><?php echo $this->Html->link(__('Colectivo', true), array('action' => 'colectivos'));?></li>
+                <?php if($cantidad > 1){?><li><?php echo $this->Html->link(__('Colectivos', true), array('action' => 'colectivos'));?></li> <?php }?>
                 <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li>
 
         </ul>

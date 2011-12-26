@@ -15,10 +15,7 @@ $this->paginate = array (
 ));
 $onlyActive = $this->paginate('Performance');
 $this->set(compact('onlyActive'));
-    
-
-}
-
+ }
 function add(){
 $this->loadModel('Sala'); 
 $list_salas = $this->Sala->find('list', array('order' => 'Sala.name ASC'));
@@ -119,6 +116,19 @@ function activar($id = null) {
 		$this->Session->setFlash('La funcion no ha podido ser dada de Alta', 'flashmsg/flash_warning');
 		$this->redirect(array('action' => 'index'));
 	}      
-        
+function search(){
+
+
+$cond = 'Performance.estado = 0'; 
+
+$this->paginate = array (
+            'order' => array ('Performance.id' => 'DESC'),
+            'limit'=> 10,
+            'fields'=>array('id','sala_id','fecha','hora_comienzo','pelicula_id','estreno','estado'),
+            'conditions' => $cond,
+            'recursive' => 2   );
+$performances = $this->paginate('Performance');
+$this->set(compact('performances'));
+}        
 }
 ?>

@@ -30,7 +30,7 @@ function _isAdmin (){
 function _LoggedIn (){
     $logged_in = FALSE;
     if ($this->Auth->user()){
-        $logged_in = TRUE;
+    $logged_in = TRUE;
     }
     return $logged_in;
 }

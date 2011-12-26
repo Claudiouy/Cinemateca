@@ -7,8 +7,8 @@
 
 <?php
 $current_year = date('Y');
-$max_year = $current_year + 10;
-$min_year = $current_year - 2;
+$max_year = $current_year + 1;
+$min_year = $current_year;
 
 echo $form->hidden('Performance.id');
 echo $form->input('Sala.id', array('type' => 'select', 'class'=>'select','label'=>'Sala:', 'options'=>$list_salas, 'empty'=>FALSE));
@@ -35,8 +35,8 @@ echo $this->Form->radio('estreno',$options,$attributes);
 	<ul>
 
 		<li><?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $this->Form->value('Director.id')), null, sprintf(__('Esta seguro de borrar al director  %s?', true), $this->Form->value('Director.surname'))); ?></li>
-		<li><?php echo $this->Html->link(__('Listar Funciones', true), array('action' => 'index'));?></li>
-                <li><?php echo $this->Html->link(__('Menu Principal', true), array('controller'=>'pages','action' => 'home'));?></li></ul>
+		<li><?php echo $this->Html->link(__('Listar', true), array('action' => 'index'));?></li>
+                <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li></ul>
 
 </div>
 

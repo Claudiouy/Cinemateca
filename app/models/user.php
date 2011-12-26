@@ -6,17 +6,12 @@ var $name = 'User';
 var $displayField = 'username';
 
 var $validate = array(
-		'username' => array(
-			'between' => array(
-			'rule' => array('between', 5, 15),
-                        'message'=>'El nombre de usuario debe contener entre 5 y 15 caracteres.',
-			'last' => true),
-			'characters' => array(
-                        'rule' => array('custom', '/^[a-zA-Z0-9]*$/i'),
-			'last' => true),
-			'isUnique' => 'isUnique',
-                        'message'=>'Ese nombre de usuario ya esta en uso.',
-                        'last' => true),
+		 'username' => array(
+                                
+                 'rule' => 'isUnique',
+                 'message' => 'Usuario Existente.'),
+    
+                   
 		
 
 		'password'=>array(
@@ -25,7 +20,7 @@ var $validate = array(
 			'message'=>'La clave de usuario debe contener entre 5 y 15 caracteres.'	),
 			'Las claves no son iguales'=>array(
 			'rule'=>'matchPasswords',
-			'message'=>'Las claves no son iguales.')
+			'message'=>'No coiciden.')
                                 )
                     );
 	
@@ -37,7 +32,7 @@ function matchPasswords($data)	{
 		{
 			return TRUE;
 		}
-		$this->invalidate('password_confirmation', 'Las claves no son iguales.');
+		$this->invalidate('password_confirmation', 'No coiciden.');
 		return FALSE;
 	}
 

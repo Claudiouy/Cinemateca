@@ -50,6 +50,7 @@
                         <input class="buttonCakeLike" style="width:auto;margin:18px 10px 0 0;" type="button" value="Ingreso a no socio" onclick="window.location ='/cake_primero/tickets/create_new_no_socio_ticket/' + $('#performanceIdForTicket').val()" />    
         </div>
 
+
 </div>
 
 <h2 style="text-align: center;color:#489;">
