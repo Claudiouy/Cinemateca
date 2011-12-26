@@ -73,7 +73,10 @@ echo $this->Html->charset();
 
 			<div id="navbar"> <a href="/cake_primero/tickets/ticket_socio" target="_parent">Ingreso a sala</a> - <a href="/cake_primero/socios" target="_parent">Modulo socios</a> - <a href="/cake_primero/peliculas" target="_parent">Modulo peliculas</a> - <a href="/cake_primero/payments" target="_parent">Modulo de pagos</a> - <a href="" target="_parent">Reportes de caja</a> -  <a href="http://www.cinemateca.org.uy/plus.html" target="_parent">Otros Modulos</a> </div>    
 
-
+<?php
+    echo $this->Session->flash();
+    echo $this->Session->flash('auth');
+?>
 		</div>
 		<div id="content">
                         
@@ -87,15 +90,13 @@ echo $this->Html->charset();
     <?php endif;?>
                     </div>
 
-<?php
 
-    echo $this->Session->flash('auth');
-?>
 
 			<?php echo $content_for_layout;?>
 
 		</div>
 		<div id="footer">
+
 
 			<div id="navbar"> <a href="/cake_primero/tickets/ticket_socio" target="_parent">Ingreso a sala</a> - <a href="/cake_primero/socios" target="_parent">Modulo socios</a> - <a href="/cake_primero/peliculas" target="_parent">Modulo peliculas</a> - <a href="/cake_primero/payments" target="_parent">Modulo de pagos</a> - <a href="" target="_parent">Reportes de caja</a> -  <a href="http://www.cinemateca.org.uy/plus.html" target="_parent">Otros Modulos</a> </div>    
 

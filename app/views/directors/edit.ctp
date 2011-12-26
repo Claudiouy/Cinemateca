@@ -2,17 +2,17 @@
 <?php echo $this->Form->create('Director');?>
 	<fieldset>
  		<legend id="legend"><?php __('Editar Director'); ?></legend>
-<?php echo $session->flash('auth');?>
-
 <?php
 echo $form->hidden('Director.id');
-echo $form->input('Director.name');
-echo $form->input('Director.surname');
-echo $form->input('Director.state_id', array('type' => 'select', 'label'=>'Nacionalidad:', 'options'=>$listado, 'empty'=>FALSE));
+echo $form->input('Director.name', array('label'=>'Nombre:'));
+echo $form->input('Director.surname', array('label'=>'Apellido:'));
+echo $form->input('Director.state_id', array('type' => 'select', 'label'=>'Nacionalidad:', 'options'=>$listado, 'default' => 229));
 ?>
 	</fieldset>
 <?php echo $this->Form->end(__('Actualizar', true));?>
 </div>
+
+
 <div class="actions">
 	<h3><?php __('Acciones'); ?></h3>
 	<ul>

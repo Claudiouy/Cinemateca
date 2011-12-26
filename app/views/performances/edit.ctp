@@ -35,8 +35,8 @@ echo $this->Form->radio('estreno',$options,$attributes);
 	<ul>
 
 		<li><?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $this->Form->value('Director.id')), null, sprintf(__('Esta seguro de borrar al director  %s?', true), $this->Form->value('Director.surname'))); ?></li>
-		<li><?php echo $this->Html->link(__('Listar Funciones', true), array('action' => 'index'));?></li>
-                <li><?php echo $this->Html->link(__('Menu Principal', true), array('controller'=>'pages','action' => 'home'));?></li></ul>
+		<li><?php echo $this->Html->link(__('Listar', true), array('action' => 'index'));?></li>
+                <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li></ul>
 
 </div>
 

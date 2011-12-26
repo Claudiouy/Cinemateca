@@ -222,33 +222,36 @@ text-transform: uppercase;
 display:block;
 }
 
-.flash_good img, .flash_bad img,.flash_warning img, .flash_info img {  
-float:right;  
+.flash_info img, .flash_bad img,.flash_warning img {  
+float:left;  
+}
+.flash_good img{
+    float: right
 }
 
-.flash_good {   
-background: #e5f2be;   
-border:2px solid #bedf5d;   
+.flash_good {
+background: #009933;   
+border:2px solid #006666;   
 padding:10px;   
 font-weight:bold;  
 }  
 
 .flash_bad {   
-background: #eccecf;  
-border:2px solid #9e0b0f;  
+background: #FF0000;  
+border:2px solid #333300;  
 padding:10px;  
 font-weight:bold;  
 }  
 
 .flash_info {  
-background: #66CCFF;  
-border:2px solid #000066;  
+background: #0066FF;  
+border:2px solid #0000CC;  
 padding:10px; 
 font-weight:bold;  
 } 
 .flash_warning {  
-background: #EE5F00;  
-border:2px solid #9e0b0f;  
+background: #FF9900;  
+border:2px solid #FF3300;  
 padding:10px; 
 font-weight:bold;  
 } 
@@ -261,12 +264,7 @@ margin: 10px 0 0 10px !important;
 margin: 10px 0 0 5px;
 }
 
-<<<<<<< HEAD:app/webroot/css/miCss.css
-.flash_good, .flash_bad, .flash_warning, .flash_info { padding:6px 10px; color:white; display:block; margin:10px 0; }
-.flash_good { background-color:#009900; }
-.flash_bad { background-color:#AA0000; }
-.flash_warning { background-color:#EE5F00; }
-.flash_info { background-color:#0055AA; }
+
 
 .filterPaymentContainer{
     width:40%;
@@ -281,8 +279,9 @@ margin: 10px 0 0 5px;
     -webkit-opacity: 0.9!important;
     opacity: 0.9 !important;
     display:none;
-    border: solid 3px #003D4C;
-=======
+    border: solid 3px #003D4C;}
+
+
 .uploaded_image img {
 display: block;
 position: relative;
@@ -290,5 +289,4 @@ background-color: #fff;
 border: 1px solid #a9a9a9;
 margin: -6px 6px 6px -6px;
 padding: 4px;
->>>>>>> 2037c340ee58c4bc81346a236529c8a8d3e3d336:app/webroot/css/miCss.css
 }

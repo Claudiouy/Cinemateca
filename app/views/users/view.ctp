@@ -18,10 +18,16 @@
     <td><?php echo $user['User']['username'];?></td>
     <td><?php echo $user['User']['roles'];?></td>
       
-    <td class="actions">
-    <?php echo $this->Html->link(__('Editar', true), array('action' => 'edit', $user['User']['id'])); ?>
-    <?php echo $this->Html->link(__('Borrar', true), array('action' => 'delete', $user['User']['id']), null, sprintf(__('Esta Seguro de eliminar el usuario %s?', true), $user['User']['username'])); ?>
-    </td>
+<td class="actions">
+<?php if($user['User']['estado']== 1) echo $this->Html->link(__('Editar', true), array('action' => 'edit', $user['User']['id'])); ?>
+
+	<?php if($user['User']['estado']== 1)
+echo $this->Html->link(__('Borrar', true), array('action' => 'delete', 
+$user['User']['id']), null, sprintf(__('Esta Seguro de eliminar al  usuario N° %s?', true),
+$user['User']['id'])); else 
+echo $this->Html->link(__('Activar', true), array('action' => 'activar', 
+$user['User']['id']), null, sprintf(__('Esta Seguro de volver a Activar al usuario N° %s?', true),
+$user['User']['id']));?></td>
     </tr>
     </table>
 	
@@ -31,6 +37,9 @@
 <div class="actions">
 	<h3><?php __('Acciones'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Nuevo User', true), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('Nuevo', true), array('action' => 'add')); ?></li>
+                 <li><?php echo $this->Html->link(__('Listar', true), array('action' => 'index'));?></li>
+                <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li></ul>
+
 	</ul>
 </div>

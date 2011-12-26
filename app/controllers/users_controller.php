@@ -15,23 +15,17 @@ function beforeFilter() {
     }
     
 function login() {
- //ini_set('memory_limit', '32M');
-  //echo phpinfo(); 
 
   
 }
 
 function logout() {
-//    	$this->Session->destroy(); 
-//	$this->redirect($this->Auth->logout());
-//$this->Cookie->del('gate');
-		$this->Session->setFlash('Sesion Finalizada.', '/flashmsg/flash_good');
-		$this->redirect($this->Auth->logout());
+    $this->Session->setFlash('Sesion Finalizada.', '/flashmsg/flash_good');
+    $this->redirect($this->Auth->logout());
 	}
 
 function index(){ 
 
-   
 $this->paginate = array (
             'order' => array ('User.id' => 'DESC'),
             'limit'=> 5,
@@ -101,12 +95,41 @@ $this->Session->setFlash('El usuario no ha sido guardado, intentelo otra vez', '
 			$this->Session->setFlash('ID de usuario no valido', '/flashmsg/flash_bad');
 			$this->redirect(array('action'=>'index'));
 		}
-		if ($this->User->saveField('estado', 'False')) {
+		if ($this->User->saveField('estado', 0)) {
                     
-			$this->Session->setFlash('El usuario no ha sido desactivado.', '/flashmsg/flash_info');
+			$this->Session->setFlash('El usuario ha sido desactivado.', '/flashmsg/flash_info');
 			$this->redirect(array('action'=>'index'));
 		}
 		$this->Session->setFlash('El usuario no ha podido darse de baja.', '/flashmsg/flash_info');
+		$this->redirect(array('action' => 'index'));
+	}
+        
+function search(){
+//ini_set('memory_limit','128M');
+
+$search = $this->data['User']['Buscar'];
+
+$cond = 'User.username LIKE "%'.$search.'%"'; 
+
+$this->paginate = array (
+            'order' => array ('User.id' => 'DESC'),
+            'limit'=> 5,
+            'fields'=>array('User.id','User.username','User.estado'),
+            'conditions' => $cond,
+            'recursive' => -1   );
+$users = $this->paginate('User');
+$this->set(compact('users'));
+}
+function activar($id = null) {
+		if (!$id) {
+			$this->Session->setFlash('ID de Usuario No Valido', 'flashmsg/flash_bad');
+			$this->redirect(array('action'=>'index'));
+		}
+		if ($this->User->saveField('estado', 1)) {
+			$this->Session->setFlash('El usuario N° '.$id.' ha sido dado de Alta Nuevamente', 'flashmsg/flash_good');
+			$this->redirect(array('action'=>'view/'.$id));
+		}
+		$this->Session->setFlash('El usuario no ha podido ser dado de Alta', 'flashmsg/flash_warning');
 		$this->redirect(array('action' => 'index'));
 	}
 

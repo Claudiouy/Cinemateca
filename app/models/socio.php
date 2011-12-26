@@ -2,7 +2,13 @@
 class Socio extends AppModel {
 var $name = 'Socio';
 var $hasMany = array('Payment');
-var $belongsTo  = array('State','Suscription','PaymentMethod',"Creditcard");
+
+
+
+    
+//var $hasMany('Creditcard');
+
+var $belongsTo  = array('State','Suscription','PaymentMethod','Colectivo','Creditcard');
 
   var $validate = array(
      'name' => array(
@@ -237,5 +243,4 @@ function generaDeuda($suscripcion) {
 }
 }
    
-
 ?>

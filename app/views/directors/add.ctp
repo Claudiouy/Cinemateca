@@ -6,10 +6,10 @@
 <?php echo $session->flash('auth');?>
 
 <?php
-echo $form->hidden('id');
+
 echo $form->input('name', array('label'=>'Nombre:'));
 echo $form->input('surname', array('label'=>'Apellido:'));
-echo $form->input('Director.state_id', array('type' => 'select', 'label'=>'Nacionalidad:', 'options'=>$listado, 'empty'=>TRUE));
+echo $form->input('Director.state_id', array('type' => 'select', 'label'=>'Nacionalidad:', 'options'=>$listado, 'default' => 229));
 ?>
             </fieldset>
 <?php echo $this->Form->end(__('Agregar', true));?>

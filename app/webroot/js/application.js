@@ -7,14 +7,17 @@ var SocioDocumentoIdentidad = $('#SocioDocumentoIdentidad');
 SocioDocumentoIdentidad.defaultText('Sin puntos ni guiones');
  
 
- // fadeout flash messages on click  
+ // fadeout mensajes flash al clickear
     $('.cancel').click(function(){  
         $(this).parent().fadeOut();  
     return false;  
     });  
   
     // fade out good flash messages after 5 seconds  
-    $('.flash_good').animate({opacity: 1.0}, 4000).fadeOut();  
+    $('.flash_good').animate({opacity: 1.0}, 4000).fadeOut();
+    $('.flash_bad').animate({opacity: 1.0}, 4000).fadeOut();
+    $('.flash_warning').animate({opacity: 1.0}, 4000).fadeOut();
+    $('.flash_info').animate({opacity: 1.0}, 4000).fadeOut();
 
 	$(function() {
 		// there's the gallery and the agrupado

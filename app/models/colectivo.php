@@ -1,5 +1,4 @@
 <?php
 class Colectivo extends AppModel {
-         var $name = 'Colectivo';
-               }
+var $name = 'Colectivo';}
 ?>

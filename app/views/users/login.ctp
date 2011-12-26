@@ -9,8 +9,6 @@
     
 <?php echo $session->flash('auth');?>
  
-<?php echo $session->flash('auth');?>
-
 <?php echo $form->input('username', array ('label'=>'Nombre de Usuario','action'=>'login'));?>
 <?php echo $form->input('password', array ('label'=>'Clave','type'=>'password','action'=>'login'));?>
 <?php echo $form->end('Ingresar', array ('action'=>'login'));?>
