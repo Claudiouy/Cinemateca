@@ -126,11 +126,10 @@ $list_pay_method = $this->Payment_method->find('list', array('order' => 'Payment
 $this->set('list_pay_method', $list_pay_method);
 
 
-$this->loadModel('Financiera'); 
-$list_f = $this->Financiera->find('list', array('order' => 'Financiera.id ASC'));
-$this->set('list_f', $list_f);
-
 $this->loadModel('Creditcard'); 
+$list_cc = $this->Creditcard->find('list', array('order' => 'Creditcard.id ASC'));
+$this->set('list_cc', $list_cc);
+
 
 
 //$this->loadModel('Creditcard_socio'); 
@@ -151,7 +150,7 @@ if (!empty($this->data)) {
 $id=$misocio['Socio']['id'];
                 if (($this->data['Socio']['payment_method_id']) ==2) {
                    $fields = array('socio_id' =>$id,
-                      'financiera_id' =>($this->data['Financiera']['id']),
+                      'financiera_id' =>($this->data['Creditcard']['id']),
                       'numero' =>($this->data['Creditcard']['numero'])
                       
                       );

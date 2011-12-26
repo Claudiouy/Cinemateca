@@ -10,7 +10,7 @@ echo $paginator->counter(array(
 <table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
-<!--			<th><?php echo $this->Paginator->sort('Sala');?></th>-->
+			<th><?php echo $this->Paginator->sort('Sala');?></th>
                         <th><?php echo $this->Paginator->sort('Fecha');?></th>
                         <th><?php echo $this->Paginator->sort('Hora Comienzo');?></th>
                         <th><?php echo $this->Paginator->sort('Proyeccion');?></th>
@@ -27,7 +27,7 @@ echo $paginator->counter(array(
 	?>
 	<tr<?php echo $class;?>>
 	<td><?php echo $performance['Performance']['id']; ?>&nbsp;</td>
-<!--	<td><?php echo $performance['Sala']['name'];?>&nbsp</td>-->
+	<td><?php echo $performance['Sala']['name'];?>&nbsp</td>
         <td><?php echo $performance['Performance']['fecha'];?>&nbsp</td>
 	<td><?php echo $performance['Performance']['hora_comienzo']; ?>&nbsp;</td>
         <td><?php echo $performance['Pelicula']['name']; ?>&nbsp;</td>
