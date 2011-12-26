@@ -100,4 +100,19 @@ echo $this->Html->link('Salas', array(
 ?>
 </li>
 
+<li>
+<?php 
+echo $this->Html->link('Suscripciones', array(
+    'controller' => 'suscriptions',
+    'action' => 'index',  
+    )
+    );
+?>
+</li>
+
 </ul>
+    
+</div>
+        </div>
+        
+

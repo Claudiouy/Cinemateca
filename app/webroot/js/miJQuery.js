@@ -2,7 +2,9 @@ $j = jQuery.noConflict();
 
 
 $j(document).ready(function(){
-$j("#content form:first div.error:first input:first").focus(); 
+
+    
+    $j("#content form:first div.error:first input:first").focus(); 
 
     
     $j('.fadeOut').hide(6000);
@@ -73,7 +75,7 @@ $j("#content form:first div.error:first input:first").focus();
              }
          });
          idsJoins = idsArray.join(',');
-         alert(idsJoins);
+         alert('Películas activas: ' + idsJoins);
          return idsJoins;
     }
     
@@ -116,6 +118,12 @@ $j("#content form:first div.error:first input:first").focus();
     
     //------------new_payment------------
     
+    
+        $j("#ticketSaleId").click(function(){
+           console.info('asdas');
+           $j("#ticketSaleContainer").show();
+        });
+        
         $j("#openSearchSocio").click(function(){
             $j("#searchSocioContainer").toggle();
         });
@@ -131,6 +139,46 @@ $j("#content form:first div.error:first input:first").focus();
                 }
            });
         });
+        
+        
+        $j("#openNewMovieButton").live('click', function(){
+            $j("#newMovieContainer").show();            
+        });
+        
+        
+        $j("#applyPaymentId").live('click', function(){
+            
+            var socioId = $("#idSocio").val();
+            var cantCuotas = $("#numberQuotas").val();
+            
+            if(cantCuotas != undefined && socioId != undefined){
+                if(!isNaN(cantCuotas) && cantCuotas > 0){
+                    $j.ajax({
+                        data: "idSocio=" + socioId + "&numberQuotas=" + cantCuotas,
+                        type: "POST",
+                        url:  "/cake_primero/payments/set_payment",
+                        success: function(data){
+                            console.info(data);
+                            myWindow = openPopUp();
+                            myWindow.document.querySelector('body').innerHTML = data;
+                            myWindow.print();
+
+                        },
+                        complete: function(){
+                            window.location = '/cake_primero/payments';
+                        }
+                   });
+                }
+                else {
+                    alert('La cantidad de cuotas es un número mayor a 0');
+                }
+            }
+            else{
+                alert('Falta el socio o el número de cuotas');
+            }
+        });
+        
+        
         /*
         $j(".selectSocio").live('click', function(){  
            var idSocio = $j(this).attr('id');
@@ -144,18 +192,53 @@ $j("#content form:first div.error:first input:first").focus();
                     $j("#socioData").html(data);
                 }
            });
-        });*/
+        });*/       
+        
 
 
         $("#closeButton").click(function(){
             var divContenedor = $("#searchSocioContainer");
             divContenedor.hide();
         });
+        
+        $("#reprintPaymentButton").live('click', function(){
+            
+            var idPayment = $(this).parent().find('.hiddenPaymentClass').val();
+            
+            $j.ajax({
+                data: "idPayment=" + idPayment,
+                type: "POST",
+                url:  "/cake_primero/payments/getPaymentById",
+                beforeSend: function() {
+                    $("#loadingIcon" + idPayment).show();
+                },
+                success: function(data){
+                    myWindow = openPopUp();
+                    myWindow.document.querySelector('body').innerHTML = data;
+                    myWindow.print();
+                    //$j("#socioData").html(data);
+                }
+           });
+            
+        });
+    //---------------------UTILITARIOS---------------------
+    
+            $j(".divCloseButtonContainer").click(function(){
+                $(this).parent().hide();
+            });
+    //----------------------------------------------------------
+    
+    //------------/ payment---------
     
     
-    //------------/ new_payment---------
-    
+    $j("#chartPaymentButton").click(function(){
+        
+           $j('.filterPaymentContainer').hide();
+           $("#containerPaymentsChart").show();
+        });
+        
     $j('#searchPaymentId').click(function(){
+            $j('#containerPaymentsChart').hide();
             $j('.filterPaymentContainer').show();
     });
     
@@ -164,9 +247,10 @@ $j("#content form:first div.error:first input:first").focus();
     
         
          
-         function openPopUp(pagina) {
-            var opciones="toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=yes, width=508, height=365, top=85, left=140";
-            window.open(pagina,"",opciones);
+         function openPopUp() {
+            var opciones="toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=yes, width=270px, height=270px, top=85, left=140";
+            newWindow = window.open('', '', opciones);
+            return newWindow;
          }
          
          
@@ -185,6 +269,52 @@ $j("#content form:first div.error:first input:first").focus();
                 }
            });
         });
+        
+        $("#buttonGenerateTicket").click( function(){
+            var ticketId = $("#TicketId").val();
+            var perfId = $("#performanceIdForTicket").val();
+            
+            if(ticketId != '' && perfId != "-1"){
+                $j.ajax({
+                    data: "ticketId=" + ticketId + "&performanceIdForTicket=" + perfId,
+                    type: "POST",
+                    url:  "/cake_primero/tickets/create_new_socio_ticket",
+                    success: function(data){
+                        myWindow = openPopUp();
+                        myWindow.document.querySelector('body').innerHTML = data;
+                        myWindow.print();
+                        $("#ticketSaleContainer").hide();
+                    },
+                    complete: function(){
+                        window.location = '/cake_primero/tickets/ticket_socio';
+                    }
+               });
+            }
+            else{
+                alert('Falta la función o el socio');
+            }
+            
+        });
+        
+        $("#reprintTicketButton").live('click', function(){
+            
+            var idTicket = $(this).parent().find('.hiddenTicketClass').val();
+            //console.info(idPayment);
+            
+            $j.ajax({
+                data: "idTicket=" + idTicket,
+                type: "POST",
+                url:  "/cake_primero/tickets/getTicketById",
+                
+                success: function(data){
+                    myWindow = openPopUp();
+                    myWindow.document.querySelector('body').innerHTML = data;
+                    myWindow.print();
+                }
+           });
+            
+        });
+        
         
         $j("#refreshTicketsButton").click(function(){
         
@@ -271,7 +401,6 @@ $j("#content form:first div.error:first input:first").focus();
          });
          
     });
-<<<<<<< HEAD:app/webroot/js/miJQuery.js
     
     function getSociosColectivos(){
 
@@ -412,7 +541,6 @@ $j("#content form:first div.error:first input:first").focus();
              alert("La fecha de inicio debe ser anterior a la de fin");
          }
     }
-=======
 
   
     function getSociosColectivos(){
@@ -430,7 +558,6 @@ idJoins = idsArray.join(',');
        return idJoins;
 
 }
->>>>>>> 2037c340ee58c4bc81346a236529c8a8d3e3d336:app/webroot/js/miJQuery.js
 
     function graficar(myData, myLegend, myLegendTitle){
      
@@ -499,6 +626,14 @@ idJoins = idsArray.join(',');
              data: myData
           }]
        });
+    }
+    
+    function htmlEncode(value){
+      return $('<div/>').text(value).html();
+    }
+
+    function htmlDecode(value){
+      return $('<div/>').html(value).text();
     }
 
 });

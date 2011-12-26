@@ -37,20 +37,30 @@ class TicketsController extends AppController{
     
     function create_new_socio_ticket(){
         
-        if(!empty($this->data['Ticket']['id']) && !empty($_POST["performanceIdForTicket"])){
+        $mess= 'false|||No se ingresó algun dato obligatorio';
+        
+        if(!empty($_POST['ticketId']) && !empty($_POST["performanceIdForTicket"])){
 
             if($_POST["performanceIdForTicket"] != '-1'){
                 $id_function = $_POST["performanceIdForTicket"];
-                $my_id = $this->data['Ticket']['id'];
+                $my_id = $_POST['ticketId'];
                 $this->loadModel('Socio');
                 if($this->Socio->cValidateSocioUpToDate($my_id)){
+                    $mySocio = $this->Socio->findById($my_id);
                     if($this->Ticket->createSocioTicket($my_id, $id_function)){
-                        $this->redirect('/tickets');
+                        $this->loadModel('Performance');
+                        $myFunction = $this->Performance->findById($id_function);
+                        $mess = array('true', $mySocio, $myFunction );
                     }
                 }
+                else{
+                    $mess = 'false|||El socio no se encuentra al día';
+                }
             }
-        }     
-        $this->redirect('/tickets/ticket_socio');
+        }
+        $this->set('message', $mess);
+        $this->render('/elements/ticket_print');
+        return false;
         
     }
     
@@ -63,11 +73,20 @@ class TicketsController extends AppController{
                 
                 $this->Ticket->create();
                 if($this->Ticket->save($data)){
-                    $this->redirect('/tickets');
+                    $this->Session->setFlash('La entrada se realizó correctamente');
+                }
+                else{
+                    $this->Session->setFlash('La entrada no se realizó correctamente');
                 }
                 
             }
-        } 
+            else{
+                $this->Session->setFlash('La función no puede ser vacía');
+            }
+        }
+        else{
+            $this->Session->setFlash('La función no puede ser vacía');
+        }
         $this->redirect('/tickets/ticket_socio');
     }
     
@@ -91,6 +110,16 @@ class TicketsController extends AppController{
     
     function createTicketToPrint(){
         
+    }
+    
+    function getTicketById(){
+        
+        if(!empty($_POST['idTicket'])){
+            $myTicket = $this->Ticket->findById($_POST['idTicket']);
+            $this->set('myTicket', $myTicket);
+        }
+        $this->render('/elements/ticket_reprint');
+        return false;
     }
 }
 

@@ -1,13 +1,13 @@
 <?php if(!empty($activePeliculas)){ 
-            
+            echo '<h2>En cartel:</h2>';
      foreach ($activePeliculas as $pelicula) {
 
 ?>
     
 <div class="pelicula"> 
     
-  <a href="">
-      <img src="" width="200" height="200" border="0">
+  <a href="" >
+        <?php echo $this->Html->image('imgPelis/'.$pelicula['Pelicula']['image_path'], array('style' => 'width:200px;height:200px;')); ?>
   </a>
         <h4>
           <a href="" class="Estilo18">

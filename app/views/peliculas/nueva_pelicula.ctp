@@ -12,6 +12,10 @@
             echo $this->Form->input('duracion', array('label' => 'Duración'));
             echo $this->Form->input('anio', array('label' => 'Año de estreno'));
             echo $this->Form->input('activa', array('type' => 'checkbox', 'label' => 'Activa'));
+            
+            ?>
+            
+            <?php
             echo $this->Form->end('Guardar');
         
         ?>
