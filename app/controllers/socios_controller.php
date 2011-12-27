@@ -126,11 +126,11 @@ $list_pay_method = $this->Payment_method->find('list', array('order' => 'Payment
 $this->set('list_pay_method', $list_pay_method);
 
 
-$this->loadModel('Creditcard'); 
-$list_f = $this->Creditcard->find('list', array('order' => 'Creditcard.id ASC'));
-$this->set('list_f', $list_f);
 
 $this->loadModel('Creditcard'); 
+$list_cc = $this->Creditcard->find('list', array('order' => 'Creditcard.id ASC'));
+$this->set('list_cc', $list_cc);
+
 
 
 //$this->loadModel('Creditcard_socio'); 
@@ -151,7 +151,7 @@ if (!empty($this->data)) {
 $id=$misocio['Socio']['id'];
                 if (($this->data['Socio']['payment_method_id']) ==2) {
                    $fields = array('socio_id' =>$id,
-                      'financiera_id' =>($this->data['Financiera']['id']),
+                      'financiera_id' =>($this->data['Creditcard']['id']),
                       'numero' =>($this->data['Creditcard']['numero'])
                       
                       );
@@ -429,18 +429,18 @@ $this->set(compact('socios'));
 }
 
 
-    function charts(){
+function charts(){
         
     }
     
-    function retrieveUpToDateSocios(){
+function retrieveUpToDateSocios(){
         $dataPie = $this->Socio->getUpToDatePieData();
         $this->set('data', $dataPie);
         $this->set('legend', "Socios al dia");
         $this->render('/elements/empty_layout');
     }
     
-    function retrieveSociosByAgeChart(){
+function retrieveSociosByAgeChart(){
         $dataPie = $this->Socio->getSociosByAge();
         $this->set('data', $dataPie);
         $this->set('legend', "Socios segun edad");

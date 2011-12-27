@@ -1,19 +1,17 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 class ActorsController extends AppController{
     var $name = 'Actors';
     var $hasMany = array('Peliculas');
+    
     
     var $paginate = array(
                         'limit' => 25,
                         'order' => array('Actor.created' => 'desc')
                         );
     
+
     function index(){
         $this->Actor->recursive = 0;
         $conditions = array('Actor.deleted = ' => 0);
@@ -106,7 +104,6 @@ class ActorsController extends AppController{
         $this->redirect('/actors');
     }
     
-
     function isUploadedFile($params){
             $val = array_shift($params);
             if ((isset($val['error']) && $val['error'] == 0) ||

@@ -312,7 +312,7 @@ class PaymentsController extends AppController{
         $this->render('/elements/empty_layout');
     }
     
-     function retrievePaymentsAmountDataChart(){
+    function retrievePaymentsAmountDataChart(){
         
         if(!empty($_POST)){
           $dateFrom = date('Y-m-d', strtotime($_POST['dateFrom']));

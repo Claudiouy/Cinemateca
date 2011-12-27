@@ -65,8 +65,10 @@ echo $paginator->counter(array(
 		<li><?php echo $this->Html->link(__('Nuevo', true), array('action' => 'add')); ?></li>
                 <li><?php echo $this->Html->link(__('Pagos', true), array('controller'=>'payments','action' =>'index'));?></li>
                 <?php if($cantidad > 1){?><li><?php echo $this->Html->link(__('Colectivos', true), array('action' => 'colectivos'));?></li> <?php }?>
+
                 <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li>
                 <li><input type="button" value="Graficar" id="loadChartSocioId" class="buttonCakeLike" style="width:100%" /> </li>
+
                 <li>
                 <?php
                 echo $form->create('', array('action'=>'search'));

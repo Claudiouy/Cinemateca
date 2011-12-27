@@ -14,6 +14,7 @@ class TicketsController extends AppController{
     }
     
     function ticket_socio(){
+        
         if($this->Session->read('SalaId')){
             if($this->Session->read('SalaId') != '-1'){
                 $this->loadModel('Performance');
@@ -35,6 +36,7 @@ class TicketsController extends AppController{
             $this->Session->setFlash('Para entrar en venta de entradas debe seleccionar una sala', 'default');
             $this->redirect('/');
         }
+
     }
     
     function retrieve_socio_by_document(){
