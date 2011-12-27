@@ -37,3 +37,12 @@
 		<li><?php echo $this->Html->link(__('Nueva suscripción', true), array('action' => 'new_suscription')); ?></li>
 	</ul>
 </div>
+
+<div style="margin-left:45%;"><p>
+<div class="paging">
+	<?php echo $paginator->prev('<< '.__('previa', true), array(), null, array('class'=>'disabled'));?>
+ | 	<?php echo $paginator->numbers();?>
+	<?php echo $paginator->next(__('siguiente', true).' >>', array(), null, array('class' => 'disabled'));?>
+</div>
+</p>
+</div>	

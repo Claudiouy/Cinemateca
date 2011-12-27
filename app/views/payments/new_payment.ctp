@@ -1,18 +1,20 @@
 <div>
-    
-    <div style="width:50%; margin-bottom:15px;" ><input type="button" id="openSearchSocio" value="Buscar cliente" /> </div>
+    <?php echo $this->Session->flash(); ?>
+    <div style="width:50%; margin-bottom:15px;" ><input type="button" class="buttonCakeLike" style="width:auto;" id="openSearchSocio" value="Buscar cliente" /> </div>
 
     <div id="selectedSocio">
                <?php if(!empty($selSocio)) {
-                  echo $form->create('Payment', array('action' => 'set_payment')); 
+                  //echo $form->create('Payment', array('action' => 'set_payment')); 
                   echo 'El pago se efectuará para el cliente: '.$selSocio["Socio"]["name"]. ' ' . $selSocio["Socio"]["surname"] ; 
                echo $this->Form->input('idSocio', array('type' => 'hidden', 'value' => $selSocio["Socio"]["id"])); ?>
                
-           <div style="width:50%;" >    <div id="amountContainer">
-                   Ingrese cantidad de cuotas: <?php echo $this->Form->input('numberQuotas', array('type' => 'text')); ?>
+           <div style="width:50%;margin-top:10px;" >    <div id="amountContainer">
+                  <?php echo $this->Form->input('numberQuotas', array('type' => 'text', 'label' => 'Numero de cuotas')); ?>
                </div> 
            </div>
-           <?php echo $this->Form->end('Aplicar pago'); }?>
+           <br /><br /><br /><br />
+            <input type="button" value="Aplicar pago" class="buttonCakeLike" style="width:auto;" id="applyPaymentId" />
+           <?php } ?>
     </div>
     
     <div id="paymentsOfSocio">
@@ -57,13 +59,17 @@
         <?php } ?>
     </div>
     
-    <div id="searchSocioContainer" style="color:white;">
-        <div id="closeButton" ></div>
+    <div id="searchSocioContainer" style="color:white;width: 40%;">
 
-        Busqueda por socio
-        <input type="text" id="socioNameSearch" />
-        <input type="button" value="Consultar" id="retrieveSocios" />        
-        <div id="socioData">
+        
+        <h2 class="tituloGraficas" >Busqueda por socio</h2>
+        <div class="divCloseButtonContainer" >
+            <?php echo $this->Html->image('closeButton2.jpg'); ?>
+        </div>
+    
+        <input type="text" id="socioNameSearch" style="width:70%;margin-left:10px;" /> <br />
+        <input type="button" value="Consultar" class="buttonCakeLike" style="width:auto;margin: 10px;" id="retrieveSocios" />        
+        <div id="socioData" style="margin-bottom:10px;">
                 
         </div>
     </div>

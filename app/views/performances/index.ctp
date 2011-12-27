@@ -58,7 +58,7 @@ echo $paginator->counter(array(
 	<h3><?php __('Acciones'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Nueva', true), array('action' => 'add')); ?></li>
-                <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li>
+                <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'display', 'home'));?></li>
                 <li><?php echo $this->Html->link(__('Inactivas', true), array('action' => 'search'));?></li>
       
         </ul>

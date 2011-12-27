@@ -13,7 +13,19 @@ class Suscription extends AppModel{
         'name' => array(
                  'rule' => 'notEmpty',      
                  'message' => 'Nombre  de suscripcion es un campo requerido'
-             )    
+             ),
+        'length_months' => array(
+                 'no_vacio' => array(   
+                     'rule' => 'notEmpty',      
+                     'message' => 'Cantidad de meses que abona es un campo requerido'
+                     
+                 ),
+                 'numerico' => array(
+                     'rule' => 'numeric',      
+                     'message' => 'Cantidad de meses que abona es un número'
+                 )
+                 
+             )
     );
     
     public function cUpdateSuscription($suscriptionId, $suscriptionName, $suscriptionDescription, $suscriptionLengthMonths){

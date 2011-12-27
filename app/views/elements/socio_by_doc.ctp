@@ -2,5 +2,5 @@
         echo $my_socio['Socio']['name']. ' '. $my_socio['Socio']['surname'] . '--||--'.  $my_socio['Socio']['id'];
 
              } else {
-                 echo 'No hay socios para ese documento'; } ?>    
+                 echo 'No existe socio'; } ?>    
 

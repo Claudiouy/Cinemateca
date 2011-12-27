@@ -33,6 +33,7 @@
             <td>
                    <div id="dataSocioTicketContainer" >
 
+
                         <div id="socioByDocResult">
                             Socio: <input type="text" readonly="readonly" id="inputReadOnlySocio" />
 
@@ -181,4 +182,6 @@
     
     
 </table>
+
 </div>
+

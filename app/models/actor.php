@@ -35,11 +35,22 @@ class Actor extends AppModel{
         return $myActor;
     }
     
-    public function cUpdateActor($actorId, $actorName, $actorLastname, $actorBirthdate){
+    public function cUpdateActor($actorId, $actorName, $actorLastname, $actorBirthdate,$actorNacionality, $actorImagePath){
         $updatedOk = false;
-        $fields = array('Actor.name' => '"'.$actorName.'"',
-                        'Actor.lastname' => '"'.$actorLastname.'"' ,
-                        'Actor.birthdate' => '"'.$actorBirthdate.'"');
+        
+        if(!empty($actorImagePath)){
+            $fields = array('Actor.name' => '"'.$actorName.'"',
+                            'Actor.image_path' => '"'.$actorImagePath.'"',
+                            'Actor.lastname' => '"'.$actorLastname.'"' ,
+                            'Actor.nacionality' => '"'.$actorNacionality.'"',
+                            'Actor.birthdate' => '"'.$actorBirthdate.'"');
+        }
+        else{
+            $fields = array('Actor.name' => '"'.$actorName.'"',
+                            'Actor.lastname' => '"'.$actorLastname.'"' ,
+                            'Actor.nacionality' => '"'.$actorNacionality.'"',
+                            'Actor.birthdate' => '"'.$actorBirthdate.'"');
+        }
         $conditions = array('Actor.id' => $actorId);
         
         if($this->updateAll($fields, $conditions) == true) $updatedOk = true;

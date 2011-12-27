@@ -173,20 +173,25 @@ class PaymentsController extends AppController{
     
     function set_payment(){
         
-        if(!empty($this->data['Payment'])){
-            $rawPayment = $this->data['Payment'];
+        if(!empty($_POST['idSocio']) && !empty($_POST['numberQuotas'])){
+            
+            $numberOfQuotas = $_POST['numberQuotas'];
+            $idOfSocio = $_POST['idSocio'];
             $this->loadModel('Socio');
             $this->loadModel('Suscription');
-            $mySocio = $this->Socio->findById($rawPayment['idSocio']);
-            
+            $mySocio = $this->Socio->findById($idOfSocio);
+            $mess= 'false|||No se ingresó ningún socio';
             if(!empty($mySocio)) {                
                 $mySuscription = $this->Suscription->findById($mySocio['Socio']['suscription_id']);
                 
                 try{
-                    if($this->Payment->cCreateNewPayment( $mySuscription, $rawPayment['idSocio'], $rawPayment['numberQuotas'])){
+                    if($this->Payment->cCreateNewPayment( $mySuscription, $idOfSocio, $numberOfQuotas)){
 
-                        if($this->Socio->cUpdateSocioEffectiveDate($mySuscription, $mySocio, $rawPayment['numberQuotas'])){
-                            $this->redirect('/payments');
+                        if($this->Socio->cUpdateSocioEffectiveDate($mySuscription, $mySocio, $numberOfQuotas)){
+                            
+                            $mess = array('true' , $mySuscription, $mySocio, $numberOfQuotas);
+                            $this->Session->setFlash('El pago se realizó correctamente');
+                            
                         }
                         else {
                             throw new Exception();
@@ -198,11 +203,13 @@ class PaymentsController extends AppController{
                     }
                 }
                 catch(Exception $e){
-                    
+                    $mess [] = 'false|||Algún dato obligatorio no fué ingresado, o hubo un error en el tipo de dato';
                 }
             }
         }
-        $this->redirect('/payments/new_payment');
+        $this->set('message', $mess);
+        $this->render('/elements/payment_print');
+        return false;
     }
     
     /*
@@ -269,7 +276,7 @@ class PaymentsController extends AppController{
         $this->render('/elements/empty_layout');
     }
     
-     function retrievePaymentsAmountDataChart(){
+    function retrievePaymentsAmountDataChart(){
         
         if(!empty($_POST)){
           $dateFrom = date('Y-m-d', strtotime($_POST['dateFrom']));
@@ -280,6 +287,17 @@ class PaymentsController extends AppController{
         $this->set('data', $dataArray);
         $this->set('legend', $legendArray);
         $this->render('/elements/empty_layout');
+    }
+    
+    function getPaymentById(){
+        
+        if(!empty($_POST['idPayment'])){
+            $idPayment = $_POST['idPayment'];
+            $myPayment =$this->Payment->findById($idPayment);
+            $this->set('myPayment', $myPayment);
+        }
+        $this->render('/elements/payment_reprint');
+        return false;
     }
     
 }

@@ -9,8 +9,11 @@ var $validate = array(
      'rule' => 'notEmpty',
      'required' => false,
      'message' => 'Favor ingresar un dato',
-     'last' => true));
-
+     'last' => true),
+    'precio' => array(
+'rule' => array('money', 'left'),
+'message' => 'Favor, ingrese el monto.'
+));
 
 }
 ?>

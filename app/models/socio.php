@@ -49,6 +49,11 @@ var $belongsTo  = array('State','Suscription','PaymentMethod','Colectivo','Credi
      'message' => 'Favor ingresar un email valido',
      'last' => true),
       
+      'cars' => array(
+'rule' => 'numeric',
+'message' => 'Please supply the number of cars.'
+),
+      
       
      'documento_identidad' => array(
      'esValida' => array(

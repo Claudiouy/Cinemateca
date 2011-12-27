@@ -10,7 +10,7 @@
             echo $form->create('Suscription', array('action' => 'new_suscription'));
             echo $this->Form->input('name', array('label' => 'Nombre'));
             echo $this->Form->input('description', array('label' => 'descripcion'));
-            echo $this->Form->input('repeats_by_year', array('label' => 'Repeticiones por año'));
+            echo $this->Form->input('length_months', array('label' => 'Cantidad de meses que paga'));
             echo $this->Form->end('Guardar');
         
         ?>

@@ -21,7 +21,7 @@ echo $form->input('Performance.precio', array('label'=>'Precio Funcion:'));
 <?php
 
 $options=array(1=>'SI',0=>'NO');
-$attributes=array('legend'=>"¿Es estreno? ", 'class'=>'estreno');
+$attributes=array('legend'=>"¿Es estreno? ", 'class'=>'estreno', 'default'=>0);
 echo $this->Form->radio('estreno',$options,$attributes);
 ?>
 </div>

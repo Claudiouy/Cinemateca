@@ -12,6 +12,13 @@ class PeliculasController extends AppController{
     
     function index(){
         $this->Pelicula->recursive = 0;
+        $this->loadModel('Actor');
+        $this->loadModel('Director');
+        $conditions1 = array('Actor.deleted = ' => 0);
+        $allActors = $this->Actor->find('all', array('conditions' => $conditions1));
+        $allDirectors = $this->Director->find('all');
+        $this->set('allAct', $allActors);
+        $this->set('allDir', $allDirectors);
         $conditions = array('Pelicula.deleted = ' => 0);
         $this->set('peliculas', $this->paginate('Pelicula', $conditions));
     }
@@ -28,14 +35,19 @@ class PeliculasController extends AppController{
     function nueva_pelicula(){
         if(!empty($this->data['Pelicula'])){
              //var_dump($this->data['Pelicula']);
+            if(is_uploaded_file($_FILES['upfilePel']['tmp_name'])){
+                    move_uploaded_file($_FILES['upfilePel']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/cake_primero/app/webroot/img/imgPelis/'.(string)time().$_FILES['upfilePel']['name'] );
+                    $this->data['Pelicula']['image_path'] = (string)time().$_FILES['upfilePel']['name'];
+            }
+                
             if($this->Pelicula->save($this->data['Pelicula'])){
-                $this->Session->setFlash('La película se salvó correctamente', 'default');   
-                $this->redirect('/peliculas/index');
+                $this->Session->setFlash('La película se salvó correctamente', 'default');
             }
             else {
                 $this->Session->setFlash('Error al guardar la película', 'flash_error');
             }
         }
+        $this->redirect('/peliculas/index');
     }
     
     function editar_pelicula(){
@@ -43,16 +55,35 @@ class PeliculasController extends AppController{
         #Si lo recibe por get viene del listado, por post es el envio del formulario
         if(!empty($this->data['Pelicula'])){           
             $nueva_pelicula = $this->data['Pelicula'];
-            $this->Pelicula->set($nueva_pelicula);   
+            $this->Pelicula->set($nueva_pelicula);
             
             if($this->Pelicula->validates()){ //necesario, ya que validates() valida el metodo save(), no el update()               
-                $this->Pelicula->updateAll(
-                    array('Pelicula.name' => '"'.$nueva_pelicula['name'].'"',
-                          'Pelicula.duracion' => $nueva_pelicula['duracion'],
-                          'Pelicula.anio' => $nueva_pelicula['anio'],
-                          'Pelicula.activa' => $nueva_pelicula['activa']),
-                    array('Pelicula.id' => $nueva_pelicula['id'])
-                    );
+                if(is_uploaded_file($_FILES['upfilePel']['tmp_name'])){
+                            move_uploaded_file($_FILES['upfilePel']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/cake_primero/app/webroot/img/imgPelis/'.(string)time().$_FILES['upfilePel']['name'] );
+                            $this->Pelicula->updateAll(
+                                                    array('Pelicula.name' => '"'.$nueva_pelicula['name'].'"',
+                                                          'Pelicula.duracion' => $nueva_pelicula['duracion'],
+                                                          'Pelicula.anio' => $nueva_pelicula['anio'],
+                                                          'Pelicula.country' => $nueva_pelicula['country'],
+                                                          'Pelicula.descripcion' => '"'.$nueva_pelicula['descripcion'].'"',
+                                                          'Pelicula.image_path' => '"'.(string)time().$_FILES['upfilePel']['name'].'"',  
+                                                          'Pelicula.activa' => $nueva_pelicula['activa']),
+                                                          
+                                                    array('Pelicula.id' => $nueva_pelicula['id'])
+                                                    );
+                        }
+                        else{
+                            $this->Pelicula->updateAll(
+                                                    array('Pelicula.name' => '"'.$nueva_pelicula['name'].'"',
+                                                          'Pelicula.duracion' => $nueva_pelicula['duracion'],
+                                                          'Pelicula.country' => $nueva_pelicula['country'],
+                                                          'Pelicula.anio' => $nueva_pelicula['anio'],
+                                                          'Pelicula.descripcion' => '"'.$nueva_pelicula['descripcion'].'"',
+                                                          'Pelicula.activa' => $nueva_pelicula['activa']),
+                                                    array('Pelicula.id' => $nueva_pelicula['id'])
+                                                    );
+                        }
+                
            
                  $this->redirect("/peliculas");
             }
@@ -61,7 +92,12 @@ class PeliculasController extends AppController{
             $this->redirect('/peliculas/editar_pelicula/'.$nueva_pelicula['id']);
         }
         else { 
-            
+            $this->loadModel('Actor');
+            $this->loadModel('Director');
+            $allActors = $this->Actor->find('all');
+            $allDirectors = $this->Director->find('all');
+            $this->set('allAct', $allActors);
+            $this->set('allDir', $allDirectors);
             if(!empty($this->params['pass']['0'])){               
                 $id_pelicula = $this->params['pass']['0'];
                 $mi_pelicula = $this->Pelicula->findById($id_pelicula);
@@ -148,9 +184,6 @@ class PeliculasController extends AppController{
        $this->Pelicula->recursive = 2;
        $conditions = array('Pelicula.activa = 1');
        $activePeliculas = $this->Pelicula->find('all', array('conditions' => $conditions));
-       //$activePeliculasJson = json_encode($activePeliculas);
-       //return $activePeliculasJson;
-       //$firstPelicula = $activePeliculas[0];
        $this->set('activePeliculas', $activePeliculas);
        $this->render('/elements/maquetado_pelicula');
    }
@@ -158,6 +191,8 @@ class PeliculasController extends AppController{
    function json_peliculas_activas2(){
        $this->render('/elements/maquetado_pelicula');
    }
+   
+
     
 }
 

@@ -428,18 +428,18 @@ $this->set(compact('socios'));
 }
 
 
-    function charts(){
+function charts(){
         
     }
     
-    function retrieveUpToDateSocios(){
+function retrieveUpToDateSocios(){
         $dataPie = $this->Socio->getUpToDatePieData();
         $this->set('data', $dataPie);
         $this->set('legend', "Socios al dia");
         $this->render('/elements/empty_layout');
     }
     
-    function retrieveSociosByAgeChart(){
+function retrieveSociosByAgeChart(){
         $dataPie = $this->Socio->getSociosByAge();
         $this->set('data', $dataPie);
         $this->set('legend', "Socios segun edad");

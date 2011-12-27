@@ -30,7 +30,7 @@ $this->paginate = array (
             'order' => array ('User.id' => 'DESC'),
             'limit'=> 5,
             'conditions' => array ('User.estado'=>1),
-            'recursive' => 0);
+            'recursive' => -1);
 $onlyActive = $this->paginate('User');
 $this->set(compact('onlyActive'));
 
@@ -46,7 +46,7 @@ function inicio(){
         
     }
 
- function view($id = null) {
+function view($id = null) {
         if(!$id){
         $this->Session->setFlash('Usuario no Valido.', '/flashmsg/flash_bad');
         $this->redirect(array('action'=>'index'));
@@ -55,7 +55,7 @@ function inicio(){
         $this->set('user', $this->User->read(null, $id));
     }
         
-    function add() {
+function add() {
   
 	if (!empty($this->data)) 
 		{
@@ -73,7 +73,7 @@ function inicio(){
 		}
 	}
                 
- function edit($id = null) {
+function edit($id = null) {
       if (!$id) {
 $this->Session->setFlash('Usuario No Válido');
 $this->redirect(array('action'=>'index'), null, true);
@@ -90,7 +90,7 @@ $this->Session->setFlash('El usuario no ha sido guardado, intentelo otra vez', '
 }
 }
 
- function delete($id = null) {
+function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash('ID de usuario no valido', '/flashmsg/flash_bad');
 			$this->redirect(array('action'=>'index'));

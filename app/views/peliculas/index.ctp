@@ -36,9 +36,69 @@
 <div class="actions">
 	<h3><?php __('Acciones'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Nueva película', true), array('action' => 'nueva_pelicula')); ?></li>
+		<li><input type="button" class="buttonCakeLike" value="Ingresar pelicula" id="openNewMovieButton" /></li>
                 <li><?php echo $this->Html->link(__('Activar películas', true), array('action' => 'seleccionar_peliculas')); ?></li>
-                <input type="button" value="Cargar peliculas" id="showTemplateBut" />
+                
         </ul>
         
+</div>
+
+<div style="margin-left:45%;"><p>
+<div class="paging">
+	<?php echo $paginator->prev('<< '.__('previa', true), array(), null, array('class'=>'disabled'));?>
+ | 	<?php echo $paginator->numbers();?>
+	<?php echo $paginator->next(__('siguiente', true).' >>', array(), null, array('class' => 'disabled'));?>
+</div>
+</p>
+</div>	
+
+<div id="newMovieContainer" style="width:50%;left: 20%;">
+    
+        <h2 class="tituloGraficas" >Agregar pelicula</h2>
+        <div class="divCloseButtonContainer" >
+            <?php echo $this->Html->image('closeButton2.jpg'); ?>
+        </div>
+    
+        <div style="width:50%;float:left;">
+        <?php 
+            echo $form->create('Pelicula', array('action' => 'nueva_pelicula', 'type' => 'file'));
+            echo $this->Form->input('name', array('label' => 'Título'));
+            echo $this->Form->input('duracion', array('label' => 'Duración'));
+            echo $this->Form->input('anio', array('label' => 'Año de estreno'));
+            echo $this->Form->input('country', array('label' => 'Pais'));
+            echo $this->Form->textarea('descripcion', array('label' => 'Descripcion', 'style' => 'margin-left:10px;'));
+            echo $this->Form->input('activa', array('type' => 'checkbox', 'label' => 'Activa'));
+            
+            ?>
+            <INPUT TYPE=FILE NAME="upfilePel" /><br />
+            
+            <?php
+            
+            echo $this->Form->end('Guardar');
+        
+        ?>
+        <?php echo $this->Session->flash(); ?>
+        </div>  
+        
+        <div style="width:50%;float:left;" >
+            Actores <br />
+            <select id="actorsSelectId" name="actorsSelectId" style="margin-bottom:30px;">
+                <option value="-1" >None</option>
+                <?php if(!empty($allAct)){
+                            foreach ($allAct as $act){ ?>
+                                <option value="<?php echo $act['Actor']['id']; ?>" ><?php echo $act['Actor']['name']. ' ' .$act['Actor']['lastname']; ?></option>                                
+                     <?php  }
+                        }?>
+            </select><br />
+            
+            Directores <br />
+            <select id="dirSelectId" name="dirSelectId" >
+                <option value="-1" >None</option>
+                <?php if(!empty($allDir)){
+                            foreach ($allDir as $dir){ ?>
+                                <option value="<?php echo $dir['Director']['id']; ?>" ><?php echo $dir['Director']['name']. ' ' .$dir['Director']['surname']; ?></option>                                
+                     <?php  }
+                        }?>
+            </select>
+        </div>
 </div>
