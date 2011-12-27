@@ -16,26 +16,34 @@ class Suscription extends AppModel{
              ),
         'length_months' => array(
                  'no_vacio' => array(   
-                     'rule' => 'notEmpty',      
+                     'rule' => array('notEmpty'),     
                      'message' => 'Cantidad de meses que abona es un campo requerido'
                      
                  ),
                  'numerico' => array(
                      'rule' => 'numeric',      
                      'message' => 'Cantidad de meses que abona es un número'
-                 )
+                 ),
+                 'mayor_cero' => array(
+                     'rule' => array('comparison', '>', 0),
+                     'message' => 'El campo mes es mayor a 0.' 
+                     )
                  
              ),
         'amount' => array(
                  'no_vacio' => array(   
-                     'rule' => 'notEmpty',      
+                      'rule' => array('notEmpty', array('comparison', '>', 0)),     
                      'message' => 'Cantidad de meses que abona es un campo requerido'
                      
                  ),
                  'numerico' => array(
                      'rule' => 'numeric',      
                      'message' => 'Cantidad de meses que abona es un número'
-                 )
+                 ),
+                 'mayor_cero' => array(
+                     'rule' => array('comparison', '>', 0),
+                     'message' => 'El campo importe es mayor a 0.' 
+                     )
                  
              )
     );

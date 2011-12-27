@@ -18,14 +18,18 @@ class Pelicula extends AppModel{
          'duracion' => array(
              
              'duracion_obligatoria' => array(
-                                 'rule' => array('notEmpty', array('comparison', '>', 0)),
+                                 'rule' => array('notEmpty'),
                                  'message' => 'Debe indicar una duración mayor que 0'
                                  ),
              'numerica' =>array(
                          
                                  'rule' => 'numeric',
                                  'message' => 'La duración es un dato numérico'
-                                 )
+                                 ),
+             'mayor_cero' => array(
+                     'rule' => array('comparison', '>', 0),
+                     'message' => 'El campo duracion es mayor a 0.' 
+                     )
              
              ),
          'anio' => array(
@@ -37,7 +41,11 @@ class Pelicula extends AppModel{
                          
                                  'rule' => 'numeric',
                                  'message' => 'El año es es un dato numérico'
-                                 )
+                                 ),
+             'mayor_cero' => array(
+                     'rule' => array('comparison', '>', 0),
+                     'message' => 'El campo anio es mayor a 0.' 
+                     )
              
              
              ), 
