@@ -7,7 +7,7 @@
 
 class Payment extends AppModel{
     var $name = 'Payment';
-    var $belongsTo = 'Socio';
+    var $belongsTo = array('Socio', 'Sala');
     var $actsAs = array('UtilDate');
     
    /* public function getSocio($socioId){
@@ -27,11 +27,11 @@ class Payment extends AppModel{
         return $safeDeleteOk;
     }
     
-    public function cCreateNewPayment($mySuscription, $mySocioId, $numberOfQuotas){
+    public function cCreateNewPayment($mySuscription, $mySocioId, $numberOfQuotas, $idSala){
         
         $savedOk = false;
         $totalAmount = ($mySuscription['Suscription']['amount'] * $numberOfQuotas); 
-        $data = array('Payment' => array('socio_id' => $mySocioId, 'amount' => $totalAmount, 'numbers_quotas' => $numberOfQuotas));
+        $data = array('Payment' => array('socio_id' => $mySocioId, 'amount' => $totalAmount, 'numbers_quotas' => $numberOfQuotas, 'sala_id' => $idSala));
         if($this->save($data)){
             $savedOk = true;
         }
@@ -48,7 +48,7 @@ class Payment extends AppModel{
         
         $okUpdated = $this->updateAll($fields, $conditions);
         $this->create();
-        $data = array('Payment' => array('socio_id' => $paymentToCancel['Payment']['socio_id'] , 'amount' => ($paymentToCancel['Payment']['amount'] * -1), 'id_canceled' => $paymentToCancel['Payment']['id'], 'created' => date('Y-m-d-H-i-s')));
+        $data = array('Payment' => array('socio_id' => $paymentToCancel['Payment']['socio_id'] , 'amount' => ($paymentToCancel['Payment']['amount'] * -1), 'id_canceled' => $paymentToCancel['Payment']['id'], 'created' => date('Y-m-d-H-i-s'), 'sala_id' =>  $paymentToCancel['Payment']['sala_id']));
         $okCreatedCanceled = $this->save($data);
         $canceledOk = $okUpdated && $okCreatedCanceled;
         return $canceledOk;
@@ -100,7 +100,7 @@ class Payment extends AppModel{
          $listP = $this->cGetMonthCount();
     }
     
-    public function cGetFilteredPayments( $nameSocio, $lastNameSocio, $ciSocio, $amountPayment ){
+    public function cGetFilteredPayments( $nameSocio, $lastNameSocio, $ciSocio, $amountPayment, $salaId ){
         
         $this->recursive = 1;
         $innerConditions = array('Payment.deleted = ' => 0);
@@ -123,6 +123,11 @@ class Payment extends AppModel{
         if(!empty($amountPayment)){
             $amountCondition = array('Payment.amount = ' => $amountPayment);
             $innerConditions = array_merge($innerConditions, $amountCondition);
+        }
+        
+        if(!empty($salaId) && $salaId != '-1'){
+            $salaCondition = array('Payment.sala_id = ' => $salaId );
+            $innerConditions = array_merge($innerConditions, $salaCondition);
         }
         
         //$paymentsByFilters = array();

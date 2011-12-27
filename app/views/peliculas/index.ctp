@@ -36,7 +36,7 @@
 <div class="actions">
 	<h3><?php __('Acciones'); ?></h3>
 	<ul>
-		<li><input type="button" class="buttonCakeLike" value="Ingresar pelicula" id="openNewMovieButton" /></li>
+		<li><input type="button" class="buttonCakeLike" value="Ingresar pelicula" style="width:100%;" id="openNewMovieButton" /></li>
                 <li><?php echo $this->Html->link(__('Activar películas', true), array('action' => 'seleccionar_peliculas')); ?></li>
                 
         </ul>
@@ -70,7 +70,9 @@
             echo $this->Form->input('activa', array('type' => 'checkbox', 'label' => 'Activa'));
             
             ?>
+            
             <INPUT TYPE=FILE NAME="upfilePel" /><br />
+            Acepta formatos: 'jpg', 'jpeg', 'gif' y 'png' menores a un mega; 
             
             <?php
             

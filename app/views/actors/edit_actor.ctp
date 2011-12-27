@@ -13,7 +13,7 @@
                 echo $this->Form->input('name', array('label' => 'Nombre' ,'value' => $my_actor['Actor']['name']));
                 echo $this->Form->input('lastname', array('label' => 'Apellido' ,'value' => $my_actor['Actor']['lastname']));
                 echo $this->Form->input('nacionality', array('label' => 'Nacionalidad' ,'value' => $my_actor['Actor']['nacionality']));
-                echo $this->Form->input('birthdate', array( 'type' => 'date', 'value' => $my_actor['Actor']['birthdate']));
+                echo $this->Form->input('birthdate', array( 'type' => 'date', 'value' => $my_actor['Actor']['birthdate'], 'maxYear' => date('Y', strtotime('-  1 days')), 'minYear' => date('Y', strtotime('- 100 years'))));
                 echo $this->Form->input('id', array('type' => 'hidden', 'value' => $my_actor['Actor']['id']));
                 echo $this->Html->image('imgPelis/'.$my_actor['Actor']['image_path'], array('style' => 'width:200px;height:200px;float:left;clear:both;'));
                 ?>

@@ -10,6 +10,11 @@ class PeliculasController extends AppController{
     var $hasMany = array('Actors, Directors');
     var $components = array('RequestHandler');
     
+    var $paginate = array(
+                        'limit' => 25,
+                        'order' => array('Pelicula.created' => 'desc')
+                        );
+    
     function index(){
         $this->Pelicula->recursive = 0;
         $this->loadModel('Actor');
@@ -36,8 +41,18 @@ class PeliculasController extends AppController{
         if(!empty($this->data['Pelicula'])){
              //var_dump($this->data['Pelicula']);
             if(is_uploaded_file($_FILES['upfilePel']['tmp_name'])){
+                $message = '';
+                if($_FILES['upfilePel']['size'] < 1048576 && (($_FILES["upfilePel"]["type"] == "image/gif")
+                                                                || ($_FILES["upfilePel"]["type"] == "image/jpeg")
+                                                                || ($_FILES["upfilePel"]["type"] == "image/jpg")
+                                                                || ($_FILES["upfilePel"]["type"] == "image/png"))){
                     move_uploaded_file($_FILES['upfilePel']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/cake_primero/app/webroot/img/imgPelis/'.(string)time().$_FILES['upfilePel']['name'] );
                     $this->data['Pelicula']['image_path'] = (string)time().$_FILES['upfilePel']['name'];
+                                                                }
+                                                                 else{
+                        $message += ' La imagen no se subió porque no era una imagen compatible o porque pesaba mas de 1 mega.';
+                    }
+                                                                
             }
                 
             if($this->Pelicula->save($this->data['Pelicula'])){
@@ -52,6 +67,7 @@ class PeliculasController extends AppController{
     
     function editar_pelicula(){
         
+        $message = '';
         #Si lo recibe por get viene del listado, por post es el envio del formulario
         if(!empty($this->data['Pelicula'])){           
             $nueva_pelicula = $this->data['Pelicula'];
@@ -59,32 +75,48 @@ class PeliculasController extends AppController{
             
             if($this->Pelicula->validates()){ //necesario, ya que validates() valida el metodo save(), no el update()               
                 if(is_uploaded_file($_FILES['upfilePel']['tmp_name'])){
+                            
+                    if($_FILES['upfilePel']['size'] < 1048576 && (($_FILES["upfilePel"]["type"] == "image/gif")
+                                                                || ($_FILES["upfilePel"]["type"] == "image/jpeg")
+                                                                || ($_FILES["upfilePel"]["type"] == "image/jpg")
+                                                                || ($_FILES["upfilePel"]["type"] == "image/png"))){
                             move_uploaded_file($_FILES['upfilePel']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/cake_primero/app/webroot/img/imgPelis/'.(string)time().$_FILES['upfilePel']['name'] );
-                            $this->Pelicula->updateAll(
-                                                    array('Pelicula.name' => '"'.$nueva_pelicula['name'].'"',
-                                                          'Pelicula.duracion' => $nueva_pelicula['duracion'],
-                                                          'Pelicula.anio' => $nueva_pelicula['anio'],
-                                                          'Pelicula.country' => $nueva_pelicula['country'],
-                                                          'Pelicula.descripcion' => '"'.$nueva_pelicula['descripcion'].'"',
-                                                          'Pelicula.image_path' => '"'.(string)time().$_FILES['upfilePel']['name'].'"',  
-                                                          'Pelicula.activa' => $nueva_pelicula['activa']),
-                                                          
-                                                    array('Pelicula.id' => $nueva_pelicula['id'])
-                                                    );
-                        }
-                        else{
-                            $this->Pelicula->updateAll(
-                                                    array('Pelicula.name' => '"'.$nueva_pelicula['name'].'"',
-                                                          'Pelicula.duracion' => $nueva_pelicula['duracion'],
-                                                          'Pelicula.country' => $nueva_pelicula['country'],
-                                                          'Pelicula.anio' => $nueva_pelicula['anio'],
-                                                          'Pelicula.descripcion' => '"'.$nueva_pelicula['descripcion'].'"',
-                                                          'Pelicula.activa' => $nueva_pelicula['activa']),
-                                                    array('Pelicula.id' => $nueva_pelicula['id'])
-                                                    );
-                        }
+                            $message += ' La imagen se subió correctamente.';
+                             }
+                    else{
+                        $message += ' La imagen no se subió porque no era una imagen compatible o porque pesaba mas de 1 mega.';
+                    }
+                            
+                            
+                    $this->Pelicula->updateAll(
+                                            array('Pelicula.name' => '"'.$nueva_pelicula['name'].'"',
+                                                  'Pelicula.duracion' => $nueva_pelicula['duracion'],
+                                                  'Pelicula.anio' => $nueva_pelicula['anio'],
+                                                  'Pelicula.country' => $nueva_pelicula['country'],
+                                                  'Pelicula.descripcion' => '"'.$nueva_pelicula['descripcion'].'"',
+                                                  'Pelicula.image_path' => '"'.(string)time().$_FILES['upfilePel']['name'].'"',  
+                                                  'Pelicula.activa' => $nueva_pelicula['activa']),
+
+                                            array('Pelicula.id' => $nueva_pelicula['id'])
+                                            );
+                    $message += ' La películas se creó correctamente.';
+                   
+                 }
+                else{
+                    $this->Pelicula->updateAll(
+                                            array('Pelicula.name' => '"'.$nueva_pelicula['name'].'"',
+                                                  'Pelicula.duracion' => $nueva_pelicula['duracion'],
+                                                  'Pelicula.country' => $nueva_pelicula['country'],
+                                                  'Pelicula.anio' => $nueva_pelicula['anio'],
+                                                  'Pelicula.descripcion' => '"'.$nueva_pelicula['descripcion'].'"',
+                                                  'Pelicula.activa' => $nueva_pelicula['activa']),
+                                            array('Pelicula.id' => $nueva_pelicula['id'])
+                                            );
+                    $message += ' La películas se creó correctamente.';
+                }
                 
-           
+                
+                 $this->Session->setFlash($message, 'default');
                  $this->redirect("/peliculas");
             }
             #$this->render('/peliculas/editar_pelicula/'.$nueva_pelicula['id']);
@@ -114,8 +146,9 @@ class PeliculasController extends AppController{
         if(!empty($this->data['Pelicula']['nombre'])){
             $nombre_peli = $this->data['Pelicula']['nombre'];
             $filtros =  array("Pelicula.name LIKE" => "%".$nombre_peli."%");
+            $order = array('Pelicula.name');
             # tambien puede hacerse asi -> $filtros = 'Pelicula.nombre LIKE %"'.$nombre_peli.'"%';
-            $listaPorPelicula = $this->Pelicula->find('all', array('conditions' => $filtros));
+            $listaPorPelicula = $this->Pelicula->find('all', array('conditions' => $filtros, 'order' => $order));
             $this->set('seleccionPelis', $listaPorPelicula);
         }
         else{

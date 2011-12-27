@@ -19,7 +19,7 @@
             echo $this->Form->end('Guardar');
         
         ?>
-        <?php echo $this->Session->flash(); ?>
+        <?php //echo $this->Session->flash(); ?>
         </div>    
             
     </body>

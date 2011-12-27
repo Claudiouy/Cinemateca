@@ -9,6 +9,10 @@ class ActorsController extends AppController{
     var $name = 'Actors';
     var $hasMany = array('Peliculas');
     
+    var $paginate = array(
+                        'limit' => 25,
+                        'order' => array('Actor.created' => 'desc')
+                        );
     
     function index(){
         $this->Actor->recursive = 0;
@@ -19,9 +23,18 @@ class ActorsController extends AppController{
     function new_actor(){
         if(!empty($this->data['Actor'])){
             
+            $message = '';
             if(is_uploaded_file($_FILES['upfile']['tmp_name'])){
-                move_uploaded_file($_FILES['upfile']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/cake_primero/app/webroot/img/imgPelis/'.(string)time().$_FILES['upfile']['name'] );
-                $this->data['Actor']['image_path'] = (string)time().$_FILES['upfile']['name'];
+                 if($_FILES['upfile']['size'] < 1048576 && (($_FILES["upfile"]["type"] == "image/gif")
+                                                                || ($_FILES["upfile"]["type"] == "image/jpeg")
+                                                                || ($_FILES["upfile"]["type"] == "image/jpg")
+                                                                || ($_FILES["upfile"]["type"] == "image/png"))){
+                                        move_uploaded_file($_FILES['upfile']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/cake_primero/app/webroot/img/imgPelis/'.(string)time().$_FILES['upfile']['name'] );
+                                        $this->data['Actor']['image_path'] = (string)time().$_FILES['upfile']['name'];
+                                                                }
+                                                                else{
+                                                                    $message += ' La imagen no se subió porque no era una imagen compatible o porque pesaba mas de 1 mega.';
+                                                                }
                 
             }
             
@@ -47,10 +60,20 @@ class ActorsController extends AppController{
     
     function edit_actor_proccess(){
         if(!empty($this->data['Actor'])){
+            $message = '';
             if(is_uploaded_file($_FILES['upfile']['tmp_name'])){
-                    move_uploaded_file($_FILES['upfile']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/cake_primero/app/webroot/img/imgPelis/'.(string)time().$_FILES['upfile']['name'] );
-                    $this->data['Actor']['image_path'] = (string)time().$_FILES['upfile']['name'];
-                    $correctly_updated = $this->Actor->cUpdateActor($this->data['Actor']['id'], $this->data['Actor']['name'], $this->data['Actor']['lastname'], $this->data['Actor']['birthdate'], $this->data['Actor']['nacionality'], $this->data['Actor']['image_path']);
+                if($_FILES['upfile']['size'] < 1048576 && (($_FILES["upfile"]["type"] == "image/gif")
+                                                                || ($_FILES["upfile"]["type"] == "image/jpeg")
+                                                                || ($_FILES["upfile"]["type"] == "image/jpg")
+                                                                || ($_FILES["upfile"]["type"] == "image/png"))){
+                                move_uploaded_file($_FILES['upfile']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/cake_primero/app/webroot/img/imgPelis/'.(string)time().$_FILES['upfile']['name'] );
+                                $this->data['Actor']['image_path'] = (string)time().$_FILES['upfile']['name'];
+                                $correctly_updated = $this->Actor->cUpdateActor($this->data['Actor']['id'], $this->data['Actor']['name'], $this->data['Actor']['lastname'], $this->data['Actor']['birthdate'], $this->data['Actor']['nacionality'], $this->data['Actor']['image_path']);
+                                                                }
+                                                                else{
+                                                                   $message += ' La imagen no se subió porque no era una imagen compatible o porque pesaba mas de 1 mega.'; 
+                                                                }
+                                
                 }
                 else{
                     $correctly_updated = $this->Actor->cUpdateActor($this->data['Actor']['id'], $this->data['Actor']['name'], $this->data['Actor']['lastname'], $this->data['Actor']['birthdate'], $this->data['Actor']['nacionality'], null);

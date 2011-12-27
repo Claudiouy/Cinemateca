@@ -71,13 +71,26 @@ echo $this->Html->charset();
 	<div id="container">
 		<div id="header">
 
-			<div id="navbar"> <a href="/cake_primero/tickets/ticket_socio" target="_parent">Ingreso a sala</a> - <a href="/cake_primero/socios" target="_parent">Modulo socios</a> - <a href="/cake_primero/peliculas" target="_parent">Modulo peliculas</a> - <a href="/cake_primero/payments" target="_parent">Modulo de pagos</a> - <a href="" target="_parent">Reportes de caja</a> -  <a href="/cake_primero" target="_parent">Otros Modulos</a> </div>    
+			<div id="navbar"> <a href="/cake_primero/tickets/ticket_socio" target="_parent">Ingreso a sala</a> - <a href="/cake_primero/socios" target="_parent">Modulo socios</a> - <a href="/cake_primero/peliculas" target="_parent">Modulo peliculas</a> - <a href="/cake_primero/payments" target="_parent">Modulo de pagos</a> -  <a href="/cake_primero" target="_parent">Otros Modulos</a> </div>    
 
 <?php
     echo $this->Session->flash();
     echo $this->Session->flash('auth');
 ?>
 		</div>
+             <div >
+                 <div  class="salaPestana">
+                        <?php if($this->Session->read('SalaId')) {
+                                            echo 'Sala: '.$this->Session->read('SalaId');
+                                        }
+                                        else{
+                                            echo 'Elija sala';
+                                        }
+                        
+                        ?>
+                        
+                    </div>
+             </div>
 		<div id="content">
                         
                     <div id="user-nav">
@@ -89,8 +102,7 @@ echo $this->Html->charset();
                         <?php echo $html->link('Login', array('controller'=>'users','action'=>'login'));?>
     <?php endif;?>
                     </div>
-
-
+                   
 
 			<?php echo $content_for_layout;?>
 
@@ -98,7 +110,7 @@ echo $this->Html->charset();
 		<div id="footer">
 
 
-			<div id="navbar"> <a href="/cake_primero/tickets/ticket_socio" target="_parent">Ingreso a sala</a> - <a href="/cake_primero/socios" target="_parent">Modulo socios</a> - <a href="/cake_primero/peliculas" target="_parent">Modulo peliculas</a> - <a href="/cake_primero/payments" target="_parent">Modulo de pagos</a> - <a href="" target="_parent">Reportes de caja</a> -  <a href="http://www.cinemateca.org.uy/plus.html" target="_parent">Otros Modulos</a> </div>    
+			<div id="navbar"> <a href="/cake_primero/tickets/ticket_socio" target="_parent">Ingreso a sala</a> - <a href="/cake_primero/socios" target="_parent">Modulo socios</a> - <a href="/cake_primero/peliculas" target="_parent">Modulo peliculas</a> - <a href="/cake_primero/payments" target="_parent">Modulo de pagos</a> -  <a href="/cake_primero" target="_parent">Otros Modulos</a> </div>    
 
 
 		</div>

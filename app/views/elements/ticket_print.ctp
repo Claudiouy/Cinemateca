@@ -8,4 +8,8 @@
             echo false;
         }
       }
+      if(!empty($message_no_socio)){
+          echo $message_no_socio;
+          
+      }
 ?>

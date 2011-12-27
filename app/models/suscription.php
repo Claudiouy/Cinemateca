@@ -25,14 +25,27 @@ class Suscription extends AppModel{
                      'message' => 'Cantidad de meses que abona es un número'
                  )
                  
+             ),
+        'amount' => array(
+                 'no_vacio' => array(   
+                     'rule' => 'notEmpty',      
+                     'message' => 'Cantidad de meses que abona es un campo requerido'
+                     
+                 ),
+                 'numerico' => array(
+                     'rule' => 'numeric',      
+                     'message' => 'Cantidad de meses que abona es un número'
+                 )
+                 
              )
     );
     
-    public function cUpdateSuscription($suscriptionId, $suscriptionName, $suscriptionDescription, $suscriptionLengthMonths){
+    public function cUpdateSuscription($suscriptionId, $suscriptionName, $suscriptionDescription, $suscriptionLengthMonths, $suscriptionAmount){
         
         $updatedOk = false;
         $fields = array('Suscription.name' => '"'.$suscriptionName.'"',
                         'Suscription.description' => '"'.$suscriptionDescription.'"' ,
+                        'Suscription.amount' => $suscriptionAmount,
                         'Suscription.length_months' => $suscriptionLengthMonths);
         $conditions = array('Suscription.id' => $suscriptionId);
         

@@ -3,11 +3,25 @@ class SalasController extends AppController {
 var $name =  'Salas';
 
 
+function beforeFilter(){
+        
+        parent::beforeFilter();
+        $this->Auth->allow('logout');
+        
+        if($this->action == 'index'|| $this->action == 'edit' || $this->action == 'add'){
+            if($this->viewVars['admin'] == false){
+                $this->Session->setFlash('Solo usuarios administrativos pueden ingresar a Sala');
+                $this->redirect('/');
+
+            }
+        }
+       
+    }
+
     function write_global_sala_id(){
         
         if(!empty($_POST['idSala'])){
             $idGlobalSala = $_POST['idSala'];
-            //Configure::write('Sala.id',$idGlobalSala);
             $this->Session->write("SalaId", $idGlobalSala);
             $this->autoRender=false;
             return 'true';

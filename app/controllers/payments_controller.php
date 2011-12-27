@@ -10,6 +10,11 @@ class PaymentsController extends AppController{
     var $name = 'Payments'; 
     var $components = array('RequestHandler');  // para no mostrar header y footer cuando cargo un element
     
+    var $paginate = array(
+                        'limit' => 25,
+                        'order' => array('Payment.created' => 'desc')
+                        );
+    
     /*
     function beforeFilter(){
         
@@ -29,16 +34,40 @@ class PaymentsController extends AppController{
     }*/
     
     function index(){
-        $this->Payment->recursive = 1;
-        $conditions = array('Payment.deleted = ' => 0);
-        $this->set('allPayments', $this->paginate('Payment', $conditions));
+        if($this->Session->read('SalaId')){
+             if($this->Session->read('SalaId') != '-1'){
+                $this->Payment->recursive = 1;
+                $this->loadModel('Sala');
+                $allSalas = $this->Sala->find('all');
+                $this->set('allSalas', $allSalas);
+                if($this->Session->read('SalaId')){
+                    $conditions = array('Payment.deleted = ' => 0, 'Payment.sala_id' => $this->Session->read('SalaId'));
+                    $this->set('allPayments', $this->paginate('Payment', $conditions));
+                }
+                else{
+                    $this->Session->setFlash('No hay un id de sala asignado', 'default'); 
+
+                }
+             }
+             else{
+                 $this->Session->setFlash('Para entrar en pagos debe seleccionar una sala', 'default');
+                    $this->redirect('/');
+             }
+        }else{
+            $this->Session->setFlash('Para entrar en pagos debe seleccionar una sala', 'default');
+            $this->redirect('/');
+        }
     }
     
     function payment_filters_method(){
         if(!empty($this->data['Payment'])){
+            
             $this->autoRender = false;
-            $my_data = $this->data['Payment'];        
-            $filteredList = $this->Payment->cGetFilteredPayments( $my_data['nameSocioOfPayment'], $my_data['lastNameSocioOfPayment'], $my_data['ciSocioOfPayment'], $my_data['amountOfPayment']);
+            $my_data = $this->data['Payment'];
+            $this->loadModel('Sala');
+            $allSalas = $this->Sala->find('all');
+            $this->set('allSalas', $allSalas);
+            $filteredList = $this->Payment->cGetFilteredPayments( $my_data['nameSocioOfPayment'], $my_data['lastNameSocioOfPayment'], $my_data['ciSocioOfPayment'], $my_data['amountOfPayment'], $_POST['salasSelectIdFind']);
             $this->set('allPayments', $this->paginate('Payment', $filteredList));
             $this->render('index');          
             return false;
@@ -158,25 +187,32 @@ class PaymentsController extends AppController{
     }
     
     function retrieveSocioById(){
-        if(!empty($this->params['pass']['0'])){        
+        if(!empty($this->params['pass']['0']) && $this->Session->read('SalaId')){        
             $idSocio = $this->params['pass']['0'];
             $this->loadModel('Socio');
             $this->Payment->recursive = 1;
             $selSocio = $this->Socio->findById($idSocio);
+            $this->loadModel('Sala');
+            $selectedSala = $this->Sala->findById($this->Session->read('SalaId'));
+            $this->set('selSala', $selectedSala);
             $socioPayments = $selSocio["Payment"];
             if( sizeOf($socioPayments) > 0 )  $this->set('paymentsSocio', $socioPayments);
             #var_dump($socioPayments);
             $this->set('selSocio', $selSocio);
+        }
+        else{
+            
         }
         $this->render('/payments/new_payment');
     }
     
     function set_payment(){
         
-        if(!empty($_POST['idSocio']) && !empty($_POST['numberQuotas'])){
+        if(!empty($_POST['idSocio']) && !empty($_POST['numberQuotas']) && !empty($_POST['miSala'])){
             
             $numberOfQuotas = $_POST['numberQuotas'];
             $idOfSocio = $_POST['idSocio'];
+            $idSala = $_POST['miSala'];
             $this->loadModel('Socio');
             $this->loadModel('Suscription');
             $mySocio = $this->Socio->findById($idOfSocio);
@@ -185,7 +221,7 @@ class PaymentsController extends AppController{
                 $mySuscription = $this->Suscription->findById($mySocio['Socio']['suscription_id']);
                 
                 try{
-                    if($this->Payment->cCreateNewPayment( $mySuscription, $idOfSocio, $numberOfQuotas)){
+                    if($this->Payment->cCreateNewPayment( $mySuscription, $idOfSocio, $numberOfQuotas, $idSala)){
 
                         if($this->Socio->cUpdateSocioEffectiveDate($mySuscription, $mySocio, $numberOfQuotas)){
                             

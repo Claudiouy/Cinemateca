@@ -309,7 +309,7 @@ padding: 4px;
 
 }
 
-#containerPaymentsChart, #ticketSaleContainer, #newMovieContainer, #newPaymentContainer, #searchSocioContainer{
+#containerPaymentsChart, #ticketSaleContainer, #newMovieContainer, #newPaymentContainer, #searchSocioContainer, #containerSocioChart{
     width:95%;
     position:absolute;
     top:14%;
@@ -359,4 +359,29 @@ padding: 4px;
 .paymentListButtonContainer{
     width: 24%;
     float:left;
+}
+
+.salaPestana{
+    border:white;
+    background-color: white;
+    height: 30px;
+    width:80px;
+    margin-left:5%;
+    padding:10px 3px 0 10px;
+    font-size:medium;color:black;
+    border-radius:9px 9px 0 0;
+    -moz-border-radius:9px 9px 0 0;
+    -webkit-border-radius:9px 9px 0 0;
+    -moz-opacity: 0.60 !important;
+    -webkit-opacity: 0.60!important;
+    opacity: 060 !important;
+    
+}
+
+#buscadorSeleccionarPelicula{
+    width: 22%;
+    float: left;
+    height: 500px;
+    border-right: solid black 1px;
+    margin-right: 65px;
 }

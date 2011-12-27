@@ -6,6 +6,15 @@
                <?php if(!empty($selSocio)) {
                   //echo $form->create('Payment', array('action' => 'set_payment')); 
                   echo 'El pago se efectuará para el cliente: '.$selSocio["Socio"]["name"]. ' ' . $selSocio["Socio"]["surname"] ; 
+                  ?>
+              
+        <br /><br /><br />
+            Sala <br />
+            <div style="margin-bottom:10px;">
+                <?php if(!empty($selSala)) echo $selSala['Sala']['name']; echo $this->Form->input('idOfSala', array('type' => 'hidden', 'value' => $selSala['Sala']['id'])); ?>  
+            </div>
+        <?php
+                
                echo $this->Form->input('idSocio', array('type' => 'hidden', 'value' => $selSocio["Socio"]["id"])); ?>
                
            <div style="width:50%;margin-top:10px;" >    <div id="amountContainer">

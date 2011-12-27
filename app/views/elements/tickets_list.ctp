@@ -20,10 +20,15 @@
         <td>
             Nombre de socio
         </td>
+        
+        <td>
+            Acciones
+        </td>
     </tr>
     
     <tr>
         <?php $amountSize = 0;
+        $numberOfTickets = 0;
               if(!empty($ticketsFromToday)) {
             //var_dump($klist);
                     
@@ -58,6 +63,31 @@
                                        }
                                 ?>
                             </td>
+                            
+                            <td>
+                                <div  >
+                                    <?php
+                                    
+                                        if(empty($tick['Ticket']['id_canceled']) && $tick['Ticket']['canceled'] == 0 ){
+                                            $numberOfTickets++ ;
+                                            ?>
+                                            
+                                            <input type="hidden" class="hiddenTicketClass"  value="<?php echo $tick['Ticket']['id']?>" />
+                                            <input type="button" style="width:auto;" value="Reimprimir" id="reprintTicketButton" class="buttonCakeLike" />
+                                        <?php
+                                            echo $this->Html->link(__('Anular', true), array('action' => 'cancelTicket', $tick['Ticket']['id']), null, sprintf(__('Esta Seguro de eliminar la entrada N° %s?', true), $tick['Ticket']['id'])); 
+                                        }
+                                        else{
+                                            if(!empty($tick['Ticket']['id_canceled'])){
+                                                echo 'Anula entrada nº: '.$tick['Ticket']['id_canceled'] ;
+                                            }
+                                            else{
+                                                echo 'Anulado.';
+                                            }
+                                        }
+                                            ?>
+                                    </div>
+                            </td>
                         </tr>
         <?php
                     }
@@ -86,12 +116,7 @@
         </td>
         
         <td>
-            Total entradas = <?php if(!empty($ticketsFromToday)) {
-                                            echo count($ticketsFromToday);
-                                        }
-                                        else{
-                                            echo 0;
-                                        }
+            Total entradas = <?php echo $numberOfTickets;
                             ?> 
         </td>
         

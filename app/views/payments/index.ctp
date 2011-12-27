@@ -37,7 +37,7 @@
                             </div>
                             <div style="float:right;margin-right:70px;">
                                 <input type="hidden" class="hiddenPaymentClass"  value="<?php echo $pay['Payment']['id']?>" />
-                                <input type="button" value="Reimprimir" id="reprintPaymentButton" class="buttonCakeLike" />
+                                <input type="button" value="Reimprimir" id="reprintPaymentButton" class="buttonCakeLike" style="width: auto;" />
                                 
                             </div>
                             
@@ -93,6 +93,19 @@
                         echo $this->Form->input('lastNameSocioOfPayment', array('label' => 'Apellido'));
                         echo $this->Form->input('ciSocioOfPayment', array('label' => 'Documento'));
                         echo $this->Form->input('amountOfPayment', array('label' => 'Monto'));
+                        
+                        ?>
+                            
+                            Salas <br />
+                            <select id="salasSelectIdFind" name="salasSelectIdFind" style="margin-bottom:30px;">
+                                <option value="-1" >None</option>
+                                <?php if(!empty($allSalas)){
+                                            foreach ($allSalas as $sala){ ?>
+                                                <option value="<?php echo $sala['Sala']['id']; ?>" ><?php echo $sala['Sala']['name'] ;?></option>                                
+                                     <?php  }
+                                        }?>
+                            </select><br />
+                    <?php
                         echo $this->Form->end('Consultar');
                     
                     

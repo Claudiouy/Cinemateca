@@ -21,11 +21,33 @@ class Ticket extends AppModel{
         return $ticketSold;
     }
     
-    function cRetrieveTickets($dateFrom, $dateTo){
-        
-        $conditions = array('Ticket.created >' => $dateFrom, 'Ticket.created <=' => $dateTo);
-        $listOfTickets = $this->find('all', array('conditions' => $conditions));
+    function cRetrieveTickets($dateFrom, $dateTo, $salaId, $socioCh, $noSocioCh){
+        if(!empty($salaId)){
+            $conditions = array('Ticket.created >=' => $dateFrom, 'Ticket.created <=' => $dateTo, 'Performance.sala_id' => $salaId);
+            
+            if(!empty($socioCh) && !empty($noSocioCh)){
+                if($socioCh == 'false') $conditions[] = array('Ticket.socio_id > ' => '0');
+                if($noSocioCh == 'false') $conditions[] = array('Ticket.socio_id = ' => '0');
+            }
+            $listOfTickets = $this->find('all', array('conditions' => $conditions, 'order' => array('Ticket.created' => 'desc')));
+        }
         return $listOfTickets;
+    }
+    
+    public function cCancelTicket($ticketId){
+        
+        $canceledOk = false;
+        $ticketToCancel = $this->findById($ticketId);
+        
+        $fields = array('Ticket.canceled' => 1);
+        $conditions = array('Ticket.id' => $ticketId);
+        
+        $okUpdated = $this->updateAll($fields, $conditions);
+        $this->create();
+        $data = array('Ticket' => array('socio_id' => $ticketToCancel['Ticket']['socio_id'] , 'amount_ticket' => ($ticketToCancel['Ticket']['amount_ticket'] * -1), 'id_canceled' => $ticketToCancel['Ticket']['id'], 'created' => date('Y-m-d-H-i-s'), 'performance_id' => $ticketToCancel['Ticket']['performance_id'], 'sala_id' => $ticketToCancel['Ticket']['sala_id']));
+        $okCreatedCanceled = $this->save($data);
+        $canceledOk = $okUpdated && $okCreatedCanceled;
+        return $canceledOk;
     }
 }
 ?>

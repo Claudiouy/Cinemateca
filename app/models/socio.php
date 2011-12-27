@@ -242,5 +242,11 @@ function generaDeuda($suscripcion) {
 }
 }
 }
+
+
+      function limit_date($data){ 
+          $actualYear = date('Y-m-d');
+          return $data <= $actualYear;
+      }
    
 ?>

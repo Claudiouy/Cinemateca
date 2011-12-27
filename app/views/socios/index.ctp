@@ -66,7 +66,7 @@ echo $paginator->counter(array(
                 <li><?php echo $this->Html->link(__('Pagos', true), array('controller'=>'payments','action' =>'index'));?></li>
                 <?php if($cantidad > 1){?><li><?php echo $this->Html->link(__('Colectivos', true), array('action' => 'colectivos'));?></li> <?php }?>
                 <li><?php echo $this->Html->link(__('Menu', true), array('controller'=>'pages','action' => 'home'));?></li>
-
+                <li><input type="button" value="Graficar" id="loadChartSocioId" class="buttonCakeLike" style="width:100%" /> </li>
                 <li>
                 <?php
                 echo $form->create('', array('action'=>'search'));
@@ -75,4 +75,23 @@ echo $paginator->counter(array(
                 ?>
                 </li>
 	</ul>
+</div>
+
+<div id="containerSocioChart" style="width:50%;left:10%;" >
+    <h2 class="tituloGraficas" >Graficas de pagos</h2>
+    
+    <div class="divCloseButtonContainer" >
+        <?php echo $this->Html->image('closeButton2.jpg'); ?>
+    </div>
+    
+    <div>
+    
+    <input type="button" class="buttonCakeLike" style="width:auto;margin-bottom:15px;" value="Grafica de socios al día" id="buttonPieSocio"/>
+    <input type="button" class="buttonCakeLike" style="width:auto;float:right;margin-bottom:15px;" value="Grafica de socios segun edad" id="buttonPieSocioByAge"/>
+    
+    <div id="containerPieTicket">
+    
+    </div>
+</div>
+    
 </div>

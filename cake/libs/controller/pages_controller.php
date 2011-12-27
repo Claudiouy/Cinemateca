@@ -63,11 +63,11 @@ class PagesController extends AppController {
  */
 	function display() {
             
-                //$this->loadModel('Sala');
-                //$mySalas = $this->Sala->find('all');
+                $this->loadModel('Sala');
+                $mySalas = $this->Sala->find('all');
                 //var_dump($mySalas);
                  
-                //$this->set('allSalas', $mySalas);
+                $this->set('allSalas', $mySalas);
 		$path = func_get_args();
 
 		$count = count($path);

@@ -19,8 +19,12 @@ class Actor extends AppModel{
                  'message' => 'El apellido es un campo requerido'
              ),
         'birthdate' => array(
-                 'rule' => 'notEmpty',      
-                 'message' => 'La fecha de nacimento es un campo requerido'
+                'no_vacia' => array(
+                                 'rule' => 'notEmpty',      
+                                 'message' => 'La fecha de nacimento es un campo requerido'
+                    ),
+                
+                    
              )       
     );
     
@@ -37,19 +41,20 @@ class Actor extends AppModel{
     
     public function cUpdateActor($actorId, $actorName, $actorLastname, $actorBirthdate,$actorNacionality, $actorImagePath){
         $updatedOk = false;
-        
+        $my_date = '';
+        $my_date = "'".$actorBirthdate['year']."-".$actorBirthdate['month']."-".$actorBirthdate['day']."'";
         if(!empty($actorImagePath)){
             $fields = array('Actor.name' => '"'.$actorName.'"',
                             'Actor.image_path' => '"'.$actorImagePath.'"',
                             'Actor.lastname' => '"'.$actorLastname.'"' ,
                             'Actor.nacionality' => '"'.$actorNacionality.'"',
-                            'Actor.birthdate' => '"'.$actorBirthdate.'"');
+                            'Actor.birthdate' => $my_date);
         }
         else{
             $fields = array('Actor.name' => '"'.$actorName.'"',
                             'Actor.lastname' => '"'.$actorLastname.'"' ,
                             'Actor.nacionality' => '"'.$actorNacionality.'"',
-                            'Actor.birthdate' => '"'.$actorBirthdate.'"');
+                            'Actor.birthdate' => $my_date);
         }
         $conditions = array('Actor.id' => $actorId);
         
@@ -68,5 +73,11 @@ class Actor extends AppModel{
         
         return $safeDeleteOk;
     }
+    
+    
+      function limit_date($data){ 
+          $actualYear = date('Y-m-d');
+          return $data <= $actualYear;
+      }
 }
 ?>

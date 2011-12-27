@@ -42,7 +42,7 @@ echo $form->input('Socio.payment_method_id', array('type' => 'select', 'label'=>
 ?>
 <div id="list-creditcards" style="display: none;">
 <?php 
-echo $form->input('Financiera.id', array('type' => 'select', 'class'=>'select','label'=>'Emisor:', 'options'=>$list_f));
+echo $form->input('Creditcard.id', array('type' => 'select', 'class'=>'select','label'=>'Emisor:', 'options'=>$list_f));
 echo $form->input('Creditcard.numero', array('label'=>'Número:', 'title'=>'Ingrese N° de tarjeta de Credito'));
 ?>
 </div>

@@ -26,7 +26,7 @@ $this->set('list_pelis', $list_pelis);
 
 //var_dump($listado);
 	if (!empty($this->data)) {
-		if ($this->Performance->save($this->data)) {
+		if ($this->Performance->saveAll($this->data)) {
 			$this->Session->setFlash('La nueva funcion ha sido guardada', 'flashmsg/flash_good');
 			$this->redirect(array('action'=>'index'), null, true);
 		} else {

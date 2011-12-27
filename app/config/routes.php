@@ -27,10 +27,12 @@
  * to use (in this case, /app/views/pages/home.ctp)...
  */
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+        
+          Router::connect('/tickets', array('controller' => 'tickets', 'action' => 'ticket_socio'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
-	//Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
         
         Router::parseExtensions('json');

@@ -150,11 +150,12 @@ $j(document).ready(function(){
             
             var socioId = $("#idSocio").val();
             var cantCuotas = $("#numberQuotas").val();
+            salaId = $("#idOfSala").val();
             
             if(cantCuotas != undefined && socioId != undefined){
                 if(!isNaN(cantCuotas) && cantCuotas > 0){
                     $j.ajax({
-                        data: "idSocio=" + socioId + "&numberQuotas=" + cantCuotas,
+                        data: "idSocio=" + socioId + "&numberQuotas=" + cantCuotas + "&miSala= " + salaId ,
                         type: "POST",
                         url:  "/cake_primero/payments/set_payment",
                         success: function(data){
@@ -174,7 +175,7 @@ $j(document).ready(function(){
                 }
             }
             else{
-                alert('Falta el socio o el número de cuotas');
+                alert('Falta el socio, el número de cuotas o la sala');
             }
         });
         
@@ -203,22 +204,29 @@ $j(document).ready(function(){
         
         $("#reprintPaymentButton").live('click', function(){
             
-            var idPayment = $(this).parent().find('.hiddenPaymentClass').val();
+            var isOk = confirm('Está seguro de reimprimir el pago?');
             
-            $j.ajax({
-                data: "idPayment=" + idPayment,
-                type: "POST",
-                url:  "/cake_primero/payments/getPaymentById",
-                beforeSend: function() {
-                    $("#loadingIcon" + idPayment).show();
-                },
-                success: function(data){
-                    myWindow = openPopUp();
-                    myWindow.document.querySelector('body').innerHTML = data;
-                    myWindow.print();
-                    //$j("#socioData").html(data);
-                }
-           });
+            if(isOk){
+                var idPayment = $(this).parent().find('.hiddenPaymentClass').val();
+
+                $j.ajax({
+                    data: "idPayment=" + idPayment,
+                    type: "POST",
+                    url:  "/cake_primero/payments/getPaymentById",
+                    beforeSend: function() {
+                        $("#loadingIcon" + idPayment).show();
+                    },
+                    success: function(data){
+                        myWindow = openPopUp();
+                        myWindow.document.querySelector('body').innerHTML = data;
+                        myWindow.print();
+                        //$j("#socioData").html(data);
+                    }
+               });
+            }
+            else{
+                alert('No se ejecutó acción');
+            }
             
         });
     //---------------------UTILITARIOS---------------------
@@ -228,6 +236,28 @@ $j(document).ready(function(){
             });
     //----------------------------------------------------------
     
+    
+    //-----------------------------------
+    
+    
+    
+    $j("#globalSalaId").change(function(){
+        
+        var globSalaId = $("#globalSalaId").val();
+        console.info(globSalaId);
+        $.ajax({
+            data: "idSala=" + globSalaId,
+            type: "POST",
+            url:  "/cake_primero/salas/write_global_sala_id",
+            success: function(data){
+                //window.location.href=window.location.href;
+              //  console.info(data);
+            },
+            error: function(miError){
+               //console.info(miError.statusText);
+            }
+         });
+    });
     //------------/ payment---------
     
     
@@ -298,23 +328,56 @@ $j(document).ready(function(){
         
         $("#reprintTicketButton").live('click', function(){
             
-            var idTicket = $(this).parent().find('.hiddenTicketClass').val();
-            //console.info(idPayment);
+            var isOk = confirm('Está seguro de reimprimir la entrada?');
             
-            $j.ajax({
-                data: "idTicket=" + idTicket,
-                type: "POST",
-                url:  "/cake_primero/tickets/getTicketById",
-                
-                success: function(data){
-                    myWindow = openPopUp();
-                    myWindow.document.querySelector('body').innerHTML = data;
-                    myWindow.print();
-                }
-           });
+            if(isOk){
+                    var idTicket = $(this).parent().find('.hiddenTicketClass').val();
+                    //console.info(idPayment);
+
+                    $j.ajax({
+                        data: "idTicket=" + idTicket,
+                        type: "POST",
+                        url:  "/cake_primero/tickets/getTicketById",
+
+                        success: function(data){
+                            myWindow = openPopUp();
+                            myWindow.document.querySelector('body').innerHTML = data;
+                            myWindow.print();
+                        }
+                   });
+            }
+            else{
+                alert('No se ejecutó acción');
+            }
+            
             
         });
         
+        $("#butNoSocioTicket").live('click', function(){
+           idOfPerf = $('#performanceIdForTicket').val();
+           console.info(idOfPerf);
+           if(idOfPerf != undefined && idOfPerf != '-1'){
+               $j.ajax({
+                        data: "idPerf=" + idOfPerf,
+                        type: "POST",
+                        url:  "/cake_primero/tickets/create_new_no_socio_ticket",
+
+                        success: function(data){
+                            myWindow = openPopUp();
+                            myWindow.document.querySelector('body').innerHTML = data;
+                            myWindow.print();
+                        }
+                   });
+           }
+           else{
+               alert('Falta la función');
+           }
+        });
+        
+        
+        $j("#loadChartSocioId").click(function(){
+           $("#containerSocioChart").show(); 
+        });
         
         $j("#refreshTicketsButton").click(function(){
         
@@ -328,9 +391,12 @@ $j(document).ready(function(){
              var yearTo = $j("#dateToYear").val();
              var myDateTo = new Date(yearTo, monthTo, dayTo);
              
-             if(myDateFrom < myDateTo){
+             socioChecked = document.querySelector('#sociosCheck').checked;
+             noSocioChecked = document.querySelector('#noSociosCheck').checked;
+             
+             if(myDateFrom <= myDateTo){
                  $.ajax({
-                    data: "dateFrom=" + myDateFrom + "&dateTo=" + myDateTo,
+                    data: "dateFrom=" + myDateFrom.toDateString() + "&dateTo=" + myDateTo.toDateString() + "&socioC=" + socioChecked + "&noSocioC=" + noSocioChecked ,
                     type: "POST",
                     url: '/cake_primero/tickets/refresh_tickets',
                     success: function(data){
@@ -386,24 +452,7 @@ $j(document).ready(function(){
    
     
     
-    $j("#globalSalaId").change(function(){
-        
-        var globSalaId = $j("#globalSalaId").val();
-        //console.info(globSalaId);
-        $.ajax({
-            data: "idSala=" + globSalaId,
-            type: "POST",
-            url:  "/cake_primero/salas/write_global_sala_id",
-            success: function(data){
-                //window.location.href=window.location.href;
-                console.info(data);
-              //  console.info(data);
-            },
-            error: function(miError){
-               //console.info(miError.statusText);
-            }
-         });
-    });
+   
     
     //----------------graficas---------------
     
@@ -472,7 +521,7 @@ $j(document).ready(function(){
          
          if(myDateFrom < myDateTo){
              $.ajax({
-                data: "dateFrom=" + myDateFrom + "&dateTo=" + myDateTo,
+                data: "dateFrom=" + myDateFrom.toDateString() + "&dateTo=" + myDateTo.toDateString(),
                 type: "POST",
                 url: urlString,
                 success: function(data){

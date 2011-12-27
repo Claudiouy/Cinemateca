@@ -12,6 +12,8 @@ function beforeFilter() {
         $this->Auth->authenticate=$this->User;
         }
         
+       
+        
     }
     
 function login() {
