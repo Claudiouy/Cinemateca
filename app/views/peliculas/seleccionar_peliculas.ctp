@@ -5,39 +5,37 @@
     
     <body>
         <h2 style="margin-left:27%;margin-bottom: 50px;" >Listado de películas</h2>
-        <div id ="buscadorSeleccionarPelicula"  >
+        <div id ="buscadorSeleccionarPelicula" style="height:170px;" >
            <?php echo $this->Form->create('Pelicula', array('action' => 'seleccionar_peliculas')); 
                  echo $this->Form->input('nombre', array('style' => 'margin-bottom:10px;'));
                  echo $this->Form->end('Buscar',  array('style' => 'margin-right: 210px;'));
            
            ?>
         </div>    
-        <div id="contenedorPeliculas" style="width:150%" >
-           <ul style="list-style-type: none;" >
+        <div id="contenedorPeliculas" style="width:74%; " >
+           <table>
                 
                 
                 <?php
                   if(!empty($seleccionPelis)){
                       $i=0;
-                      echo '<div id="contenedorPeliculasSP">';
-                      echo '<li class="liTitulo" " ><div style="height:30px;" >Nombre</div> <div style="height:30px;" >Duración</div> <div style="height:30px;" >Marcar</div> </li><br />';
+                      echo '<tr  ><td style="height:30px;" >Nombre</td> <td >Duración</td> <td  >Marcar</td> </tr>';
                       foreach ($seleccionPelis as $peli){ 
                           
                           ?>
                             
-                                  <li class="liAlineados" >
-                                      <div id="contenedorPelicula" >
-                                          <div id="contenedorNombrePelicula" >
+                                  <tr>
+                                          <td >
                                             <?php echo $peli['Pelicula']['name'] ?>
-                                          </div>
-                                            <div id="contenedorDuracionPelicula" > 
+                                          </td>
+                                            <td  > 
                                                 <?php echo $peli['Pelicula']['duracion'] ?>
-                                            </div> 
-                                            <div  id="contenedorCheckearPelicula" >
+                                            </td> 
+                                            <td  >
                                                 <input type="checkbox" <?php if($peli['Pelicula']['activa'] == 1) echo 'checked="checked"'; ?> class="peliculaSeleccionada" id="<?php echo $peli['Pelicula']['id'] ?>" /></div>  
-                                            </div>
-                                  </li> 
-                                  <br />
+                                            </td>
+       
+                                  
                   <?php    }
                       echo '</div>';
                   }
@@ -46,7 +44,7 @@
                   }
                 ?> 
 
-           </ul>         
+           </table >        
             
         </div>
         
